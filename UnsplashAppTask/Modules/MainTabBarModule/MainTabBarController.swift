@@ -12,11 +12,14 @@ class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBar.tintColor = .black
+        tabBar.backgroundColor = .secondarySystemBackground
+        view.backgroundColor = .white
         
-        viewControllers = [
-            createNavController(viewcontroller: CollectionImagesViewController(), title: "Collection", imageName: "photo"),
-            createNavController(viewcontroller: FavouriteImagesViewController(), title: "Favourites", imageName: "heart")
-        ]
+//        viewControllers = [
+//            createNavController(viewcontroller: CollectionImagesViewController(), title: "Collection", imageName: "photo"),
+//            createNavController(viewcontroller: FavouriteImagesViewController(), title: "Favourites", imageName: "heart")
+//        ]
     }
     
     fileprivate func createNavController(viewcontroller: UIViewController, title: String, imageName: String) -> UIViewController {

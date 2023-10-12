@@ -12,6 +12,13 @@
 		CE857F0F2AD811210012B07C /* MainTabBarAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F0E2AD811210012B07C /* MainTabBarAssembly.swift */; };
 		CE857F112AD811400012B07C /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F102AD811400012B07C /* MainTabBarController.swift */; };
 		CE857F152AD813670012B07C /* FavouriteImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F142AD813670012B07C /* FavouriteImagesViewController.swift */; };
+		CE857F182AD81AB40012B07C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F172AD81AB40012B07C /* Constants.swift */; };
+		CE857F1A2AD81BB30012B07C /* CollectionImagesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F192AD81BB30012B07C /* CollectionImagesAssembly.swift */; };
+		CE857F1C2AD81C430012B07C /* CollectionImagesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F1B2AD81C430012B07C /* CollectionImagesPresenter.swift */; };
+		CE857F1E2AD81C640012B07C /* CollectionImagesPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F1D2AD81C640012B07C /* CollectionImagesPresenterProtocol.swift */; };
+		CE857F222AD820250012B07C /* CollectionImagesViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F212AD820250012B07C /* CollectionImagesViewInput.swift */; };
+		CE857F252AD822C70012B07C /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F242AD822C70012B07C /* Image.swift */; };
+		CE857F272AD822D40012B07C /* ImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F262AD822D40012B07C /* ImageData.swift */; };
 		CE8BBAF92AD7FEF0006FA944 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BBAF82AD7FEF0006FA944 /* AppDelegate.swift */; };
 		CE8BBAFB2AD7FEF0006FA944 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BBAFA2AD7FEF0006FA944 /* SceneDelegate.swift */; };
 		CE8BBAFD2AD7FEF0006FA944 /* CollectionImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BBAFC2AD7FEF0006FA944 /* CollectionImagesViewController.swift */; };
@@ -43,6 +50,13 @@
 		CE857F0E2AD811210012B07C /* MainTabBarAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarAssembly.swift; sourceTree = "<group>"; };
 		CE857F102AD811400012B07C /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		CE857F142AD813670012B07C /* FavouriteImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteImagesViewController.swift; sourceTree = "<group>"; };
+		CE857F172AD81AB40012B07C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CE857F192AD81BB30012B07C /* CollectionImagesAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionImagesAssembly.swift; sourceTree = "<group>"; };
+		CE857F1B2AD81C430012B07C /* CollectionImagesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionImagesPresenter.swift; sourceTree = "<group>"; };
+		CE857F1D2AD81C640012B07C /* CollectionImagesPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionImagesPresenterProtocol.swift; sourceTree = "<group>"; };
+		CE857F212AD820250012B07C /* CollectionImagesViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionImagesViewInput.swift; sourceTree = "<group>"; };
+		CE857F242AD822C70012B07C /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		CE857F262AD822D40012B07C /* ImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageData.swift; sourceTree = "<group>"; };
 		CE8BBAF52AD7FEF0006FA944 /* UnsplashAppTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnsplashAppTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE8BBAF82AD7FEF0006FA944 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE8BBAFA2AD7FEF0006FA944 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -123,9 +137,46 @@
 		CE857F132AD812FF0012B07C /* CollectionImagesModule */ = {
 			isa = PBXGroup;
 			children = (
-				CE8BBAFC2AD7FEF0006FA944 /* CollectionImagesViewController.swift */,
+				CE857F202AD81D400012B07C /* Presenter */,
+				CE857F1F2AD81D320012B07C /* View */,
+				CE857F192AD81BB30012B07C /* CollectionImagesAssembly.swift */,
 			);
 			path = CollectionImagesModule;
+			sourceTree = "<group>";
+		};
+		CE857F162AD81A950012B07C /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				CE857F172AD81AB40012B07C /* Constants.swift */,
+			);
+			path = "Support Files";
+			sourceTree = "<group>";
+		};
+		CE857F1F2AD81D320012B07C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CE8BBAFC2AD7FEF0006FA944 /* CollectionImagesViewController.swift */,
+				CE857F212AD820250012B07C /* CollectionImagesViewInput.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CE857F202AD81D400012B07C /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				CE857F1B2AD81C430012B07C /* CollectionImagesPresenter.swift */,
+				CE857F1D2AD81C640012B07C /* CollectionImagesPresenterProtocol.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		CE857F232AD822B80012B07C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CE857F242AD822C70012B07C /* Image.swift */,
+				CE857F262AD822D40012B07C /* ImageData.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		CE8BBAEC2AD7FEF0006FA944 = {
@@ -151,6 +202,8 @@
 		CE8BBAF72AD7FEF0006FA944 /* UnsplashAppTask */ = {
 			isa = PBXGroup;
 			children = (
+				CE857F232AD822B80012B07C /* Model */,
+				CE857F162AD81A950012B07C /* Support Files */,
 				CE857F0C2AD810AD0012B07C /* Modules */,
 				CE857F0B2AD8108E0012B07C /* Application */,
 				CE8BBB012AD7FEF2006FA944 /* Assets.xcassets */,
@@ -315,11 +368,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE857F0F2AD811210012B07C /* MainTabBarAssembly.swift in Sources */,
+				CE857F252AD822C70012B07C /* Image.swift in Sources */,
+				CE857F272AD822D40012B07C /* ImageData.swift in Sources */,
 				CE857F152AD813670012B07C /* FavouriteImagesViewController.swift in Sources */,
+				CE857F1C2AD81C430012B07C /* CollectionImagesPresenter.swift in Sources */,
 				CE8BBAFD2AD7FEF0006FA944 /* CollectionImagesViewController.swift in Sources */,
+				CE857F1E2AD81C640012B07C /* CollectionImagesPresenterProtocol.swift in Sources */,
+				CE857F1A2AD81BB30012B07C /* CollectionImagesAssembly.swift in Sources */,
 				CE857F112AD811400012B07C /* MainTabBarController.swift in Sources */,
+				CE857F182AD81AB40012B07C /* Constants.swift in Sources */,
 				CE8BBAF92AD7FEF0006FA944 /* AppDelegate.swift in Sources */,
 				CE8BBAFB2AD7FEF0006FA944 /* SceneDelegate.swift in Sources */,
+				CE857F222AD820250012B07C /* CollectionImagesViewInput.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
