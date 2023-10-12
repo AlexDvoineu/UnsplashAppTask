@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE857F082AD804290012B07C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CE857F072AD804290012B07C /* Realm */; };
+		CE857F0A2AD804290012B07C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE857F092AD804290012B07C /* RealmSwift */; };
+		CE857F0F2AD811210012B07C /* MainTabBarAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F0E2AD811210012B07C /* MainTabBarAssembly.swift */; };
+		CE857F112AD811400012B07C /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F102AD811400012B07C /* MainTabBarController.swift */; };
+		CE857F152AD813670012B07C /* FavouriteImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F142AD813670012B07C /* FavouriteImagesViewController.swift */; };
 		CE8BBAF92AD7FEF0006FA944 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BBAF82AD7FEF0006FA944 /* AppDelegate.swift */; };
 		CE8BBAFB2AD7FEF0006FA944 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BBAFA2AD7FEF0006FA944 /* SceneDelegate.swift */; };
-		CE8BBAFD2AD7FEF0006FA944 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BBAFC2AD7FEF0006FA944 /* ViewController.swift */; };
-		CE8BBB002AD7FEF0006FA944 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8BBAFE2AD7FEF0006FA944 /* Main.storyboard */; };
+		CE8BBAFD2AD7FEF0006FA944 /* CollectionImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BBAFC2AD7FEF0006FA944 /* CollectionImagesViewController.swift */; };
 		CE8BBB022AD7FEF2006FA944 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE8BBB012AD7FEF2006FA944 /* Assets.xcassets */; };
 		CE8BBB052AD7FEF2006FA944 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8BBB032AD7FEF2006FA944 /* LaunchScreen.storyboard */; };
 		CE8BBB102AD7FEF2006FA944 /* UnsplashAppTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BBB0F2AD7FEF2006FA944 /* UnsplashAppTaskTests.swift */; };
@@ -36,11 +40,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE857F0E2AD811210012B07C /* MainTabBarAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarAssembly.swift; sourceTree = "<group>"; };
+		CE857F102AD811400012B07C /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		CE857F142AD813670012B07C /* FavouriteImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteImagesViewController.swift; sourceTree = "<group>"; };
 		CE8BBAF52AD7FEF0006FA944 /* UnsplashAppTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnsplashAppTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE8BBAF82AD7FEF0006FA944 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE8BBAFA2AD7FEF0006FA944 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CE8BBAFC2AD7FEF0006FA944 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CE8BBAFF2AD7FEF0006FA944 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CE8BBAFC2AD7FEF0006FA944 /* CollectionImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionImagesViewController.swift; sourceTree = "<group>"; };
 		CE8BBB012AD7FEF2006FA944 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE8BBB042AD7FEF2006FA944 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE8BBB062AD7FEF2006FA944 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,6 +62,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE857F0A2AD804290012B07C /* RealmSwift in Frameworks */,
+				CE857F082AD804290012B07C /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +84,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE857F0B2AD8108E0012B07C /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				CE8BBAFA2AD7FEF0006FA944 /* SceneDelegate.swift */,
+				CE8BBAF82AD7FEF0006FA944 /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		CE857F0C2AD810AD0012B07C /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				CE857F132AD812FF0012B07C /* CollectionImagesModule */,
+				CE857F122AD812EC0012B07C /* FavouriteImagesModule */,
+				CE857F0D2AD810E70012B07C /* MainTabBarModule */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		CE857F0D2AD810E70012B07C /* MainTabBarModule */ = {
+			isa = PBXGroup;
+			children = (
+				CE857F0E2AD811210012B07C /* MainTabBarAssembly.swift */,
+				CE857F102AD811400012B07C /* MainTabBarController.swift */,
+			);
+			path = MainTabBarModule;
+			sourceTree = "<group>";
+		};
+		CE857F122AD812EC0012B07C /* FavouriteImagesModule */ = {
+			isa = PBXGroup;
+			children = (
+				CE857F142AD813670012B07C /* FavouriteImagesViewController.swift */,
+			);
+			path = FavouriteImagesModule;
+			sourceTree = "<group>";
+		};
+		CE857F132AD812FF0012B07C /* CollectionImagesModule */ = {
+			isa = PBXGroup;
+			children = (
+				CE8BBAFC2AD7FEF0006FA944 /* CollectionImagesViewController.swift */,
+			);
+			path = CollectionImagesModule;
+			sourceTree = "<group>";
+		};
 		CE8BBAEC2AD7FEF0006FA944 = {
 			isa = PBXGroup;
 			children = (
@@ -99,10 +151,8 @@
 		CE8BBAF72AD7FEF0006FA944 /* UnsplashAppTask */ = {
 			isa = PBXGroup;
 			children = (
-				CE8BBAF82AD7FEF0006FA944 /* AppDelegate.swift */,
-				CE8BBAFA2AD7FEF0006FA944 /* SceneDelegate.swift */,
-				CE8BBAFC2AD7FEF0006FA944 /* ViewController.swift */,
-				CE8BBAFE2AD7FEF0006FA944 /* Main.storyboard */,
+				CE857F0C2AD810AD0012B07C /* Modules */,
+				CE857F0B2AD8108E0012B07C /* Application */,
 				CE8BBB012AD7FEF2006FA944 /* Assets.xcassets */,
 				CE8BBB032AD7FEF2006FA944 /* LaunchScreen.storyboard */,
 				CE8BBB062AD7FEF2006FA944 /* Info.plist */,
@@ -143,6 +193,10 @@
 			dependencies = (
 			);
 			name = UnsplashAppTask;
+			packageProductDependencies = (
+				CE857F072AD804290012B07C /* Realm */,
+				CE857F092AD804290012B07C /* RealmSwift */,
+			);
 			productName = UnsplashAppTask;
 			productReference = CE8BBAF52AD7FEF0006FA944 /* UnsplashAppTask.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +269,9 @@
 				Base,
 			);
 			mainGroup = CE8BBAEC2AD7FEF0006FA944;
+			packageReferences = (
+				CE857F062AD804280012B07C /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = CE8BBAF62AD7FEF0006FA944 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -233,7 +290,6 @@
 			files = (
 				CE8BBB052AD7FEF2006FA944 /* LaunchScreen.storyboard in Resources */,
 				CE8BBB022AD7FEF2006FA944 /* Assets.xcassets in Resources */,
-				CE8BBB002AD7FEF0006FA944 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +314,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE8BBAFD2AD7FEF0006FA944 /* ViewController.swift in Sources */,
+				CE857F0F2AD811210012B07C /* MainTabBarAssembly.swift in Sources */,
+				CE857F152AD813670012B07C /* FavouriteImagesViewController.swift in Sources */,
+				CE8BBAFD2AD7FEF0006FA944 /* CollectionImagesViewController.swift in Sources */,
+				CE857F112AD811400012B07C /* MainTabBarController.swift in Sources */,
 				CE8BBAF92AD7FEF0006FA944 /* AppDelegate.swift in Sources */,
 				CE8BBAFB2AD7FEF0006FA944 /* SceneDelegate.swift in Sources */,
 			);
@@ -297,14 +356,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		CE8BBAFE2AD7FEF0006FA944 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE8BBAFF2AD7FEF0006FA944 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CE8BBB032AD7FEF2006FA944 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -366,7 +417,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -420,7 +471,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -442,9 +493,8 @@
 				INFOPLIST_FILE = UnsplashAppTask/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -470,9 +520,8 @@
 				INFOPLIST_FILE = UnsplashAppTask/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -602,6 +651,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CE857F062AD804280012B07C /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.43.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CE857F072AD804290012B07C /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE857F062AD804280012B07C /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		CE857F092AD804290012B07C /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE857F062AD804280012B07C /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CE8BBAED2AD7FEF0006FA944 /* Project object */;
 }
