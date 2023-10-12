@@ -19,6 +19,11 @@
 		CE857F222AD820250012B07C /* CollectionImagesViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F212AD820250012B07C /* CollectionImagesViewInput.swift */; };
 		CE857F252AD822C70012B07C /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F242AD822C70012B07C /* Image.swift */; };
 		CE857F272AD822D40012B07C /* ImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F262AD822D40012B07C /* ImageData.swift */; };
+		CE857F2A2AD82FC40012B07C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CE857F292AD82FC40012B07C /* Alamofire */; };
+		CE857F2D2AD82FF80012B07C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F2C2AD82FF80012B07C /* NetworkManager.swift */; };
+		CE857F2F2AD8406E0012B07C /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F2E2AD8406E0012B07C /* PersistanceManager.swift */; };
+		CE857F312AD845620012B07C /* CollectionImagesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F302AD845620012B07C /* CollectionImagesViewCell.swift */; };
+		CE857F332AD8491F0012B07C /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F322AD8491F0012B07C /* Collection+Extension.swift */; };
 		CE8BBAF92AD7FEF0006FA944 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BBAF82AD7FEF0006FA944 /* AppDelegate.swift */; };
 		CE8BBAFB2AD7FEF0006FA944 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BBAFA2AD7FEF0006FA944 /* SceneDelegate.swift */; };
 		CE8BBAFD2AD7FEF0006FA944 /* CollectionImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BBAFC2AD7FEF0006FA944 /* CollectionImagesViewController.swift */; };
@@ -57,6 +62,10 @@
 		CE857F212AD820250012B07C /* CollectionImagesViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionImagesViewInput.swift; sourceTree = "<group>"; };
 		CE857F242AD822C70012B07C /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		CE857F262AD822D40012B07C /* ImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageData.swift; sourceTree = "<group>"; };
+		CE857F2C2AD82FF80012B07C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		CE857F2E2AD8406E0012B07C /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
+		CE857F302AD845620012B07C /* CollectionImagesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionImagesViewCell.swift; sourceTree = "<group>"; };
+		CE857F322AD8491F0012B07C /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
 		CE8BBAF52AD7FEF0006FA944 /* UnsplashAppTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnsplashAppTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE8BBAF82AD7FEF0006FA944 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE8BBAFA2AD7FEF0006FA944 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE857F2A2AD82FC40012B07C /* Alamofire in Frameworks */,
 				CE857F0A2AD804290012B07C /* RealmSwift in Frameworks */,
 				CE857F082AD804290012B07C /* Realm in Frameworks */,
 			);
@@ -148,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				CE857F172AD81AB40012B07C /* Constants.swift */,
+				CE857F322AD8491F0012B07C /* Collection+Extension.swift */,
 			);
 			path = "Support Files";
 			sourceTree = "<group>";
@@ -157,6 +168,7 @@
 			children = (
 				CE8BBAFC2AD7FEF0006FA944 /* CollectionImagesViewController.swift */,
 				CE857F212AD820250012B07C /* CollectionImagesViewInput.swift */,
+				CE857F302AD845620012B07C /* CollectionImagesViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -177,6 +189,15 @@
 				CE857F262AD822D40012B07C /* ImageData.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		CE857F2B2AD82FD70012B07C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CE857F2C2AD82FF80012B07C /* NetworkManager.swift */,
+				CE857F2E2AD8406E0012B07C /* PersistanceManager.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		CE8BBAEC2AD7FEF0006FA944 = {
@@ -202,6 +223,7 @@
 		CE8BBAF72AD7FEF0006FA944 /* UnsplashAppTask */ = {
 			isa = PBXGroup;
 			children = (
+				CE857F2B2AD82FD70012B07C /* Services */,
 				CE857F232AD822B80012B07C /* Model */,
 				CE857F162AD81A950012B07C /* Support Files */,
 				CE857F0C2AD810AD0012B07C /* Modules */,
@@ -249,6 +271,7 @@
 			packageProductDependencies = (
 				CE857F072AD804290012B07C /* Realm */,
 				CE857F092AD804290012B07C /* RealmSwift */,
+				CE857F292AD82FC40012B07C /* Alamofire */,
 			);
 			productName = UnsplashAppTask;
 			productReference = CE8BBAF52AD7FEF0006FA944 /* UnsplashAppTask.app */;
@@ -324,6 +347,7 @@
 			mainGroup = CE8BBAEC2AD7FEF0006FA944;
 			packageReferences = (
 				CE857F062AD804280012B07C /* XCRemoteSwiftPackageReference "realm-swift" */,
+				CE857F282AD82FC40012B07C /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = CE8BBAF62AD7FEF0006FA944 /* Products */;
 			projectDirPath = "";
@@ -367,16 +391,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE857F2F2AD8406E0012B07C /* PersistanceManager.swift in Sources */,
 				CE857F0F2AD811210012B07C /* MainTabBarAssembly.swift in Sources */,
 				CE857F252AD822C70012B07C /* Image.swift in Sources */,
 				CE857F272AD822D40012B07C /* ImageData.swift in Sources */,
 				CE857F152AD813670012B07C /* FavouriteImagesViewController.swift in Sources */,
 				CE857F1C2AD81C430012B07C /* CollectionImagesPresenter.swift in Sources */,
+				CE857F312AD845620012B07C /* CollectionImagesViewCell.swift in Sources */,
 				CE8BBAFD2AD7FEF0006FA944 /* CollectionImagesViewController.swift in Sources */,
 				CE857F1E2AD81C640012B07C /* CollectionImagesPresenterProtocol.swift in Sources */,
 				CE857F1A2AD81BB30012B07C /* CollectionImagesAssembly.swift in Sources */,
 				CE857F112AD811400012B07C /* MainTabBarController.swift in Sources */,
+				CE857F332AD8491F0012B07C /* Collection+Extension.swift in Sources */,
 				CE857F182AD81AB40012B07C /* Constants.swift in Sources */,
+				CE857F2D2AD82FF80012B07C /* NetworkManager.swift in Sources */,
 				CE8BBAF92AD7FEF0006FA944 /* AppDelegate.swift in Sources */,
 				CE8BBAFB2AD7FEF0006FA944 /* SceneDelegate.swift in Sources */,
 				CE857F222AD820250012B07C /* CollectionImagesViewInput.swift in Sources */,
@@ -721,6 +749,14 @@
 				minimumVersion = 10.43.0;
 			};
 		};
+		CE857F282AD82FC40012B07C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -733,6 +769,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE857F062AD804280012B07C /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		CE857F292AD82FC40012B07C /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE857F282AD82FC40012B07C /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

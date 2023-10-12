@@ -17,9 +17,44 @@ final class CollectionImagesPresenter: CollectionImagesPresenterProtocol {
     
     func viewDidLoad() {
         fetchImages()
+//        showRandomImages()
+    }
+    
+    func searchImages(searchText: String) {
+        NetworkManager().fetchData(
+            requestType: .search(searchTerms: searchText)
+        ) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let image):
+                self.imageData = image
+                self.view?.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func showRandomImages() {
+        if imageData != randomImageData {
+            imageData = randomImageData
+            view?.reloadData()
+        }
     }
     
     private func fetchImages() {
-        
+        NetworkManager().fetchData(
+            requestType: .random
+        ) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let image):
+                self.imageData = image
+                self.randomImageData = image
+                self.view?.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }

@@ -9,4 +9,6 @@ import Foundation
 
 protocol CollectionImagesPresenterProtocol {
     func viewDidLoad()
+    func searchImages(searchText: String)
+    func showRandomImages()
 }

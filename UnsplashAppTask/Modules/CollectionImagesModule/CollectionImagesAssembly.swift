@@ -12,7 +12,7 @@ final class CollectionImagesAssembly {
         let presenter = CollectionImagesPresenter()
         let view = CollectionImagesViewController(presenter: presenter)
         view.presenter = presenter
-//        presenter.view = view
+        presenter.view = view
         return view
     }
 }
