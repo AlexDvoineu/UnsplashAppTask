@@ -18,3 +18,7 @@ Technology:
 - Alamofire
 - Realm
 - SDWebImage
+
+
+https://github.com/AlexDvoineu/UnsplashAppTask/assets/89863071/f4072bb3-df8c-4b00-a7e4-47eac0ecebb9
+
