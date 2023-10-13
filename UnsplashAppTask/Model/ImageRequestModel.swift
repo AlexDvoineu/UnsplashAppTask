@@ -11,8 +11,14 @@ struct ImageResult: Codable{
   
     let location: LocationData
     let downloads: Int?
+    let topics: [Topics]
+    let description: String?
 }
 
-struct LocationData: Codable, Hashable{
+struct LocationData: Codable, Hashable {
     let name: String?
+}
+
+struct Topics: Codable, Hashable {
+    let title: String?
 }

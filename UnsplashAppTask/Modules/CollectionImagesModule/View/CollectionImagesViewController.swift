@@ -200,19 +200,18 @@ extension CollectionImagesViewController: UICollectionViewDelegate, UICollection
         let destinationVC = ImageInfoVC()
         
         if isSearchingByRandom == false{
-            let resultRequest         = requestImagesResults[indexPath.item]
+            let resultRequest = requestImagesResults[indexPath.item]
             destinationVC.authorsName = resultRequest.user.name
-            destinationVC.imageUrl    = resultRequest.urls.small
-            destinationVC.likes       = resultRequest.likes
-            destinationVC.idOfImage   = resultRequest.id
+            destinationVC.imageUrl = resultRequest.urls.small
+            destinationVC.likes = resultRequest.likes
+            destinationVC.idOfImage = resultRequest.id
         }
         else {
-            let resultRandom          = randomImagesResults[indexPath.item]
+            let resultRandom = randomImagesResults[indexPath.item]
             destinationVC.authorsName = resultRandom.user.name
-            destinationVC.imageUrl    = resultRandom.urls.small
-            destinationVC.likes       = resultRandom.likes
-            destinationVC.idOfImage   = resultRandom.id
-//            destinationVC
+            destinationVC.imageUrl = resultRandom.urls.small
+            destinationVC.likes = resultRandom.likes
+            destinationVC.idOfImage = resultRandom.id
         }
         let navController = UINavigationController(rootViewController: destinationVC)
         present(navController, animated: true)

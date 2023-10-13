@@ -82,8 +82,8 @@ final class AllertVC: UIViewController {
     
     func configureMessageLabel(){
         containerView.addSubview(messageLabel)
-        messageLabel.text           = message ?? "Unable to complete request"
-        messageLabel.numberOfLines      = 4
+        messageLabel.text = message ?? "Unable to complete request"
+        messageLabel.numberOfLines = 4
         
         NSLayoutConstraint.activate([
             messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),

@@ -12,16 +12,12 @@ struct RandomImagesResult: Codable, Hashable {
     let likes: Int
     let urls: URLS
     let user: UnsplashUsers
-    let title: String
-    let description: String?
     
     enum CodingKeys: String, CodingKey {
         case id
         case user
         case likes
         case urls
-        case title = "slug"
-        case description = "alt_description"
     }
 }
 
@@ -40,7 +36,7 @@ struct ImagesResult: Codable{
     let updatedAt: Date
     let urls: URLS
     let user: UnsplashUsers
-    
+
     private enum CodingKeys : String, CodingKey {
         case id
         case likes

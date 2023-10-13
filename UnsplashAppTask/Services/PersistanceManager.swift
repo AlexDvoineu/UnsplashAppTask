@@ -10,11 +10,13 @@ import RealmSwift
 
 final class ImagesRealm: Object{
     @Persisted dynamic var authorsName = ""
-    @Persisted dynamic var imageUrl    = ""
-    @Persisted dynamic var updatedAt: Date
-    @Persisted dynamic var userHTML    = ""
-    @Persisted dynamic var idOfImage   = ""
-    @Persisted dynamic var likes       = 0
+    @Persisted dynamic var imageUrl = ""
+    @Persisted dynamic var updatedAt: Date = Date()
+    @Persisted dynamic var userHTML = ""
+    @Persisted dynamic var idOfImage = ""
+    @Persisted dynamic var likes = 0
+    @Persisted dynamic var imageTitle = ""
+    @Persisted dynamic var imageDescription = ""
     override static func primaryKey() -> String? { return "idOfImage" }
     @Persisted(primaryKey: true) var id: ObjectId//for sorting
 }
