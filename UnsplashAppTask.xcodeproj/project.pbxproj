@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40F3E6282AD8C52900E7C9B8 /* FavouriteImagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3E6272AD8C52900E7C9B8 /* FavouriteImagesTableViewCell.swift */; };
+		40F3E62A2AD8C5EF00E7C9B8 /* FavouriteImagesViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3E6292AD8C5EF00E7C9B8 /* FavouriteImagesViewInput.swift */; };
+		40F3E62C2AD8C6D700E7C9B8 /* FavouriteImagesPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3E62B2AD8C6D700E7C9B8 /* FavouriteImagesPresenterProtocol.swift */; };
+		40F3E62E2AD8C71F00E7C9B8 /* FavouriteImagesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3E62D2AD8C71F00E7C9B8 /* FavouriteImagesPresenter.swift */; };
+		40F3E6302AD8C83200E7C9B8 /* ImagesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3E62F2AD8C83200E7C9B8 /* ImagesStorage.swift */; };
 		CE857F082AD804290012B07C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CE857F072AD804290012B07C /* Realm */; };
 		CE857F0A2AD804290012B07C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE857F092AD804290012B07C /* RealmSwift */; };
 		CE857F0F2AD811210012B07C /* MainTabBarAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F0E2AD811210012B07C /* MainTabBarAssembly.swift */; };
@@ -52,6 +57,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		40F3E6272AD8C52900E7C9B8 /* FavouriteImagesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteImagesTableViewCell.swift; sourceTree = "<group>"; };
+		40F3E6292AD8C5EF00E7C9B8 /* FavouriteImagesViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteImagesViewInput.swift; sourceTree = "<group>"; };
+		40F3E62B2AD8C6D700E7C9B8 /* FavouriteImagesPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteImagesPresenterProtocol.swift; sourceTree = "<group>"; };
+		40F3E62D2AD8C71F00E7C9B8 /* FavouriteImagesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteImagesPresenter.swift; sourceTree = "<group>"; };
+		40F3E62F2AD8C83200E7C9B8 /* ImagesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesStorage.swift; sourceTree = "<group>"; };
 		CE857F0E2AD811210012B07C /* MainTabBarAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarAssembly.swift; sourceTree = "<group>"; };
 		CE857F102AD811400012B07C /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		CE857F142AD813670012B07C /* FavouriteImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteImagesViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +118,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		40F3E6252AD8C4A300E7C9B8 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				40F3E62B2AD8C6D700E7C9B8 /* FavouriteImagesPresenterProtocol.swift */,
+				40F3E62D2AD8C71F00E7C9B8 /* FavouriteImagesPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		40F3E6262AD8C4AC00E7C9B8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CE857F142AD813670012B07C /* FavouriteImagesViewController.swift */,
+				40F3E6272AD8C52900E7C9B8 /* FavouriteImagesTableViewCell.swift */,
+				40F3E6292AD8C5EF00E7C9B8 /* FavouriteImagesViewInput.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		CE857F0B2AD8108E0012B07C /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,7 +168,8 @@
 		CE857F122AD812EC0012B07C /* FavouriteImagesModule */ = {
 			isa = PBXGroup;
 			children = (
-				CE857F142AD813670012B07C /* FavouriteImagesViewController.swift */,
+				40F3E6262AD8C4AC00E7C9B8 /* View */,
+				40F3E6252AD8C4A300E7C9B8 /* Presenter */,
 			);
 			path = FavouriteImagesModule;
 			sourceTree = "<group>";
@@ -196,6 +226,7 @@
 			children = (
 				CE857F2C2AD82FF80012B07C /* NetworkManager.swift */,
 				CE857F2E2AD8406E0012B07C /* PersistanceManager.swift */,
+				40F3E62F2AD8C83200E7C9B8 /* ImagesStorage.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -223,11 +254,11 @@
 		CE8BBAF72AD7FEF0006FA944 /* UnsplashAppTask */ = {
 			isa = PBXGroup;
 			children = (
-				CE857F2B2AD82FD70012B07C /* Services */,
-				CE857F232AD822B80012B07C /* Model */,
-				CE857F162AD81A950012B07C /* Support Files */,
-				CE857F0C2AD810AD0012B07C /* Modules */,
 				CE857F0B2AD8108E0012B07C /* Application */,
+				CE857F2B2AD82FD70012B07C /* Services */,
+				CE857F162AD81A950012B07C /* Support Files */,
+				CE857F232AD822B80012B07C /* Model */,
+				CE857F0C2AD810AD0012B07C /* Modules */,
 				CE8BBB012AD7FEF2006FA944 /* Assets.xcassets */,
 				CE8BBB032AD7FEF2006FA944 /* LaunchScreen.storyboard */,
 				CE8BBB062AD7FEF2006FA944 /* Info.plist */,
@@ -392,6 +423,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE857F2F2AD8406E0012B07C /* PersistanceManager.swift in Sources */,
+				40F3E62E2AD8C71F00E7C9B8 /* FavouriteImagesPresenter.swift in Sources */,
+				40F3E62A2AD8C5EF00E7C9B8 /* FavouriteImagesViewInput.swift in Sources */,
 				CE857F0F2AD811210012B07C /* MainTabBarAssembly.swift in Sources */,
 				CE857F252AD822C70012B07C /* Image.swift in Sources */,
 				CE857F272AD822D40012B07C /* ImageData.swift in Sources */,
@@ -404,10 +437,13 @@
 				CE857F112AD811400012B07C /* MainTabBarController.swift in Sources */,
 				CE857F332AD8491F0012B07C /* Collection+Extension.swift in Sources */,
 				CE857F182AD81AB40012B07C /* Constants.swift in Sources */,
+				40F3E62C2AD8C6D700E7C9B8 /* FavouriteImagesPresenterProtocol.swift in Sources */,
 				CE857F2D2AD82FF80012B07C /* NetworkManager.swift in Sources */,
 				CE8BBAF92AD7FEF0006FA944 /* AppDelegate.swift in Sources */,
 				CE8BBAFB2AD7FEF0006FA944 /* SceneDelegate.swift in Sources */,
+				40F3E6302AD8C83200E7C9B8 /* ImagesStorage.swift in Sources */,
 				CE857F222AD820250012B07C /* CollectionImagesViewInput.swift in Sources */,
+				40F3E6282AD8C52900E7C9B8 /* FavouriteImagesTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

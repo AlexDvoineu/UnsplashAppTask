@@ -8,6 +8,35 @@
 import Alamofire
 import UIKit
 
+enum HTTPRequstMethod: String {
+    case get = "GET"
+    case post = "POST"
+    case put = "PUT"
+    case delete = "DELETE"
+    case head = "HEAD"
+}
+
+enum HTTPResponseCode: String, Error {
+    case badRequest = "Unfortunately your request didn't find any results!"
+    case accessDenied = "Your access is denied!"
+    case notFound = "Unfortunately your request didn't find any images!"
+    case successfull
+    case invalidHTTPRequest = "Something went wrong..."
+    case invalidJSONDecoder = "Something went wrond, we are fixing it right now..."
+
+    var responseCode: Int {
+        switch self {
+        case .successfull: return 200
+        case .badRequest: return 400
+        case .accessDenied: return 403
+        case .notFound: return 404
+        case .invalidHTTPRequest: return 406
+        case .invalidJSONDecoder: return 407
+
+        }
+    }
+}
+
 enum RequestType {
     case random
     case search(searchTerms: String)
@@ -109,4 +138,27 @@ final class NetworkManager {
         }
         return images
     }
+}
+
+struct UnsplashSectionedImages: Codable, Hashable {
+    let total: Int
+    let total_pages: Int
+    let results: [UnsplashImage]
+}
+
+struct UnsplashImage: Codable, Hashable {
+    let id: String
+    let urls: UnsplashImageURL
+    static func == (lhs: UnsplashImage, rhs: UnsplashImage) -> Bool {
+        lhs.id == rhs.id && lhs.urls == rhs.urls
+    }
+}
+
+struct UnsplashImageURL: Codable, Hashable {
+    let raw: String
+    let full: String
+    let regular: String
+    let small: String
+    let thumb: String
+    let small_s3: String
 }
