@@ -45,9 +45,9 @@ final class FavouriteImagesTableViewCell: UITableViewCell {
         ])
     }
 
-    func configure(photo: Image) {
-        authorNameLabel.text = photo.authorName
-        NetworkManager().downloadImage(url: photo.smallPhoto) { [weak self] image in
+    func configure(image: Image) {
+        authorNameLabel.text = image.authorName
+        NetworService().downloadImage(url: image.smallPhoto) { [weak self] image in
             guard let self = self else { return }
             self.image.image = image
         }

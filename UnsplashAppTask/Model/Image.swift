@@ -15,6 +15,8 @@ struct Image: Codable, Equatable {
     let location: String
     let smallPhoto: String
     let fullPhoto: String
+    let title: String
+    let description: String
 
     init?(imageData: ImageData) {
         id = imageData.id ?? ""
@@ -24,9 +26,11 @@ struct Image: Codable, Equatable {
         location = imageData.location?.name ?? ""
         smallPhoto = imageData.urls?.thumb ?? ""
         fullPhoto = imageData.urls?.full ?? ""
+        title = imageData.title ?? ""
+        description = imageData.description ?? ""
     }
 
-    init?(searchData: Results) {
+    init?(searchData: UnsplashResult) {
         id = searchData.id ?? ""
         authorName = searchData.user?.name ?? ""
         createDate = searchData.createDate ?? ""
@@ -34,6 +38,8 @@ struct Image: Codable, Equatable {
         fullPhoto = searchData.urls?.full ?? ""
         downloads = 0
         location = ""
+        title = ""
+        description = ""
     }
 
     init(
@@ -43,7 +49,9 @@ struct Image: Codable, Equatable {
         location: String,
         smallPhoto: String,
         fullPhoto: String,
-        id: String
+        id: String,
+        title: String,
+        description: String
     ) {
         self.id = id
         self.authorName = authorName
@@ -52,5 +60,7 @@ struct Image: Codable, Equatable {
         self.location = location
         self.smallPhoto = smallPhoto
         self.fullPhoto = fullPhoto
+        self.title = title
+        self.description = description
     }
 }

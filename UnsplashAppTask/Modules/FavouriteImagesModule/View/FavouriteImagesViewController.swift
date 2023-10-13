@@ -72,24 +72,30 @@ extension FavouriteImagesViewController: UITableViewDelegate, UITableViewDataSou
             withIdentifier: FavouriteImagesTableViewCell.identifier
         ) as? FavouriteImagesTableViewCell,
            let image = presenter.imageData[safe: indexPath.row] {
-            cell.configure(photo: image)
+            cell.configure(image: image)
             return cell
         }
         return UITableViewCell()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let photo = presenter.imageData[safe: indexPath.row] else { return }
-        let vc = UIViewController()
-        // TODO: add Details ViewController navigation
-
+        guard let image = presenter.imageData[safe: indexPath.row] else { return }
+        let vc = ImageDetailsAssembly.assembleImageDetailsModule(image: image, fromFavouritePhoto: true, delegate: self)
         navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 // MARK: Delegate
 
-// TODO: add delegate to description screen
+extension FavouriteImagesViewController: ImageDetailsViewControllerDelegate {
+    func passImageData(image: Image) {
+        presenter.passImageData(image: image)
+    }
+    
+    func deleteImageData(image: Image) {
+        presenter.deleteImageData(image: image)
+    }
+}
 
 // MARK: ViewInput
 
@@ -100,14 +106,14 @@ extension FavouriteImagesViewController: FavouriteImagesViewInput {
 
     func showAlert(isEmpty: Bool) {
         if isEmpty {
-            let action = UIAlertController(
+            let alertController = alertMessage(
                 title: "No image",
-                message: "Please, add image to favourites",
-                preferredStyle: .alert
+                description: "Please, add image to favourites",
+                buttonDefaultTitle: "OK",
+                handlerDestructive: { _ in },
+                handlerDefault: { _ in }
             )
-            let okAction = UIAlertAction(title: "OK", style: .default)
-            action.addAction(okAction)
-            present(action, animated: true)
+            present(alertController, animated: true)
 
             tableView?.isHidden = true
             textIfEmpty.isHidden = false

@@ -14,6 +14,8 @@ struct ImageData: Codable {
     let user: User?
     let location: Location?
     let downloads: Int?
+    let title: String?
+    let description: String?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -22,11 +24,13 @@ struct ImageData: Codable {
         case location
         case createDate = "created_at"
         case urls
+        case title = "slug"
+        case description = "alt_description"
     }
 }
 
 struct SearchData: Codable {
-    let results: [Results]?
+    let results: [UnsplashResult]?
 }
 
 struct Urls: Codable {
@@ -42,7 +46,7 @@ struct Location: Codable {
     let name: String?
 }
 
-struct Results: Codable {
+struct UnsplashResult: Codable {
     let id: String?
     let createDate: String?
     let urls: Urls?

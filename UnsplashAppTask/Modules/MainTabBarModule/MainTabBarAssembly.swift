@@ -18,15 +18,15 @@ final class MainTabBarAssembly {
             title: "Collection"
         )
         
-//        guard let favouriteImages = UIImage(systemName: Constant.unfavouriteImage) else { return UITabBarController() }
-//        let favouriteImagesVC = MainTabBarAssembly.generateViewController(
-//            viewController: FavouriteImagesViewController(),
-//            image: favouriteImages,
-//            title: "Favourites"
-//        )
+        guard let favouriteImages = UIImage(systemName: Constant.unfavouriteImage) else { return UITabBarController() }
+        let favouriteImagesVC = MainTabBarAssembly.generateViewController(
+//            viewController: FavouriteImagesAssembly.assembleFavouriteImagesModule(),
+            viewController: FavoritesVC(),
+            image: favouriteImages,
+            title: "Favourites"
+        )
         
-//        controller.setViewControllers([collectionImagesVC, favouriteImagesVC], animated: true)
-        controller.setViewControllers([collectionImagesVC], animated: true)
+        controller.setViewControllers([collectionImagesVC, favouriteImagesVC], animated: true)
         return controller
     }
     

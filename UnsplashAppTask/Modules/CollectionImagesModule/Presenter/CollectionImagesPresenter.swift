@@ -14,14 +14,15 @@ final class CollectionImagesPresenter: CollectionImagesPresenterProtocol {
     var imageData: [Image] = []
     private var randomImageData: [Image] = []
     
+//    var requestImagesResults: [ImagesResult] = []
+//    var randomImagesResults:  [RandomImagesResult] = []
     
     func viewDidLoad() {
         fetchImages()
-//        showRandomImages()
     }
     
     func searchImages(searchText: String) {
-        NetworkManager().fetchData(
+        NetworService().fetchData(
             requestType: .search(searchTerms: searchText)
         ) { [weak self] result in
             guard let self = self else { return }
@@ -43,7 +44,7 @@ final class CollectionImagesPresenter: CollectionImagesPresenterProtocol {
     }
     
     private func fetchImages() {
-        NetworkManager().fetchData(
+        NetworService().fetchData(
             requestType: .random
         ) { [weak self] result in
             guard let self = self else { return }

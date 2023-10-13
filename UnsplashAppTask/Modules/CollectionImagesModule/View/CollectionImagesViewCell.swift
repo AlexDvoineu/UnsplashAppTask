@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import SDWebImage
 
-class CollectionPhotoViewCell: UICollectionViewCell {
+class CollectionImagesViewCell: UICollectionViewCell {
     static let identifier = "collectionImagesViewCell"
 
     private let picture = UIImageView()
@@ -36,7 +37,7 @@ class CollectionPhotoViewCell: UICollectionViewCell {
     }
 
     func configure(image: Image) {
-        NetworkManager().downloadImage(url: image.smallPhoto) { [weak self] image in
+        NetworService().downloadImage(url: image.smallPhoto) { [weak self] image in
             guard let self = self else { return }
             self.picture.image = image
         }
