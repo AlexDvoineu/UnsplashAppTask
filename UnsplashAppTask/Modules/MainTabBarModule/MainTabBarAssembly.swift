@@ -20,7 +20,6 @@ final class MainTabBarAssembly {
         
         guard let favouriteImages = UIImage(systemName: Constant.unfavouriteImage) else { return UITabBarController() }
         let favouriteImagesVC = MainTabBarAssembly.generateViewController(
-//            viewController: FavouriteImagesAssembly.assembleFavouriteImagesModule(),
             viewController: FavoritesVC(),
             image: favouriteImages,
             title: "Favourites"

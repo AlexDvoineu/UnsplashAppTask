@@ -14,9 +14,6 @@ final class CollectionImagesPresenter: CollectionImagesPresenterProtocol {
     var imageData: [Image] = []
     private var randomImageData: [Image] = []
     
-//    var requestImagesResults: [ImagesResult] = []
-//    var randomImagesResults:  [RandomImagesResult] = []
-    
     func viewDidLoad() {
         fetchImages()
     }

@@ -93,8 +93,6 @@ class ImageInfoVC: UIViewController, UIScrollViewDelegate {
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
-//                    self.imageDescriptionLabel.text = data.description
-//                    self.imageTitleLabel.text = data.topics.first?.title
                     self.locationAndDowloadsLabel.text = "\(data.location.name ?? "No info about description") \nDownloads: \(String(describing: data.downloads ?? 0))"
                 }
                 

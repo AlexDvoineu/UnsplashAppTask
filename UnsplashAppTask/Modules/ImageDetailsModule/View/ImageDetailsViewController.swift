@@ -145,7 +145,7 @@ protocol ImageDetailsViewControllerDelegate: AnyObject {
     func deleteImageData(image: Image)
 }
 
-//protocol ImageDetailsViewControllerFavourite: AnyObject {
-//    func passImageData(image: Image)
-//    func deleteImageData(image: Image)
-//}
+protocol ImageDetailsViewControllerFavourite: AnyObject {
+    func passImageData(image: Image)
+    func deleteImageData(image: Image)
+}

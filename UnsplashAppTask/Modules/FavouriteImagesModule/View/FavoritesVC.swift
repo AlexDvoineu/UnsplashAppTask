@@ -101,16 +101,12 @@ extension FavoritesVC: UITableViewDataSource, UITableViewDelegate{
         PersistenceManager.sharedRealm.deleteFavorite(item: favorite)
         reloadTableView()
         checkImagesCount()
-        
     }
-    
-    
 }
 
 
 extension FavoritesVC: ReloadTableProtocol{
     func reloadTableFunc() {
-        
         reloadTableView()
         checkImagesCount()
     }

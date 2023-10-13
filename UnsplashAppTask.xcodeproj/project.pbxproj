@@ -62,9 +62,6 @@
 		CE8BBAFD2AD7FEF0006FA944 /* CollectionImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BBAFC2AD7FEF0006FA944 /* CollectionImagesViewController.swift */; };
 		CE8BBB022AD7FEF2006FA944 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE8BBB012AD7FEF2006FA944 /* Assets.xcassets */; };
 		CE8BBB052AD7FEF2006FA944 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE8BBB032AD7FEF2006FA944 /* LaunchScreen.storyboard */; };
-		CE8BBB102AD7FEF2006FA944 /* UnsplashAppTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BBB0F2AD7FEF2006FA944 /* UnsplashAppTaskTests.swift */; };
-		CE8BBB1A2AD7FEF2006FA944 /* UnsplashAppTaskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BBB192AD7FEF2006FA944 /* UnsplashAppTaskUITests.swift */; };
-		CE8BBB1C2AD7FEF2006FA944 /* UnsplashAppTaskUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BBB1B2AD7FEF2006FA944 /* UnsplashAppTaskUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,10 +136,7 @@
 		CE8BBB042AD7FEF2006FA944 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE8BBB062AD7FEF2006FA944 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE8BBB0B2AD7FEF2006FA944 /* UnsplashAppTaskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnsplashAppTaskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE8BBB0F2AD7FEF2006FA944 /* UnsplashAppTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAppTaskTests.swift; sourceTree = "<group>"; };
 		CE8BBB152AD7FEF2006FA944 /* UnsplashAppTaskUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnsplashAppTaskUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE8BBB192AD7FEF2006FA944 /* UnsplashAppTaskUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAppTaskUITests.swift; sourceTree = "<group>"; };
-		CE8BBB1B2AD7FEF2006FA944 /* UnsplashAppTaskUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAppTaskUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -397,8 +391,6 @@
 			isa = PBXGroup;
 			children = (
 				CE8BBAF72AD7FEF0006FA944 /* UnsplashAppTask */,
-				CE8BBB0E2AD7FEF2006FA944 /* UnsplashAppTaskTests */,
-				CE8BBB182AD7FEF2006FA944 /* UnsplashAppTaskUITests */,
 				CE8BBAF62AD7FEF0006FA944 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -427,23 +419,6 @@
 				CE8BBB062AD7FEF2006FA944 /* Info.plist */,
 			);
 			path = UnsplashAppTask;
-			sourceTree = "<group>";
-		};
-		CE8BBB0E2AD7FEF2006FA944 /* UnsplashAppTaskTests */ = {
-			isa = PBXGroup;
-			children = (
-				CE8BBB0F2AD7FEF2006FA944 /* UnsplashAppTaskTests.swift */,
-			);
-			path = UnsplashAppTaskTests;
-			sourceTree = "<group>";
-		};
-		CE8BBB182AD7FEF2006FA944 /* UnsplashAppTaskUITests */ = {
-			isa = PBXGroup;
-			children = (
-				CE8BBB192AD7FEF2006FA944 /* UnsplashAppTaskUITests.swift */,
-				CE8BBB1B2AD7FEF2006FA944 /* UnsplashAppTaskUITestsLaunchTests.swift */,
-			);
-			path = UnsplashAppTaskUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -643,7 +618,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE8BBB102AD7FEF2006FA944 /* UnsplashAppTaskTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -651,8 +625,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE8BBB1A2AD7FEF2006FA944 /* UnsplashAppTaskUITests.swift in Sources */,
-				CE8BBB1C2AD7FEF2006FA944 /* UnsplashAppTaskUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
