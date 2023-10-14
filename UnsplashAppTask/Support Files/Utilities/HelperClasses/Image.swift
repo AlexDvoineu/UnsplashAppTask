@@ -18,24 +18,24 @@ struct Image: Codable, Equatable {
     let title: String
     let description: String
 
-    init?(imageData: ImageData) {
-        id = imageData.id ?? ""
-        authorName = imageData.user?.name ?? ""
-        createDate = imageData.createDate ?? ""
-        downloads = imageData.downloads ?? 1
-        location = imageData.location?.name ?? ""
-        smallPhoto = imageData.urls?.thumb ?? ""
-        fullPhoto = imageData.urls?.full ?? ""
-        title = imageData.title ?? ""
-        description = imageData.description ?? ""
+    init(imageData: ImageData) {
+        id = imageData.id
+        authorName = imageData.user.name
+        createDate = imageData.createDate
+        downloads = imageData.downloads
+        location = imageData.location.name
+        smallPhoto = imageData.urls.thumb
+        fullPhoto = imageData.urls.full
+        title = imageData.title
+        description = imageData.description
     }
 
-    init?(searchData: UnsplashResult) {
-        id = searchData.id ?? ""
-        authorName = searchData.user?.name ?? ""
-        createDate = searchData.createDate ?? ""
-        smallPhoto = searchData.urls?.thumb ?? ""
-        fullPhoto = searchData.urls?.full ?? ""
+    init(searchData: UnsplashResult) {
+        id = searchData.id
+        authorName = searchData.user.name
+        createDate = searchData.createDate
+        smallPhoto = searchData.urls.thumb
+        fullPhoto = searchData.urls.full
         downloads = 0
         location = ""
         title = ""

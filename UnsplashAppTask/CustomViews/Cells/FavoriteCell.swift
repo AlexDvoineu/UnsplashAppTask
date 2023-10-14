@@ -23,7 +23,7 @@ final class FavoriteCell: UITableViewCell {
     }
     
     func set(imageUrl: String, userName: String){
-        imageImageView.downloadImage(fromURL: imageUrl)
+        imageImageView.sd_setImage(with: URL(string: imageUrl))
         userNameLabel.text = "Authors name: \n\(userName)"
     }
     

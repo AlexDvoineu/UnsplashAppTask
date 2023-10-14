@@ -42,9 +42,11 @@ enum RequestType {
 }
 
 final class NetworService {
+    let jsonDecoder = JSONDecoder()
+    
     func fetchData(
         requestType: RequestType,
-        onCompletion: @escaping ((Result<[Image], HTTPResponseCode>) -> Void)
+        onCompletion: @escaping ((Result<[Image], Error>) -> Void)
     ) {
         guard let url = createURLcomponents(requestType: requestType) else { return }
 
@@ -63,11 +65,11 @@ final class NetworService {
                         }
                     }
                 } catch {
-                    onCompletion(.failure(error as! HTTPResponseCode))
+                    onCompletion(.failure(error))
                 }
             case .failure(let error):
                 print(error)
-                onCompletion(.failure(error as! HTTPResponseCode))
+                onCompletion(.failure(error))
             }
         }
     }
@@ -76,8 +78,7 @@ final class NetworService {
         AF.request(url).response { response in
             switch response.result {
             case .success(let data):
-                guard let data = data else { return }
-                guard let image = UIImage(data: data) else { return }
+                guard let data, let image = UIImage(data: data) else { return }
                 completion(image)
             case .failure(let error):
                 print(error)
@@ -97,14 +98,7 @@ final class NetworService {
                 URLQueryItem(name: "client_id", value: Constant.keyAPI),
                 URLQueryItem(name: "count", value: "30")
             ]
-//        case .random:
-//            urlComponents.path = "/search/photos/"
-//            urlComponents.queryItems = [
-//                URLQueryItem(name: "page", value: "1"),
-//                URLQueryItem(name: "per_page", value: "30"),
-//                URLQueryItem(name: "client_id", value: Constant.keyAPI),
-//                URLQueryItem(name: "query", value: "curated")
-//            ]
+
         case .search(let searchTerms):
             urlComponents.path = "/search/photos/"
             urlComponents.queryItems = [
@@ -116,26 +110,13 @@ final class NetworService {
     }
 
     private func randomImageParseJSON(withData data: Data) throws -> [Image]? {
-        let decoder = JSONDecoder()
-        let imageData = try decoder.decode([ImageData].self, from: data)
-        var images: [Image] = []
-        for datum in imageData {
-            guard let image = Image(imageData: datum) else { return nil }
-            images.append(image)
-        }
-        return images
+        let imageData = try jsonDecoder.decode([ImageData].self, from: data)
+        return imageData.compactMap { Image(imageData: $0) }
     }
 
     private func searchImageParseJSON(withData data: Data) throws -> [Image]? {
-        let decoder = JSONDecoder()
-        let imageData = try decoder.decode(SearchData.self, from: data)
-        var images: [Image] = []
-        guard let searchData = imageData.results else { return nil }
-        for datum in searchData {
-            guard let image = Image(searchData: datum) else { return nil }
-            images.append(image)
-        }
-        return images
+        let imageData = try jsonDecoder.decode(SearchData.self, from: data)
+        return imageData.results.compactMap { Image(searchData: $0) }
     }
 }
 

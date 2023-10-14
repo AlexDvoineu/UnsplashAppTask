@@ -16,17 +16,6 @@ class MainTabBarController: UITabBarController {
         tabBar.backgroundColor = .secondarySystemBackground
         view.backgroundColor = .white
     }
-    
-    fileprivate func createNavController(viewcontroller: UIViewController, title: String, imageName: String) -> UIViewController {
-        
-        let navController = UINavigationController(rootViewController: viewcontroller)
-        viewcontroller.navigationItem.title = title
-        viewcontroller.view.backgroundColor = .white
-        navController.tabBarItem.title = title
-        navController.tabBarItem.image = UIImage(systemName: imageName)
-        navController.navigationBar.prefersLargeTitles = true
-        return navController
-    }
 }
 
 struct MainTabBarController_Previews: PreviewProvider {

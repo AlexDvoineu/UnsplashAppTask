@@ -11,12 +11,11 @@ class NetworkManager {
     
     static let shared = NetworkManager()
     private let baseURL = "https://api.unsplash.com/"
-//    private let clientId = Constant.keyAPI
+    // private let clientId = Constant.keyAPI
     // Another key if rate limit exceeded
     // CewI7tFKhXqMgfDQ_mWQc2KYRxQLsXyTv033_CvAIko
     // mXn3boZyLcKIvK-0rIdaoIgiJ4fYoDanWHhheM5EQnc
     private let clientId = "CewI7tFKhXqMgfDQ_mWQc2KYRxQLsXyTv033_CvAIko"
-    let cache = NSCache<NSString, UIImage>()
     
     private init() {}
     
@@ -139,33 +138,32 @@ class NetworkManager {
         task.resume()
     }
     
-    //MARK: - DownLoad image
-    func downloadImage(from urlString: String, completed: @escaping(UIImage?)-> Void){
-        let cacheKey = NSString(string: urlString)
-
-        if let image = cache.object(forKey: cacheKey) {
-            completed(image)
-            return
-        }
-        
-        guard let url = URL(string: urlString) else {
-            completed(nil)
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            
-            guard let self = self,
-                  error == nil,
-                  let response = response as? HTTPURLResponse, response.statusCode == 200,
-                  let data = data,
-                  let image = UIImage(data: data) else {
-                completed(nil)
-                return
-            }
-            self.cache.setObject(image, forKey: cacheKey)
-            completed(image)
-        }
-        task.resume()
-    }
+//    func downloadImage(from urlString: String, completed: @escaping(UIImage?)-> Void){
+//        let cacheKey = NSString(string: urlString)
+//
+//        if let image = cache.object(forKey: cacheKey) {
+//            completed(image)
+//            return
+//        }
+//        
+//        guard let url = URL(string: urlString) else {
+//            completed(nil)
+//            return
+//        }
+//        
+//        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+//            
+//            guard let self = self,
+//                  error == nil,
+//                  let response = response as? HTTPURLResponse, response.statusCode == 200,
+//                  let data = data,
+//                  let image = UIImage(data: data) else {
+//                completed(nil)
+//                return
+//            }
+//            self.cache.setObject(image, forKey: cacheKey)
+//            completed(image)
+//        }
+//        task.resume()
+//    }
 }

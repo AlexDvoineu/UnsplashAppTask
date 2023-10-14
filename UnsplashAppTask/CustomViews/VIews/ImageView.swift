@@ -7,14 +7,9 @@
 
 import UIKit
 
-enum Images {
-    static let placeholder = UIImage(named: "placeholderimage")
-}
-
 final class ImageView: UIImageView {
     
     let placeholderImage = Images.placeholder
-    let cache = NetworkManager.shared.cache
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -31,12 +26,5 @@ final class ImageView: UIImageView {
         image = placeholderImage
         translatesAutoresizingMaskIntoConstraints = true
         contentMode = .scaleAspectFill
-    }
-    
-    func downloadImage(fromURL url: String){
-        NetworkManager.shared.downloadImage(from: url) { [weak self] image in
-            guard let self = self else { return }
-            DispatchQueue.main.async {self.image = image}
-        }
     }
 }

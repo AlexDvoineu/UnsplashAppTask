@@ -9,7 +9,7 @@ import UIKit
 
 final class CollectionImagesViewController: DataLoadingVC {
     
-    private lazy  var collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnFlowLayout(in: view))
+    private lazy var collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnFlowLayout(in: view))
     private var timer: Timer?
     
     var requestImagesResults: [ImagesResult] = []
@@ -46,6 +46,7 @@ final class CollectionImagesViewController: DataLoadingVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+        
         let textAttributes = [NSAttributedString.Key.foregroundColor: Colors.basicColor]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
     }
@@ -64,7 +65,7 @@ extension CollectionImagesViewController {
             
             switch result {
             case .success(let resultsImages):
-                if resultsImages.results.count < 20 { moreImages = false }
+                if resultsImages.results.count < 30 { moreImages = false }
                 else { moreImages = true }
                 requestImagesResults.append(contentsOf: resultsImages.results)
 
@@ -90,7 +91,6 @@ extension CollectionImagesViewController {
                 randomImagesResults.removeAll()
                 randomImagesResults = randomImagesResult
                 reloadData()
-//                reloadCollectionView()
                 
             case .failure(let error):
                 presentCustomAllertOnMainThred(allertTitle: "Bad Stuff Happend", message: error.rawValue, butonTitle: "Ok")
@@ -152,12 +152,7 @@ extension CollectionImagesViewController: UICollectionViewDelegate, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch isSearchingByRandom {
-        case true:
-            return randomImagesResults.count
-        default:
-            return requestImagesResults.count
-        }
+        return isSearchingByRandom ? randomImagesResults.count : requestImagesResults.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -244,14 +239,6 @@ extension CollectionImagesViewController: UISearchResultsUpdating, UISearchContr
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.setOldRandomImages()
     }
-}
-
-// MARK: Delegate
-
-extension CollectionImagesViewController: ImageDetailsViewControllerDelegate {
-    func passImageData(image: Image) {}
-    
-    func deleteImageData(image: Image) {}
 }
 
 // MARK: ViewInput

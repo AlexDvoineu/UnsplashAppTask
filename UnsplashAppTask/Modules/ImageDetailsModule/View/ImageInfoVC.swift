@@ -68,20 +68,18 @@ class ImageInfoVC: UIViewController, UIScrollViewDelegate {
     }
     
     private func configureImage(){
-        imageImageView.downloadImage(fromURL: imageUrl)
+        imageImageView.sd_setImage(with: URL(string: imageUrl))
     }
     
     func configureScrollView(){
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         scrollView.pinToEdges(of: view)
-        scrollView.contentSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height)
         
         contentView.pinToEdges(of: scrollView)
         
         NSLayoutConstraint.activate([
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.heightAnchor.constraint(equalToConstant: 1000)
         ])
     }
     
@@ -115,7 +113,7 @@ class ImageInfoVC: UIViewController, UIScrollViewDelegate {
             
             //AllertController
             let alert = UIAlertController(title: "", message: "Already in Favorites", preferredStyle: .actionSheet)
-            alert.addAction(UIAlertAction(title: "Delete from Favorites", style: .destructive , handler:{ (UIAlertAction)in
+            alert.addAction(UIAlertAction(title: "Delete from Favorites", style: .destructive , handler:{ (UIAlertAction) in
                 
                 PersistenceManager.sharedRealm.deleteData(idForDelete: self.idOfImage)//here realm
                 self.reloadDelegate?.reloadTableFunc()

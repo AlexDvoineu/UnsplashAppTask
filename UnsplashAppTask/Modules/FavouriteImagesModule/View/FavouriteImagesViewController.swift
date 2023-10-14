@@ -11,7 +11,7 @@ final class FavouriteImagesViewController: UIViewController {
 
     var presenter: FavouriteImagesPresenter
 
-    private var tableView: UITableView?
+    private lazy var tableView = UITableView(frame: self.view.bounds)
     private let textIfEmpty = UILabel()
 
     override func viewDidLoad() {
@@ -23,7 +23,7 @@ final class FavouriteImagesViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         presenter.viewWillAppear()
-        tableView?.reloadData()
+        tableView.reloadData()
     }
 
     init(presenter: FavouriteImagesPresenter) {
@@ -41,11 +41,11 @@ final class FavouriteImagesViewController: UIViewController {
 extension FavouriteImagesViewController {
     private func setupUI() {
         tableView = UITableView(frame: self.view.bounds)
-        tableView?.delegate = self
-        tableView?.dataSource = self
-        tableView?.separatorStyle = .none
-        tableView?.register(FavouriteImagesTableViewCell.self, forCellReuseIdentifier: FavouriteImagesTableViewCell.identifier)
-        self.view.addSubview(tableView ?? UITableView())
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.register(FavouriteImagesTableViewCell.self, forCellReuseIdentifier: FavouriteImagesTableViewCell.identifier)
+        self.view.addSubview(tableView)
 
         textIfEmpty.translatesAutoresizingMaskIntoConstraints = false
         textIfEmpty.font = .systemFont(ofSize: 32)
@@ -101,7 +101,7 @@ extension FavouriteImagesViewController: ImageDetailsViewControllerDelegate {
 
 extension FavouriteImagesViewController: FavouriteImagesViewInput {
     func reloadData() {
-        self.tableView?.reloadData()
+        self.tableView.reloadData()
     }
 
     func showAlert(isEmpty: Bool) {
@@ -115,10 +115,10 @@ extension FavouriteImagesViewController: FavouriteImagesViewInput {
             )
             present(alertController, animated: true)
 
-            tableView?.isHidden = true
+            tableView.isHidden = true
             textIfEmpty.isHidden = false
         } else {
-            tableView?.isHidden = false
+            tableView.isHidden = false
             textIfEmpty.isHidden = true
         }
     }

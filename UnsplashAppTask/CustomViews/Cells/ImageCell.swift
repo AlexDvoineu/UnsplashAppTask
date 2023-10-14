@@ -12,7 +12,6 @@ final class ImageCell: UICollectionViewCell {
     static let reuseID = "ImageCell"
     
     let imageImageView = ImageView(frame: .zero)
-    var cellId = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,34 +24,32 @@ final class ImageCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        imageImageView.image = Images.placeholder
+        setDefaultImage()
+        imageImageView.sd_cancelCurrentImageLoad()
+        imageImageView.image = nil
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        imageImageView.frame = contentView.bounds
     }
     
     func setDefaultImage(){
+        imageImageView.image = nil
         imageImageView.image = Images.placeholder
     }
     
     func setForRequest(image: ImagesResult){
         setDefaultImage()
-        self.imageImageView.downloadImage(fromURL: image.urls.thumb)
+        imageImageView.sd_setImage(with: URL(string: image.urls.thumb))
     }
 
     func setForRandom(image: RandomImagesResult){
         setDefaultImage()
-        self.imageImageView.downloadImage(fromURL: image.urls.thumb)
+        imageImageView.sd_setImage(with: URL(string: image.urls.thumb))
     }
     
     private func configure(){
-        imageImageView.frame = contentView.bounds
         addSubview(imageImageView)
-        
-        let padding: CGFloat = 8
-        
-        NSLayoutConstraint.activate([
-            imageImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
-            imageImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            imageImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
-            imageImageView.heightAnchor.constraint(equalTo: imageImageView.widthAnchor)
-        ])
     }
 }

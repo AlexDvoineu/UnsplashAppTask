@@ -7,19 +7,19 @@
 
 import UIKit
 
-final class MainTabBarAssembly {
+struct MainTabBarAssembly {
     static func assembleMainTabBarModule() -> UITabBarController {
         let controller = MainTabBarController()
         
         guard let collectionImages = UIImage(systemName: Constant.collectionImage) else { return UITabBarController() }
-        let collectionImagesVC = MainTabBarAssembly.generateViewController(
+        let collectionImagesVC = Self.generateViewController(
             viewController: CollectionImagesAssembly.assembleCollectionImagesModule(),
             image: collectionImages,
             title: "Collection"
         )
         
         guard let favouriteImages = UIImage(systemName: Constant.unfavouriteImage) else { return UITabBarController() }
-        let favouriteImagesVC = MainTabBarAssembly.generateViewController(
+        let favouriteImagesVC = Self.generateViewController(
             viewController: FavoritesVC(),
             image: favouriteImages,
             title: "Favourites"
