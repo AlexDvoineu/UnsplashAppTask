@@ -30,10 +30,8 @@ struct MainTabBarController_Previews: PreviewProvider {
         }
         
         func updateUIViewController(_ uiViewController: MainTabBarController, context: Context) {
-            
         }
         
         typealias UIViewControllerType = MainTabBarController
-        
     }
 }

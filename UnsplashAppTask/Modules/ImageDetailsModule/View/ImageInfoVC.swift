@@ -45,7 +45,7 @@ class ImageInfoVC: UIViewController, UIScrollViewDelegate {
         layoutUI()
     }
     
-    func configureVC(){
+    func configureVC() {
         view.backgroundColor = .systemBackground
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
         doneButton.tintColor = Colors.basicColor
@@ -53,12 +53,12 @@ class ImageInfoVC: UIViewController, UIScrollViewDelegate {
     }
     
  //MARK: -  Configure Views
-    private func configureLabels(){
+    private func configureLabels() {
         userNameLabel.text  = "Author: \(authorsName)"
         getImageData(id: idOfImage)
     }
     
-    private func configureButtons(){
+    private func configureButtons() {
         addFavoritesButton.addTarget(self, action: #selector(addFavoritesButtonTapped), for: .touchUpInside)
         guard !PersistenceManager.sharedRealm.objectExist(primaryKey: idOfImage) else {
             addFavoritesButton.set(backgroundColor: .systemRed, title: "Delete From  Favorites")
@@ -67,11 +67,11 @@ class ImageInfoVC: UIViewController, UIScrollViewDelegate {
         addFavoritesButton.set(backgroundColor: .systemGreen, title: "Add to favorites")
     }
     
-    private func configureImage(){
+    private func configureImage() {
         imageImageView.sd_setImage(with: URL(string: imageUrl))
     }
     
-    func configureScrollView(){
+    func configureScrollView() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         scrollView.pinToEdges(of: view)
@@ -84,7 +84,7 @@ class ImageInfoVC: UIViewController, UIScrollViewDelegate {
     }
     
     //MARK: - Load Image Data From API
-    private func getImageData(id: String){
+    private func getImageData(id: String) {
         NetworkManager.shared.getImagesByID(for: id) { [weak self] result in
             guard let self = self else { return }
             
@@ -101,12 +101,12 @@ class ImageInfoVC: UIViewController, UIScrollViewDelegate {
     }
     
     //MARK: - Configure actions for buttons
-    @objc func dismissVC(){
+    @objc func dismissVC() {
         self.reloadDelegate?.reloadTableFunc()
         dismiss(animated: true)
     }
     
-    @objc func addFavoritesButtonTapped(){
+    @objc func addFavoritesButtonTapped() {
         addFavoritesButton.set(backgroundColor: .systemRed, title: "Delete From  Favorites")
         
         guard !PersistenceManager.sharedRealm.objectExist(primaryKey: idOfImage) else{
@@ -135,7 +135,7 @@ class ImageInfoVC: UIViewController, UIScrollViewDelegate {
         self.reloadDelegate?.reloadTableFunc()
     }
     
-    @objc func userInfoTapped(){
+    @objc func userInfoTapped() {
         guard let url = URL(string: userHTML) else{
             presentCustomAllertOnMainThred(allertTitle: "Invalid URL", message: "This URL is invalid", butonTitle: "Ok")
             return
@@ -144,7 +144,7 @@ class ImageInfoVC: UIViewController, UIScrollViewDelegate {
     }
     
     //MARK: - Configure Views Layouts
-    private func layoutUI(){
+    private func layoutUI() {
         
         contentView.addSubviews(
             imageImageView,
@@ -194,6 +194,7 @@ class ImageInfoVC: UIViewController, UIScrollViewDelegate {
             imageDescriptionLabel.topAnchor.constraint(equalTo: imageTitleLabel.bottomAnchor, constant: padding),
             imageDescriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
             imageDescriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            imageDescriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding),
             imageDescriptionLabel.heightAnchor.constraint(equalToConstant: 60)
         ])
     }

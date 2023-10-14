@@ -33,14 +33,14 @@ class DataLoadingVC: UIViewController {
     }
     
     func dismissLoadingView() {
-        DispatchQueue.main.async{
+        DispatchQueue.main.async {
             self.containerView.removeFromSuperview()
         }
     }
     
-    func showEmptyStateView(with message: String, in view: UIView){
-        let emptyStateView      = EmptyStateView(message: message)
-        emptyStateView.frame    = view.bounds
+    func showEmptyStateView(with message: String, in view: UIView) {
+        let emptyStateView = EmptyStateView(message: message)
+        emptyStateView.frame = view.bounds
         view.addSubview(emptyStateView)
     }
 }

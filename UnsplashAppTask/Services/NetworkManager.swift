@@ -59,7 +59,7 @@ class NetworkManager {
     }
     
     //MARK: - Get Random Images
-    func getRandomImages(completed: @escaping (Result<[RandomImagesResult], ErrorMessages>) -> Void) {
+    func getRandomImages(page: Int, completed: @escaping (Result<[RandomImagesResult], ErrorMessages>) -> Void) {
         let endpoint = baseURL+"photos/random?client_id=\(clientId)&count=30"
         
         guard let url = URL(string: endpoint) else {
@@ -88,7 +88,7 @@ class NetworkManager {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy  = .convertFromSnakeCase
                 decoder.dateDecodingStrategy = .iso8601
-                let resultsRandomImages      = try decoder.decode([RandomImagesResult].self, from: data)
+                let resultsRandomImages = try decoder.decode([RandomImagesResult].self, from: data)
                 completed(.success(resultsRandomImages))
             } catch {
                 completed(.failure(.invalidData))
@@ -137,33 +137,4 @@ class NetworkManager {
         }
         task.resume()
     }
-    
-//    func downloadImage(from urlString: String, completed: @escaping(UIImage?)-> Void){
-//        let cacheKey = NSString(string: urlString)
-//
-//        if let image = cache.object(forKey: cacheKey) {
-//            completed(image)
-//            return
-//        }
-//        
-//        guard let url = URL(string: urlString) else {
-//            completed(nil)
-//            return
-//        }
-//        
-//        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-//            
-//            guard let self = self,
-//                  error == nil,
-//                  let response = response as? HTTPURLResponse, response.statusCode == 200,
-//                  let data = data,
-//                  let image = UIImage(data: data) else {
-//                completed(nil)
-//                return
-//            }
-//            self.cache.setObject(image, forKey: cacheKey)
-//            completed(image)
-//        }
-//        task.resume()
-//    }
 }

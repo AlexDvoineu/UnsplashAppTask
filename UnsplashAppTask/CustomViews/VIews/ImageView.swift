@@ -9,9 +9,9 @@ import UIKit
 
 final class ImageView: UIImageView {
     
-    let placeholderImage = Images.placeholder
+    private let placeholderImage = Images.placeholder
     
-    override init(frame: CGRect){
+    override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
     }
@@ -20,7 +20,7 @@ final class ImageView: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configure(){
+    private func configure() {
         layer.cornerRadius = 10
         clipsToBounds = true
         image = placeholderImage

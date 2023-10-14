@@ -38,7 +38,7 @@ final class CollectionImagesViewController: DataLoadingVC {
         
         congifureViewController()
         configureCollectionView()
-        getRandomImages()
+        getRandomImages(page: page)
         configureSearchController()
         createDismissKeyboardTapGesture()
     }
@@ -78,11 +78,11 @@ extension CollectionImagesViewController {
         }
     }
     
-    func getRandomImages() {
+    func getRandomImages(page: Int) {
         isSearchingByRandom = true
         moreImages = false
         showLoadingView()
-        NetworkManager.shared.getRandomImages(){ [weak self] result in
+        NetworkManager.shared.getRandomImages(page: self.page) { [weak self] result in
             guard let self = self else { return }
             dismissLoadingView()
             
@@ -101,13 +101,13 @@ extension CollectionImagesViewController {
     
     //MARK: -  Additional Functions
     
-    func createDismissKeyboardTapGesture(){
+    func createDismissKeyboardTapGesture() {
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
         tap.cancelsTouchesInView = false
     }
     
-    func setOldRandomImages(){
+    func setOldRandomImages() {
         requestImagesResults.removeAll()
         isSearchingByRandom = true
         reloadData()
@@ -119,12 +119,12 @@ extension CollectionImagesViewController {
 
 extension CollectionImagesViewController {
     
-    private func congifureViewController(){
+    private func congifureViewController() {
         view.backgroundColor = .systemBackground
     }
     
     //MARK: - Configure UI elements
-    private func configureCollectionView(){
+    private func configureCollectionView() {
         view.addSubview(collectionView)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -226,7 +226,7 @@ extension CollectionImagesViewController: UISearchResultsUpdating, UISearchContr
         requestImagesResults.removeAll()
         
         timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false){ _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
             self.requestImagesResults.removeAll()
             self.getImagesByRequest(request: self.searchRequest, page: self.page)
         }

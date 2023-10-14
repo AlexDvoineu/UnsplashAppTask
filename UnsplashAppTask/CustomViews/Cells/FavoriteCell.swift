@@ -22,12 +22,12 @@ final class FavoriteCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(imageUrl: String, userName: String){
+    func set(imageUrl: String, userName: String) {
         imageImageView.sd_setImage(with: URL(string: imageUrl))
         userNameLabel.text = "Authors name: \n\(userName)"
     }
     
-    private func configure(){
+    private func configure() {
         addSubviews(imageImageView, userNameLabel)
         imageImageView.translatesAutoresizingMaskIntoConstraints = false
         userNameLabel.translatesAutoresizingMaskIntoConstraints  = false
@@ -45,7 +45,6 @@ final class FavoriteCell: UITableViewCell {
             userNameLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             userNameLabel.leadingAnchor.constraint(equalTo: imageImageView.trailingAnchor, constant: padding),
             userNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding)
-   
         ])
     }
 }

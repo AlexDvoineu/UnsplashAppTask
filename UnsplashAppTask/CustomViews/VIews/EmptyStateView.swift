@@ -25,7 +25,7 @@ final class EmptyStateView: UIView {
         messageLabel.text = message
     }
     
-    private func configure(){
+    private func configure() {
         addSubview(messageLabel)
         messageLabel.textColor = Colors.basicColor
         

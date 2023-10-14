@@ -27,7 +27,7 @@ extension UIViewController {
         return alert
     }
     
-    func presentCustomAllertOnMainThred(allertTitle: String, message: String, butonTitle: String){
+    func presentCustomAllertOnMainThred(allertTitle: String, message: String, butonTitle: String) {
         DispatchQueue.main.async {
             let allertVC = AllertVC(allertTitle: allertTitle, message: message, buttonTitle: butonTitle)
             allertVC.modalPresentationStyle = .overFullScreen
@@ -36,7 +36,7 @@ extension UIViewController {
         }
     }
     
-    func presentSafariVC(with url: URL){
+    func presentSafariVC(with url: URL) {
         let safariVC = SFSafariViewController(url: url)
         safariVC.preferredControlTintColor = .systemOrange
         present(safariVC, animated: true)

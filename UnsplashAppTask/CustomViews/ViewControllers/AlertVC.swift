@@ -11,21 +11,21 @@ final class AllertVC: UIViewController {
     
     let containerView = AlertContainerView()
     
-    let titleLabel   = TitleLabel(textAlignment: .center, fontSize: 20)
+    let titleLabel = TitleLabel(textAlignment: .center, fontSize: 20)
     let messageLabel = BodyLabel(textAlignment: .center)
     let actionButton = Button(backgroundcolor: .systemPink, title: "Ok")
     
     
-    var alertTitle:  String?
-    var message:     String?
+    var alertTitle: String?
+    var message: String?
     var buttonTitle: String?
     
     let padding: CGFloat = 20
     
-    init(allertTitle: String, message: String, buttonTitle: String){
+    init(allertTitle: String, message: String, buttonTitle: String) {
         super.init(nibName: nil, bundle: nil)
-        self.alertTitle  = allertTitle
-        self.message     = message
+        self.alertTitle = allertTitle
+        self.message = message
         self.buttonTitle = buttonTitle
     }
     
@@ -35,7 +35,7 @@ final class AllertVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor =  UIColor.black.withAlphaComponent(0.75)
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.75)
         
         configureContainerView()
         configureTitleLabel()
@@ -43,7 +43,7 @@ final class AllertVC: UIViewController {
         configureMessageLabel()
     }
     
-    func configureContainerView(){
+    func configureContainerView() {
         view.addSubview(containerView)
         
         NSLayoutConstraint.activate([
@@ -54,7 +54,7 @@ final class AllertVC: UIViewController {
         ])
     }
     
-    func configureTitleLabel(){
+    func configureTitleLabel() {
         containerView.addSubview(titleLabel)
         titleLabel.text = alertTitle ?? "Something went wrong"
         
@@ -66,7 +66,7 @@ final class AllertVC: UIViewController {
         ])
     }
     
-    func configureActionButton(){
+    func configureActionButton() {
         containerView.addSubview(actionButton)
         actionButton.setTitle(buttonTitle ?? "Ok", for: .normal)
         actionButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
@@ -79,8 +79,7 @@ final class AllertVC: UIViewController {
         ])
     }
     
-    
-    func configureMessageLabel(){
+    func configureMessageLabel() {
         containerView.addSubview(messageLabel)
         messageLabel.text = message ?? "Unable to complete request"
         messageLabel.numberOfLines = 4
@@ -93,7 +92,7 @@ final class AllertVC: UIViewController {
         ])
     }
     
-    @objc func dismissVC(){
+    @objc func dismissVC() {
         dismiss(animated: true)
     }
 }

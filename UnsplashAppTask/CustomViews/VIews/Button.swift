@@ -18,21 +18,21 @@ final class Button: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(backgroundcolor: UIColor, title: String){
+    convenience init(backgroundcolor: UIColor, title: String) {
         self.init(frame: .zero)
-        self.backgroundColor    = backgroundcolor
+        self.backgroundColor = backgroundcolor
         self.setTitle(title, for: .normal)
     }
     
-    private func configure(){
-        layer.cornerRadius      = 10
-        titleLabel?.font        = UIFont.preferredFont(forTextStyle: .headline)
+    private func configure() {
+        layer.cornerRadius = 10
+        titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         setTitleColor(.white, for: .normal)
         translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func set(backgroundColor: UIColor, title: String){
-        self.backgroundColor    = backgroundColor
+    func set(backgroundColor: UIColor, title: String) {
+        self.backgroundColor = backgroundColor
         setTitle(title, for: .normal)
     }
 }

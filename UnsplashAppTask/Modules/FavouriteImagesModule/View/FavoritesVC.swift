@@ -26,7 +26,7 @@ class FavoritesVC: DataLoadingVC {
         checkImagesCount()
     }
     
-    private func checkImagesCount(){
+    private func checkImagesCount() {
         if favoritesArray.count == 0{
             
             DispatchQueue.main.async {
@@ -35,7 +35,7 @@ class FavoritesVC: DataLoadingVC {
         }
     }
     
-    func reloadTableView(){
+    func reloadTableView() {
         favoritesArray = PersistenceManager.sharedRealm.item
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -43,14 +43,14 @@ class FavoritesVC: DataLoadingVC {
         }
     }
     
-    func configureViewController(){
+    func configureViewController() {
         view.backgroundColor = .systemBackground
         title = "Favorites"
         let textAttributes = [NSAttributedString.Key.foregroundColor: Colors.basicColor]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
     }
     
-    func configureTableView(){
+    func configureTableView() {
         view.addSubview(tableView)
         
         tableView.frame = view.bounds

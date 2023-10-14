@@ -32,24 +32,24 @@ final class PersistenceManager{
         return realm.object(ofType: ImagesRealm.self, forPrimaryKey: primaryKey) != nil
     }
     
-    func addFavorite(authorsName: String, imageUrl: String, updatedAt: Date, userHTML: String, likes: Int, id: String){
+    func addFavorite(authorsName: String, imageUrl: String, updatedAt: Date, userHTML: String, likes: Int, id: String) {
         let favoriteImage = ImagesRealm()
-        favoriteImage.imageUrl    = imageUrl
+        favoriteImage.imageUrl = imageUrl
         favoriteImage.authorsName = authorsName
-        favoriteImage.updatedAt   = updatedAt
-        favoriteImage.userHTML    = userHTML
-        favoriteImage.likes       = likes
-        favoriteImage.idOfImage   = id//primary key
+        favoriteImage.updatedAt = updatedAt
+        favoriteImage.userHTML = userHTML
+        favoriteImage.likes = likes
+        favoriteImage.idOfImage = id//primary key
         
         try! realm.write{ realm.add(favoriteImage) }
     }
     
-    func deleteFavorite(item: ImagesRealm){
+    func deleteFavorite(item: ImagesRealm) {
         try! realm.write{
             realm.delete(item) }
     }
     
-    func deleteData(idForDelete: String){
+    func deleteData(idForDelete: String) {
         let realm = try! Realm()
         let data = realm.object(ofType: ImagesRealm.self, forPrimaryKey: idForDelete)
         if data != nil{

@@ -34,22 +34,22 @@ final class ImageCell: UICollectionViewCell {
         imageImageView.frame = contentView.bounds
     }
     
-    func setDefaultImage(){
+    func setDefaultImage() {
         imageImageView.image = nil
         imageImageView.image = Images.placeholder
     }
     
-    func setForRequest(image: ImagesResult){
+    func setForRequest(image: ImagesResult) {
         setDefaultImage()
         imageImageView.sd_setImage(with: URL(string: image.urls.thumb))
     }
 
-    func setForRandom(image: RandomImagesResult){
+    func setForRandom(image: RandomImagesResult) {
         setDefaultImage()
         imageImageView.sd_setImage(with: URL(string: image.urls.thumb))
     }
     
-    private func configure(){
+    private func configure() {
         addSubview(imageImageView)
     }
 }
