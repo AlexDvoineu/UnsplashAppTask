@@ -60,7 +60,7 @@ class NetworkManager {
     
     //MARK: - Get Random Images
     func getRandomImages(completed: @escaping (Result<[RandomImagesResult], ErrorMessages>) -> Void) {
-        let endpoint = baseURL+"photos/random?client_id=\(clientId)&count=20"
+        let endpoint = baseURL+"photos/random?client_id=\(clientId)&count=30"
         
         guard let url = URL(string: endpoint) else {
             completed(.failure(.invalidRequest))
