@@ -7,7 +7,6 @@
 
 import UIKit
 
-#warning("поставить вместо ImageDetails id")
 final class ImageDetailsAssembly {
     static func assembleImageDetailsModule(
         image: ImageDetails,

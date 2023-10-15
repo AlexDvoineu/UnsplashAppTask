@@ -11,8 +11,6 @@ final class CollectionImagesPresenter {
 
     weak var view: CollectionImagesInput?
 
-    #warning("Choose your fighter")
-    private var networkService = NetworkService()
     private let apiManager: APIManagerProtocol
 
     private var requestImagesResults: [ImagesResult] = []

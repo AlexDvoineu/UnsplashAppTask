@@ -41,17 +41,6 @@ final class ImageCell: UICollectionViewCell {
         imageImageView.sd_setImage(with: image.imageUrl)
     }
 
-    #warning("возможно стоит убрать эти методы")
-    func setForRequest(image: ImagesResult) {
-        setDefaultImage()
-        imageImageView.sd_setImage(with: URL(string: image.urls.thumb))
-    }
-
-    func setForRandom(image: RandomImagesResult) {
-        setDefaultImage()
-        imageImageView.sd_setImage(with: URL(string: image.urls.thumb))
-    }
-
     private func configure() {
         addSubview(imageImageView)
     }

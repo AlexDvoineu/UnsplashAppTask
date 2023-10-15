@@ -44,12 +44,4 @@ final class FavouriteImagesTableViewCell: UITableViewCell {
             authorNameLabel.leftAnchor.constraint(equalTo: image.rightAnchor, constant: 40)
         ])
     }
-
-    func configure(image: Image) {
-        authorNameLabel.text = image.authorName
-        NetworkService().downloadImage(url: image.smallPhoto) { [weak self] image in
-            guard let self = self else { return }
-            self.image.image = image
-        }
-    }
 }

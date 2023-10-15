@@ -56,7 +56,6 @@
 		40F3E6C12ADC566D00E7C9B8 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 40F3E6C02ADC566D00E7C9B8 /* RealmSwift */; };
 		40F3E6C32ADC566D00E7C9B8 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 40F3E6C22ADC566D00E7C9B8 /* SDWebImage */; };
 		40F3E6C62ADC572E00E7C9B8 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3E6C52ADC572E00E7C9B8 /* ImageDownloader.swift */; };
-		40F3E6C92ADC58FE00E7C9B8 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3E6C82ADC58FE00E7C9B8 /* NetworkService.swift */; };
 		40F3E6CB2ADC5B5D00E7C9B8 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3E6CA2ADC5B5D00E7C9B8 /* Reusable.swift */; };
 		CE857F082AD804290012B07C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CE857F072AD804290012B07C /* Realm */; };
 		CE857F0A2AD804290012B07C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE857F092AD804290012B07C /* RealmSwift */; };
@@ -138,7 +137,6 @@
 		40F3E69D2ADC4A3300E7C9B8 /* FavouriteImagesInputTestDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteImagesInputTestDouble.swift; sourceTree = "<group>"; };
 		40F3E6A32ADC527100E7C9B8 /* UnsplashAppTaskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnsplashAppTaskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		40F3E6C52ADC572E00E7C9B8 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
-		40F3E6C82ADC58FE00E7C9B8 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		40F3E6CA2ADC5B5D00E7C9B8 /* Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		CE857F0E2AD811210012B07C /* MainTabBarAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarAssembly.swift; sourceTree = "<group>"; };
 		CE857F102AD811400012B07C /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -393,7 +391,6 @@
 				CE857F242AD822C70012B07C /* Image.swift */,
 				CE857F262AD822D40012B07C /* ImageData.swift */,
 				40F3E62F2AD8C83200E7C9B8 /* ImagesStorage.swift */,
-				40F3E6C82ADC58FE00E7C9B8 /* NetworkService.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -731,7 +728,6 @@
 				40F3E6482AD93B8700E7C9B8 /* ErrorMessages.swift in Sources */,
 				CE857F182AD81AB40012B07C /* Constants.swift in Sources */,
 				40F3E62C2AD8C6D700E7C9B8 /* FavouriteImagesPresenterProtocol.swift in Sources */,
-				40F3E6C92ADC58FE00E7C9B8 /* NetworkService.swift in Sources */,
 				40F3E65C2AD945AF00E7C9B8 /* BodyLabel.swift in Sources */,
 				CE8BBAF92AD7FEF0006FA944 /* AppDelegate.swift in Sources */,
 				40F3E63B2AD8D1E900E7C9B8 /* ImageDetailsPresenter.swift in Sources */,
@@ -931,6 +927,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -958,6 +955,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
