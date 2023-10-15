@@ -10,6 +10,12 @@ import UIKit
 class DataLoadingVC: UIViewController {
     
     lazy var containerView = UIView(frame: view.bounds)
+    let emptyStateView = EmptyStateView(message: "")
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.addSubview(emptyStateView)
+    }
     
     func showLoadingView() {
         view.addSubview(containerView)
@@ -39,8 +45,13 @@ class DataLoadingVC: UIViewController {
     }
     
     func showEmptyStateView(with message: String, in view: UIView) {
-        let emptyStateView = EmptyStateView(message: message)
+        emptyStateView.massage = message
         emptyStateView.frame = view.bounds
-        view.addSubview(emptyStateView)
+        emptyStateView.isHidden = false
     }
+    
+    func hideEmptyStateView() {
+        emptyStateView.isHidden = true
+    }
+    
 }
