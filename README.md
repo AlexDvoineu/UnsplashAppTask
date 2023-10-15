@@ -2,6 +2,7 @@
 
 The start screen includes two tabs.
 The first tab contains a collection of random photos from Unsplash. At the top of the search bar for photos from Unsplash. 
+While in a search mode the user can download images in a bulk of 30 items by dragging the table of images.
 When the cell is picked up, the user will be taken to a detailed information screen.
 On the second tab there is a table with a list of favorite photos,
 in the cell there is a miniature photo and the name of the author.
@@ -18,7 +19,8 @@ Technology:
 - Alamofire
 - Realm
 - SDWebImage
-
-
+- SwiftLint
+- Localization (R.Swift)
+- Unit Tests
 https://github.com/AlexDvoineu/UnsplashAppTask/assets/89863071/f4072bb3-df8c-4b00-a7e4-47eac0ecebb9
 
