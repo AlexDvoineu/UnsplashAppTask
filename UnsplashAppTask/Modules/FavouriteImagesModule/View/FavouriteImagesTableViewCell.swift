@@ -53,4 +53,3 @@ final class FavouriteImagesTableViewCell: UITableViewCell {
         }
     }
 }
-

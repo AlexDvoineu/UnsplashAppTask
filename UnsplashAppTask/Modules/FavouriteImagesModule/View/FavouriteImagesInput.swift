@@ -10,4 +10,3 @@ import Foundation
 protocol FavouriteImagesInput: AnyObject {
     func reloadData()
 }
-

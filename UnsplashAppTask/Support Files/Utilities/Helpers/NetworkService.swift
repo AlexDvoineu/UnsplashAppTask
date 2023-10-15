@@ -94,19 +94,19 @@ private extension NetworkService {
         urlComponents.scheme = "https"
         urlComponents.host = "api.unsplash.com"
         switch requestType {
-            case .random:
-                urlComponents.path = "/photos/random/"
-                urlComponents.queryItems = [
-                    URLQueryItem(name: "client_id", value: Constant.keyAPI),
-                    URLQueryItem(name: "count", value: "30")
-                ]
-
-            case .search(let searchTerms):
-                urlComponents.path = "/search/photos/"
-                urlComponents.queryItems = [
-                    URLQueryItem(name: "client_id", value: Constant.keyAPI),
-                    URLQueryItem(name: "query", value: searchTerms)
-                ]
+        case .random:
+            urlComponents.path = "/photos/random/"
+            urlComponents.queryItems = [
+                URLQueryItem(name: "client_id", value: Constant.keyAPI),
+                URLQueryItem(name: "count", value: "30")
+            ]
+            
+        case .search(let searchTerms):
+            urlComponents.path = "/search/photos/"
+            urlComponents.queryItems = [
+                URLQueryItem(name: "client_id", value: Constant.keyAPI),
+                URLQueryItem(name: "query", value: searchTerms)
+            ]
         }
         return urlComponents.url
     }
@@ -120,12 +120,6 @@ private extension NetworkService {
         let imageData = try jsonDecoder.decode(SearchData.self, from: data)
         return imageData.results.compactMap { Image(searchData: $0) }
     }
-}
-
-struct UnsplashSectionedImages: Codable, Hashable {
-    let total: Int
-    let total_pages: Int
-    let results: [UnsplashImage]
 }
 
 struct UnsplashImage: Codable, Hashable {
@@ -143,5 +137,4 @@ struct UnsplashImageURL: Codable, Hashable {
     let regular: String
     let small: String
     let thumb: String
-    let small_s3: String
 }

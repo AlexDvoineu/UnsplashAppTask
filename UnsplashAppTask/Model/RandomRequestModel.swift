@@ -38,7 +38,7 @@ struct ImagesResult: Codable {
     let urls: URLS
     let user: UnsplashUsers
 
-    private enum CodingKeys : String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case id
         case likes
         case user
@@ -54,8 +54,8 @@ extension ImagesResult: ImageDetails {
     var authorsName: String { user.name }
 }
 
-extension ImagesResult: Hashable{
-    static func ==(lhs: ImagesResult, rhs: ImagesResult) -> Bool {
+extension ImagesResult: Hashable {
+    static func == (lhs: ImagesResult, rhs: ImagesResult) -> Bool {
         return lhs.uuid == rhs.uuid
     }
     
@@ -64,7 +64,7 @@ extension ImagesResult: Hashable{
     }
 }
 
-struct URLS: Codable, Hashable{
+struct URLS: Codable, Hashable {
     let thumb: String
     let small: String
 }

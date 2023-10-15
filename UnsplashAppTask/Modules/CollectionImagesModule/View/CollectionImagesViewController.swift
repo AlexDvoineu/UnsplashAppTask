@@ -88,12 +88,13 @@ extension CollectionImagesViewController: UICollectionViewDelegate, UICollection
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCell.identifier, for: indexPath) as! ImageCell
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCell.identifier, for: indexPath) as? ImageCell {
+            let image: ImageDetails = presenter.image(at: indexPath.row)
+            cell.setForRequest(image: image)
 
-        let image: ImageDetails = presenter.image(at: indexPath.row)
-        cell.setForRequest(image: image)
-
-        return cell
+            return cell
+        }
+        return UICollectionViewCell()
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {

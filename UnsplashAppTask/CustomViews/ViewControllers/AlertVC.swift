@@ -15,7 +15,6 @@ final class AllertVC: UIViewController {
     let messageLabel = BodyLabel(textAlignment: .center)
     let actionButton = Button(backgroundcolor: .systemPink, title: "Ok")
     
-    
     var alertTitle: String?
     var message: String?
     var buttonTitle: String?

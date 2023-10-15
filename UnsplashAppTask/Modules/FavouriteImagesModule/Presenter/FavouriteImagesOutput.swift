@@ -13,4 +13,3 @@ protocol FavouriteImagesOutput {
     
     func updateData()
 }
-

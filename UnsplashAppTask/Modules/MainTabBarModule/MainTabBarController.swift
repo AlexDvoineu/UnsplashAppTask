@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftUI
 
 class MainTabBarController: UITabBarController {
     
@@ -15,23 +14,5 @@ class MainTabBarController: UITabBarController {
         tabBar.tintColor = .black
         tabBar.backgroundColor = .secondarySystemBackground
         view.backgroundColor = .white
-    }
-}
-
-struct MainTabBarController_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        Container()
-    }
-    
-    struct Container: UIViewControllerRepresentable {
-        func makeUIViewController(context: Context) -> MainTabBarController {
-            MainTabBarController()
-        }
-        
-        func updateUIViewController(_ uiViewController: MainTabBarController, context: Context) {
-        }
-        
-        typealias UIViewControllerType = MainTabBarController
     }
 }

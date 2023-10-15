@@ -87,15 +87,15 @@ private extension CollectionImagesPresenter {
 
             DispatchQueue.main.async {
                 self.view?.dismissLoadingView()
-
+                
                 switch result {
-                    case .success(let randomImagesResult):
-                        self.randomImagesResults.removeAll()
-                        self.randomImagesResults = randomImagesResult
-                        self.view?.reloadData()
-
-                    case .failure(let error):
-                        self.view?.showError(error)
+                case .success(let randomImagesResult):
+                    self.randomImagesResults.removeAll()
+                    self.randomImagesResults = randomImagesResult
+                    self.view?.reloadData()
+                    
+                case .failure(let error):
+                    self.view?.showError(error)
                 }
             }
         }
@@ -114,15 +114,15 @@ private extension CollectionImagesPresenter {
 
             DispatchQueue.main.async {
                 self.view?.dismissLoadingView()
-
+                
                 switch result {
-                    case .success(let resultsImages):
-                        self.shouldLoadMoreImages = resultsImages.results.count >= 30
-                        self.requestImagesResults.append(contentsOf: resultsImages.results)
-                    case .failure(let error):
-                        self.view?.showError(error)
+                case .success(let resultsImages):
+                    self.shouldLoadMoreImages = resultsImages.results.count >= 30
+                    self.requestImagesResults.append(contentsOf: resultsImages.results)
+                case .failure(let error):
+                    self.view?.showError(error)
                 }
-
+                
                 self.isLoadingMoreImages = false
                 self.view?.reloadData()
             }

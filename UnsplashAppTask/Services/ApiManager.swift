@@ -42,7 +42,7 @@ extension APIManager: APIManagerProtocol {
 
         let task = urlSession.dataTask(with: url) { data, response, error in
 
-            if let _ = error {
+            if error != nil {
                 completed(.failure(.unableToComplete))
                 return
             }
@@ -81,7 +81,7 @@ extension APIManager: APIManagerProtocol {
 
         let randomTask = urlSession.dataTask(with: url) { data, response, error in
 
-            if let _ = error {
+            if error != nil {
                 completed(.failure(.unableToComplete))
                 return
             }
@@ -121,7 +121,7 @@ extension APIManager: APIManagerProtocol {
 
         let task = urlSession.dataTask(with: url) { data, response, error in
 
-            if let _ = error {
+            if error != nil {
                 completed(.failure(.unableToComplete))
                 return
             }

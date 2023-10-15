@@ -69,14 +69,14 @@ private extension ImageDetailsPresenter {
     private func getImageData() {
         apiManager.getImagesByID(for: image.id) { [weak self] result in
             guard let self else { return }
-
+            
             DispatchQueue.main.async {
                 switch result {
-                    case .success(let data):
-                        self.view?.configure(image: self.image, location: data.location.name, downloads: data.downloads ?? 0)
-
-                    case .failure(let error):
-                        self.view?.showError(error)
+                case .success(let data):
+                    self.view?.configure(image: self.image, location: data.location.name, downloads: data.downloads ?? 0)
+                    
+                case .failure(let error):
+                    self.view?.showError(error)
                 }
             }
         }

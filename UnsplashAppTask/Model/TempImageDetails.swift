@@ -30,4 +30,3 @@ struct TempImageDetails: ImageDetails {
         authorsName = image.authorsName
     }
 }
-

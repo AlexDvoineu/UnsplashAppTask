@@ -17,7 +17,7 @@ final class RealmImage: Object {
     var imageUrl: URL { URL(string: urlString)! }
     @Persisted dynamic var updatedAt: Date
     override static func primaryKey() -> String? { return "id" }
-    @Persisted(primaryKey: true) var objectId: ObjectId//for sorting
+    @Persisted(primaryKey: true) var objectId: ObjectId
 }
 
 extension RealmImage: ImageDetails {
@@ -28,7 +28,7 @@ extension RealmImage: ImageDetails {
 
 final class PersistenceManager {
     static let sharedRealm = PersistenceManager()
-    
+    // swiftlint:disable force_try
     private let realm = try! Realm()
     
     var realmImages: Results<RealmImage> { return realm.objects(RealmImage.self).sorted(byKeyPath: "objectId", ascending: false) }
@@ -39,7 +39,7 @@ final class PersistenceManager {
     
     func addFavorite(id: String, title: String, imageDescription: String, authorsName: String, imageUrl: String, updatedAt: Date = Date()) {
         let favoriteImage = RealmImage()
-        favoriteImage.id = id //primary key
+        favoriteImage.id = id
         favoriteImage.title = title
         favoriteImage.imageDescription = imageDescription
         favoriteImage.authorsName = authorsName
@@ -79,5 +79,4 @@ extension PersistenceManager: FavouritesStorage {
     func removeImage(id: String) {
         deleteData(idForDelete: id)
     }
-    
 }

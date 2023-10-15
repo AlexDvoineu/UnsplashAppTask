@@ -32,8 +32,8 @@ class FavouriteImagesViewController: DataLoadingViewController {
         needReloadTableView()
     }
     
-    private func showPlaceholderIfNeeded(_ count: Int) {
-        if count == 0 {
+    private func showPlaceholderIfNeeded(_ number: Int) {
+        if number == 0 {
             showEmptyStateView(with: "No favorites", in: self.view)
         } else {
             hideEmptyStateView()
@@ -65,8 +65,7 @@ class FavouriteImagesViewController: DataLoadingViewController {
     }
 }
 
-
-//MARK: - UITableViewDataSource, UITableViewDelegate
+// MARK: - UITableViewDataSource, UITableViewDelegate
 extension FavouriteImagesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = presenter.favoritesArray.count
@@ -75,10 +74,12 @@ extension FavouriteImagesViewController: UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteCell.reuseID) as! FavoriteCell
-        let favorite = presenter.favoritesArray[indexPath.row]
-        cell.set(imageUrl: favorite.imageUrl, userName: favorite.authorsName)
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteCell.reuseID) as? FavoriteCell {
+            let favorite = presenter.favoritesArray[indexPath.row]
+            cell.set(imageUrl: favorite.imageUrl, userName: favorite.authorsName)
+            return cell
+        }
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

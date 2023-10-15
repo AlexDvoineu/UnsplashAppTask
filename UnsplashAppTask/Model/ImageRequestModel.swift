@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ImageResult: Codable{
+struct ImageResult: Codable {
   
     let location: LocationData
     let downloads: Int?

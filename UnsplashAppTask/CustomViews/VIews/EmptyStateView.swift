@@ -12,11 +12,11 @@ final class EmptyStateView: UIView {
     let messageLabel = TitleLabel(textAlignment: .center, fontSize: 28)
     
     var massage: String? {
-        set {
-            messageLabel.text = newValue
-        }
         get {
             messageLabel.text
+        }
+        set {
+            messageLabel.text = newValue
         }
     }
     
