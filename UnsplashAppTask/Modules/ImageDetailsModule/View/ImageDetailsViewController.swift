@@ -108,7 +108,8 @@ class ImageDetailsViewController: UIViewController, UIScrollViewDelegate {
 extension ImageDetailsViewController: ImageDetailsViewInput {
     func configure(image: ImageDetails, location: String?, downloads: Int) {
         userNameLabel.text = R.string.localizable.author() + " " + image.authorsName
-        locationAndDowloadsLabel.text = "\(location ?? R.string.localizable.noDescription()) \n\(R.string.localizable.downloads()) \(String(describing: downloads))"
+        locationAndDowloadsLabel.text = "\(location ?? R.string.localizable.noDescription())" +
+                                        "\n\(R.string.localizable.downloads()) \(String(describing: downloads))"
     }
 
     func setImage(image: UIImage) {

@@ -60,6 +60,9 @@
 		40F3E6D22ADC87A900E7C9B8 /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 40F3E6D12ADC87A900E7C9B8 /* RswiftLibrary */; };
 		40F3E6D42ADC87A900E7C9B8 /* rswift in Frameworks */ = {isa = PBXBuildFile; productRef = 40F3E6D32ADC87A900E7C9B8 /* rswift */; };
 		40F9AF162ADC8FF200173CF0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 40F9AF182ADC8FF200173CF0 /* Localizable.strings */; };
+		40F9AF202ADCA70D00173CF0 /* ConnectivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F9AF1F2ADCA70D00173CF0 /* ConnectivityService.swift */; };
+		40F9AF242ADCA7F000173CF0 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 40F9AF232ADCA7F000173CF0 /* SwiftMessages */; };
+		40F9AF292ADCAA9400173CF0 /* ConnectivityServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F9AF282ADCAA9400173CF0 /* ConnectivityServiceTests.swift */; };
 		CE857F082AD804290012B07C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CE857F072AD804290012B07C /* Realm */; };
 		CE857F0A2AD804290012B07C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE857F092AD804290012B07C /* RealmSwift */; };
 		CE857F0F2AD811210012B07C /* MainTabBarAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F0E2AD811210012B07C /* MainTabBarAssembly.swift */; };
@@ -144,6 +147,8 @@
 		40F9AF172ADC8FF200173CF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		40F9AF192ADC903500173CF0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		40F9AF1C2ADC9EDC00173CF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		40F9AF1F2ADCA70D00173CF0 /* ConnectivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityService.swift; sourceTree = "<group>"; };
+		40F9AF282ADCAA9400173CF0 /* ConnectivityServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityServiceTests.swift; sourceTree = "<group>"; };
 		CE857F0E2AD811210012B07C /* MainTabBarAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarAssembly.swift; sourceTree = "<group>"; };
 		CE857F102AD811400012B07C /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		CE857F142AD813670012B07C /* FavouriteImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteImagesViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40F3E6D22ADC87A900E7C9B8 /* RswiftLibrary in Frameworks */,
+				40F9AF242ADCA7F000173CF0 /* SwiftMessages in Frameworks */,
 				CE857F2A2AD82FC40012B07C /* Alamofire in Frameworks */,
 				CE857F0A2AD804290012B07C /* RealmSwift in Frameworks */,
 				40F3E6422AD8EE1500E7C9B8 /* SDWebImage in Frameworks */,
@@ -380,6 +386,7 @@
 		40F3E6A42ADC527100E7C9B8 /* UnsplashAppTaskTests */ = {
 			isa = PBXGroup;
 			children = (
+				40F9AF262ADCAA6A00173CF0 /* Services */,
 				40F3E6832ADC482100E7C9B8 /* Modules */,
 				40F3E68E2ADC494000E7C9B8 /* Utility */,
 			);
@@ -409,6 +416,14 @@
 				40F9AF182ADC8FF200173CF0 /* Localizable.strings */,
 			);
 			path = Localizables;
+			sourceTree = "<group>";
+		};
+		40F9AF262ADCAA6A00173CF0 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				40F9AF282ADCAA9400173CF0 /* ConnectivityServiceTests.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		CE857F0B2AD8108E0012B07C /* Application */ = {
@@ -506,6 +521,7 @@
 				CE857F2E2AD8406E0012B07C /* PersistanceManager.swift */,
 				40F3E6452AD93AAD00E7C9B8 /* ApiManager.swift */,
 				40F3E6472AD93B8700E7C9B8 /* ErrorMessages.swift */,
+				40F9AF1F2ADCA70D00173CF0 /* ConnectivityService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -595,6 +611,7 @@
 				40F3E6412AD8EE1500E7C9B8 /* SDWebImage */,
 				40F3E6D12ADC87A900E7C9B8 /* RswiftLibrary */,
 				40F3E6D32ADC87A900E7C9B8 /* rswift */,
+				40F9AF232ADCA7F000173CF0 /* SwiftMessages */,
 			);
 			productName = UnsplashAppTask;
 			productReference = CE8BBAF52AD7FEF0006FA944 /* UnsplashAppTask.app */;
@@ -634,6 +651,7 @@
 				CE857F282AD82FC40012B07C /* XCRemoteSwiftPackageReference "Alamofire" */,
 				40F3E6402AD8EE1500E7C9B8 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				40F3E6D02ADC87A900E7C9B8 /* XCRemoteSwiftPackageReference "R.swift" */,
+				40F9AF222ADCA7F000173CF0 /* XCRemoteSwiftPackageReference "SwiftMessages" */,
 			);
 			productRefGroup = CE8BBAF62AD7FEF0006FA944 /* Products */;
 			projectDirPath = "";
@@ -696,6 +714,7 @@
 				40F3E6B42ADC538E00E7C9B8 /* FavouriteImagesInputTestDouble.swift in Sources */,
 				40F3E6B32ADC538C00E7C9B8 /* CollectionImagesInputTestDouble.swift in Sources */,
 				40F3E6B52ADC539100E7C9B8 /* FakeImageDetails.swift in Sources */,
+				40F9AF292ADCAA9400173CF0 /* ConnectivityServiceTests.swift in Sources */,
 				40F3E6AE2ADC537700E7C9B8 /* ImageDetailsPresenterTests.swift in Sources */,
 				40F3E6B22ADC538A00E7C9B8 /* FavouritesStorageTestDouble.swift in Sources */,
 				40F3E6B12ADC538600E7C9B8 /* ImageDownloaderProtocolTestDouble.swift in Sources */,
@@ -744,6 +763,7 @@
 				CE857F312AD845620012B07C /* CollectionImagesViewCell.swift in Sources */,
 				CE8BBAFD2AD7FEF0006FA944 /* CollectionImagesViewController.swift in Sources */,
 				40F3E6632AD946A000E7C9B8 /* ImageCell.swift in Sources */,
+				40F9AF202ADCA70D00173CF0 /* ConnectivityService.swift in Sources */,
 				CE857F1E2AD81C640012B07C /* CollectionImagesPresenterProtocol.swift in Sources */,
 				CE857F1A2AD81BB30012B07C /* CollectionImagesAssembly.swift in Sources */,
 				CE857F112AD811400012B07C /* MainTabBarController.swift in Sources */,
@@ -1058,6 +1078,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		40F9AF222ADCA7F000173CF0 /* XCRemoteSwiftPackageReference "SwiftMessages" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftKickMobile/SwiftMessages.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 		CE857F062AD804280012B07C /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -1110,6 +1138,11 @@
 		40F3E6D52ADC889A00E7C9B8 /* RswiftGenerateInternalResources */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = "plugin:RswiftGenerateInternalResources";
+		};
+		40F9AF232ADCA7F000173CF0 /* SwiftMessages */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 40F9AF222ADCA7F000173CF0 /* XCRemoteSwiftPackageReference "SwiftMessages" */;
+			productName = SwiftMessages;
 		};
 		CE857F072AD804290012B07C /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
