@@ -11,6 +11,15 @@ final class EmptyStateView: UIView {
     
     let messageLabel = TitleLabel(textAlignment: .center, fontSize: 28)
     
+    var massage: String? {
+        set {
+            messageLabel.text = newValue
+        }
+        get {
+            messageLabel.text
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
