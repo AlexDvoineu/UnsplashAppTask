@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  UnsplashAppTask
 //
-//  Created by user on 12.10.23.
+//  Created by Aliaksandr Dvoineu on 12.10.23.
 //
 
 import UIKit
@@ -12,19 +12,9 @@ final class CollectionImagesViewController: DataLoadingVC {
     private lazy var collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnFlowLayout(in: view))
     private var timer: Timer?
     
-    var requestImagesResults: [ImagesResult] = []
-    var randomImagesResults:  [RandomImagesResult] = []
+    var presenter: CollectionImagesOutput
     
-    var isSearchingByRandom = true
-    var isLoadingMoreImages = false
-    var moreImages = true
-    
-    var searchRequest = ""
-    var page = 1
-    
-    var presenter: CollectionImagesPresenter
-    
-    init(presenter: CollectionImagesPresenter) {
+    init(presenter: CollectionImagesOutput) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
@@ -35,12 +25,12 @@ final class CollectionImagesViewController: DataLoadingVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         congifureViewController()
         configureCollectionView()
-        getRandomImages(page: page)
         configureSearchController()
-        createDismissKeyboardTapGesture()
+        createDismissKeyboardTapGestureRecognizer()
+        presenter.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,75 +43,17 @@ final class CollectionImagesViewController: DataLoadingVC {
 }
 
 extension CollectionImagesViewController {
-    
-    //MARK: - Fetching Data
-    func getImagesByRequest(request: String, page: Int) {
-        isSearchingByRandom = false
-        showLoadingView()
-        isLoadingMoreImages = true
-        
-        NetworkManager.shared.getImagesByRequest(for: request, page: page)  { [weak self] result in
-            guard let self else { return }
-            dismissLoadingView()
-            
-            switch result {
-            case .success(let resultsImages):
-                if resultsImages.results.count < 30 { moreImages = false }
-                else { moreImages = true }
-                requestImagesResults.append(contentsOf: resultsImages.results)
-
-                reloadData()
-            case .failure(let error):
-                presentCustomAllertOnMainThred(allertTitle: "Bad Stuff Happend", message: error.rawValue, butonTitle: "Ok")
-            }
-            
-            self.isLoadingMoreImages = false
-        }
-        
-    }
-    
-    func getRandomImages(page: Int) {
-        isSearchingByRandom = true
-        moreImages = false
-        showLoadingView()
-        NetworkManager.shared.getRandomImages(page: self.page) { [weak self] result in
-            guard let self = self else { return }
-            dismissLoadingView()
-            
-            switch result {
-            case .success(let randomImagesResult):
-                randomImagesResults.removeAll()
-                randomImagesResults = randomImagesResult
-                reloadData()
-                
-            case .failure(let error):
-                presentCustomAllertOnMainThred(allertTitle: "Bad Stuff Happend", message: error.rawValue, butonTitle: "Ok")
-            }
-        }
-        title = "Collection"
-    }
-    
-    //MARK: -  Additional Functions
-    
-    func createDismissKeyboardTapGesture() {
+    func createDismissKeyboardTapGestureRecognizer() {
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
         tap.cancelsTouchesInView = false
     }
-    
-    func setOldRandomImages() {
-        requestImagesResults.removeAll()
-        isSearchingByRandom = true
-        reloadData()
-        title = "Collection"
-    }
 }
-
-// MARK: Setup UI
 
 extension CollectionImagesViewController {
     
     private func congifureViewController() {
+        title = "Collection"
         view.backgroundColor = .systemBackground
     }
     
@@ -154,47 +86,30 @@ extension CollectionImagesViewController: UICollectionViewDelegate, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return isSearchingByRandom ? randomImagesResults.count : requestImagesResults.count
+        return presenter.numberOfItemsInSection(section)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCell.reuseID, for: indexPath) as! ImageCell
         
-        switch isSearchingByRandom {
-        case true:
-            let image = randomImagesResults[indexPath.row]
-            cell.setDefaultImage()
-            cell.setForRandom(image: image)
-            
-        default:
-           print("requestImagesResults.count \(requestImagesResults.count)")//testing for 0 value
-            switch requestImagesResults.count {
-            case 1...:
-                let image = requestImagesResults[indexPath.row]
-                cell.setForRequest(image: image)
-            default:
-                break
-            }
-        }
+        let image: ImageDetails = presenter.getItem(at: indexPath)
+        cell.setForRequest(image: image)
         
         return cell
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        let offSetY = scrollView.contentOffset.y//already scrolled data
-        let contentHeight = scrollView.contentSize.height//total height of data
-        let height = scrollView.frame.size.height//screen height
+        let alreadyScrolledDataOffsetY = scrollView.contentOffset.y
+        let totalContentHeight = scrollView.contentSize.height
+        let screenHeight = scrollView.frame.size.height
         
-        if offSetY > contentHeight - height {
-            guard moreImages, !isLoadingMoreImages, !isSearchingByRandom else {return}
-            page += 1
-            getImagesByRequest(request: searchRequest, page: page)
-            moreImages = false
+        if alreadyScrolledDataOffsetY > totalContentHeight - screenHeight {
+            presenter.loadNextPageIfNeeded()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let image: ImageDetails = isSearchingByRandom ? randomImagesResults[indexPath.item] : requestImagesResults[indexPath.item]
+        let image: ImageDetails = presenter.getItem(at: indexPath)
         
         let destinationVC = ImageDetailsAssembly.assembleImageDetailsModule(image: image, delegate: nil)
         let navController = UINavigationController(rootViewController: destinationVC)
@@ -205,19 +120,18 @@ extension CollectionImagesViewController: UICollectionViewDelegate, UICollection
 //MARK: - UISearchResultsUpdating, UISearchBarDelegate, UISearchControllerDelegate
 extension CollectionImagesViewController: UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
+        let searchRequest = searchController.searchBar.text ?? ""
+        presenter.searchRequest = searchRequest
         
-        searchRequest = searchController.searchBar.text ?? ""
-        guard let filter = searchController.searchBar.text,  !filter.isEmpty else {
-            setOldRandomImages()
-            return }
-        
-        page = 1
-        requestImagesResults.removeAll()
+        guard !searchRequest.isEmpty else {
+            presenter.cancelSearching()
+            return
+        }
         
         timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
-            self.requestImagesResults.removeAll()
-            self.getImagesByRequest(request: self.searchRequest, page: self.page)
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { [weak self] _ in
+            guard let self else { return }
+            self.presenter.searchImages(searchText: searchRequest)
         }
     }
     
@@ -226,16 +140,18 @@ extension CollectionImagesViewController: UISearchResultsUpdating, UISearchContr
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.setOldRandomImages()
+        presenter.cancelSearching()
     }
 }
 
 // MARK: ViewInput
 
-extension CollectionImagesViewController: CollectionImagesViewInput {
+extension CollectionImagesViewController: CollectionImagesInput {
     func reloadData() {
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
+        collectionView.reloadData()
+    }
+    
+    func showError(_ error: ErrorMessages) {
+        self.presentCustomAllertOnMainThred(allertTitle: "Bad Stuff Happend", message: error.rawValue, butonTitle: "Ok")
     }
 }

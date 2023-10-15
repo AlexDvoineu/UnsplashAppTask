@@ -2,7 +2,7 @@
 //  Image.swift
 //  UnsplashAppTask
 //
-//  Created by user on 12.10.23.
+//  Created by Aliaksandr Dvoineu on 12.10.23.
 //
 
 import Foundation

@@ -39,6 +39,12 @@ final class ImageCell: UICollectionViewCell {
         imageImageView.image = Images.placeholder
     }
     
+    func setForRequest(image: ImageDetails) {
+        setDefaultImage()
+        imageImageView.sd_setImage(with: image.imageUrl)
+    }
+        
+    #warning("возможно стоит убрать эти методы")
     func setForRequest(image: ImagesResult) {
         setDefaultImage()
         imageImageView.sd_setImage(with: URL(string: image.urls.thumb))
