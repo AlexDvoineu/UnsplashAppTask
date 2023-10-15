@@ -101,8 +101,7 @@ class ImageDetailsViewController: UIViewController, UIScrollViewDelegate {
             contentStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             contentStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -padding*3),
             
-            imageView.heightAnchor.constraint(equalToConstant: 300),
-            imageView.widthAnchor.constraint(equalToConstant: 300),
+            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
             locationAndDowloadsLabel.heightAnchor.constraint(equalToConstant: 60),
             addFavoritesButton.heightAnchor.constraint(equalToConstant: 60)
         ])
