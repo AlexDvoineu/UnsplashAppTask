@@ -8,13 +8,9 @@
 import Foundation
 
 final class FavouriteImagesPresenter {
-    
     weak var view: FavouriteImagesInput?
     private var storage: FavouritesStorage
-
-//    lazy var imageData: [ImageDetails] = []
     lazy var favoritesArray: [ImageDetails] = []
-    
     
     init(storage: FavouritesStorage) {
         self.storage = storage
@@ -28,11 +24,8 @@ extension FavouriteImagesPresenter: FavouriteImagesOutput {
     
     func viewWillAppear() {
         updateData()
-//        imageData = ImagesStorage.shared.loadNotes()
-//        checkFavouriteImages()
     }
 
-    
     func updateData() {
         favoritesArray = storage.items
         view?.reloadData()
