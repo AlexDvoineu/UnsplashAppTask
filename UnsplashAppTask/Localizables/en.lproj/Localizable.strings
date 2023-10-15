@@ -1,0 +1,39 @@
+/* 
+  Localizable.strings
+  UnsplashAppTask
+
+  Created by Aliaksandr Dvoineu on 15.10.23.
+  
+*/
+
+"Ok" = "Ok";
+
+"success" = "Success";
+
+"success.message" = "You have successfully added this image to favorites";
+
+"no.description" = "No info about description";
+
+"cancel" = "Cancel";
+
+"already.inFav" = "Already in Favorites";
+
+"add.toFav" = "Add to favorites";
+
+"author" = "Author:";
+
+"delete.favorites" = "Delete from Favorites";
+
+"Smth.wrong" = "Something wrong happened";
+
+"Downloads:" = "Downloads:";
+
+"Search..." = "Search...";
+
+"Something" = "Something";
+
+"Collection" = "Collection";
+
+"Favourites" = "Favourites";
+
+"Authors name:" = "Authors name:";

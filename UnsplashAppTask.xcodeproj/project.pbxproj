@@ -57,6 +57,9 @@
 		40F3E6C32ADC566D00E7C9B8 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 40F3E6C22ADC566D00E7C9B8 /* SDWebImage */; };
 		40F3E6C62ADC572E00E7C9B8 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3E6C52ADC572E00E7C9B8 /* ImageDownloader.swift */; };
 		40F3E6CB2ADC5B5D00E7C9B8 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3E6CA2ADC5B5D00E7C9B8 /* Reusable.swift */; };
+		40F3E6D22ADC87A900E7C9B8 /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 40F3E6D12ADC87A900E7C9B8 /* RswiftLibrary */; };
+		40F3E6D42ADC87A900E7C9B8 /* rswift in Frameworks */ = {isa = PBXBuildFile; productRef = 40F3E6D32ADC87A900E7C9B8 /* rswift */; };
+		40F9AF162ADC8FF200173CF0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 40F9AF182ADC8FF200173CF0 /* Localizable.strings */; };
 		CE857F082AD804290012B07C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CE857F072AD804290012B07C /* Realm */; };
 		CE857F0A2AD804290012B07C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE857F092AD804290012B07C /* RealmSwift */; };
 		CE857F0F2AD811210012B07C /* MainTabBarAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F0E2AD811210012B07C /* MainTabBarAssembly.swift */; };
@@ -138,6 +141,9 @@
 		40F3E6A32ADC527100E7C9B8 /* UnsplashAppTaskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnsplashAppTaskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		40F3E6C52ADC572E00E7C9B8 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		40F3E6CA2ADC5B5D00E7C9B8 /* Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		40F9AF172ADC8FF200173CF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		40F9AF192ADC903500173CF0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		40F9AF1C2ADC9EDC00173CF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		CE857F0E2AD811210012B07C /* MainTabBarAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarAssembly.swift; sourceTree = "<group>"; };
 		CE857F102AD811400012B07C /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		CE857F142AD813670012B07C /* FavouriteImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteImagesViewController.swift; sourceTree = "<group>"; };
@@ -175,10 +181,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40F3E6D22ADC87A900E7C9B8 /* RswiftLibrary in Frameworks */,
 				CE857F2A2AD82FC40012B07C /* Alamofire in Frameworks */,
 				CE857F0A2AD804290012B07C /* RealmSwift in Frameworks */,
 				40F3E6422AD8EE1500E7C9B8 /* SDWebImage in Frameworks */,
 				CE857F082AD804290012B07C /* Realm in Frameworks */,
+				40F3E6D42ADC87A900E7C9B8 /* rswift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +403,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		40F9AF112ADC8ED000173CF0 /* Localizables */ = {
+			isa = PBXGroup;
+			children = (
+				40F9AF182ADC8FF200173CF0 /* Localizable.strings */,
+			);
+			path = Localizables;
+			sourceTree = "<group>";
+		};
 		CE857F0B2AD8108E0012B07C /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -516,6 +532,7 @@
 		CE8BBAF72AD7FEF0006FA944 /* UnsplashAppTask */ = {
 			isa = PBXGroup;
 			children = (
+				40F9AF112ADC8ED000173CF0 /* Localizables */,
 				40F3E6772ADC369100E7C9B8 /* Contracts */,
 				40F3E64F2AD9404500E7C9B8 /* CustomViews */,
 				CE857F0B2AD8108E0012B07C /* Application */,
@@ -568,6 +585,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				40F3E6D62ADC889A00E7C9B8 /* PBXTargetDependency */,
 			);
 			name = UnsplashAppTask;
 			packageProductDependencies = (
@@ -575,6 +593,8 @@
 				CE857F092AD804290012B07C /* RealmSwift */,
 				CE857F292AD82FC40012B07C /* Alamofire */,
 				40F3E6412AD8EE1500E7C9B8 /* SDWebImage */,
+				40F3E6D12ADC87A900E7C9B8 /* RswiftLibrary */,
+				40F3E6D32ADC87A900E7C9B8 /* rswift */,
 			);
 			productName = UnsplashAppTask;
 			productReference = CE8BBAF52AD7FEF0006FA944 /* UnsplashAppTask.app */;
@@ -606,12 +626,14 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = CE8BBAEC2AD7FEF0006FA944;
 			packageReferences = (
 				CE857F062AD804280012B07C /* XCRemoteSwiftPackageReference "realm-swift" */,
 				CE857F282AD82FC40012B07C /* XCRemoteSwiftPackageReference "Alamofire" */,
 				40F3E6402AD8EE1500E7C9B8 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				40F3E6D02ADC87A900E7C9B8 /* XCRemoteSwiftPackageReference "R.swift" */,
 			);
 			productRefGroup = CE8BBAF62AD7FEF0006FA944 /* Products */;
 			projectDirPath = "";
@@ -636,6 +658,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE8BBB052AD7FEF2006FA944 /* LaunchScreen.storyboard in Resources */,
+				40F9AF162ADC8FF200173CF0 /* Localizable.strings in Resources */,
 				CE8BBB022AD7FEF2006FA944 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -748,13 +771,27 @@
 			target = CE8BBAF42AD7FEF0006FA944 /* UnsplashAppTask */;
 			targetProxy = 40F3E6A72ADC527100E7C9B8 /* PBXContainerItemProxy */;
 		};
+		40F3E6D62ADC889A00E7C9B8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 40F3E6D52ADC889A00E7C9B8 /* RswiftGenerateInternalResources */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		40F9AF182ADC8FF200173CF0 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				40F9AF172ADC8FF200173CF0 /* en */,
+				40F9AF192ADC903500173CF0 /* de */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		CE8BBB032AD7FEF2006FA944 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				CE8BBB042AD7FEF2006FA944 /* Base */,
+				40F9AF1C2ADC9EDC00173CF0 /* en */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -804,6 +841,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -864,6 +902,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1011,6 +1050,14 @@
 				minimumVersion = 5.1.0;
 			};
 		};
+		40F3E6D02ADC87A900E7C9B8 /* XCRemoteSwiftPackageReference "R.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mac-cain13/R.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		CE857F062AD804280012B07C /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -1049,6 +1096,20 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 40F3E6402AD8EE1500E7C9B8 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		40F3E6D12ADC87A900E7C9B8 /* RswiftLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 40F3E6D02ADC87A900E7C9B8 /* XCRemoteSwiftPackageReference "R.swift" */;
+			productName = RswiftLibrary;
+		};
+		40F3E6D32ADC87A900E7C9B8 /* rswift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 40F3E6D02ADC87A900E7C9B8 /* XCRemoteSwiftPackageReference "R.swift" */;
+			productName = rswift;
+		};
+		40F3E6D52ADC889A00E7C9B8 /* RswiftGenerateInternalResources */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = "plugin:RswiftGenerateInternalResources";
 		};
 		CE857F072AD804290012B07C /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;

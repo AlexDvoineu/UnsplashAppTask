@@ -15,14 +15,14 @@ struct MainTabBarAssembly {
         let collectionImagesVC = Self.generateViewController(
             viewController: CollectionImagesAssembly.assembleCollectionImagesModule(),
             image: collectionImages,
-            title: "Collection"
+            title: R.string.localizable.collection()
         )
         
         guard let favouriteImages = UIImage(systemName: Constant.unfavouriteImage) else { return UITabBarController() }
         let favouriteImagesVC = Self.generateViewController(
             viewController: FavouriteImagesAssembly.assembleFavouriteImagesModule(),
             image: favouriteImages,
-            title: "Favourites"
+            title: R.string.localizable.favourites()
         )
         
         controller.setViewControllers([collectionImagesVC, favouriteImagesVC], animated: true)

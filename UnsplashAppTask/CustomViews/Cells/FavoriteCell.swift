@@ -24,7 +24,7 @@ final class FavoriteCell: UITableViewCell {
     
     func set(imageUrl: URL, userName: String) {
         imageImageView.sd_setImage(with: imageUrl)
-        userNameLabel.text = "Authors name: \n\(userName)"
+        userNameLabel.text = R.string.localizable.authorsName() + "\n\(userName)"
     }
     
     private func configure() {

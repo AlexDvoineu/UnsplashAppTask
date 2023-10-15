@@ -107,8 +107,8 @@ class ImageDetailsViewController: UIViewController, UIScrollViewDelegate {
 
 extension ImageDetailsViewController: ImageDetailsViewInput {
     func configure(image: ImageDetails, location: String?, downloads: Int) {
-        userNameLabel.text = "Author: \(image.authorsName)"
-        locationAndDowloadsLabel.text = "\(location ?? "No info about description") \nDownloads: \(String(describing: downloads))"
+        userNameLabel.text = R.string.localizable.author() + " " + image.authorsName
+        locationAndDowloadsLabel.text = "\(location ?? R.string.localizable.noDescription()) \n\(R.string.localizable.downloads()) \(String(describing: downloads))"
     }
 
     func setImage(image: UIImage) {
@@ -116,14 +116,14 @@ extension ImageDetailsViewController: ImageDetailsViewInput {
     }
 
     func showDeleteConfirmationAlert(completion: @escaping (Bool) -> Void) {
-        let alert = UIAlertController(title: "", message: "Already in Favorites", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "", message: R.string.localizable.alreadyInFav(), preferredStyle: .actionSheet)
 
-        alert.addAction(UIAlertAction(title: "Delete from Favorites", style: .destructive, handler: { [weak self] (_) in
+        alert.addAction(UIAlertAction(title: R.string.localizable.deleteFavorites(), style: .destructive, handler: { [weak self] (_) in
             completion(true)
             self?.reloadDelegate?.reloadTableData()
         }))
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {  (_) in
+        alert.addAction(UIAlertAction(title: R.string.localizable.cancel(), style: .cancel, handler: {  (_) in
             completion(false)
         }))
 
@@ -131,20 +131,24 @@ extension ImageDetailsViewController: ImageDetailsViewInput {
     }
 
     func showSuccesSavedAlert() {
-        presentCustomAllertOnMainThred(allertTitle: "Success", message: "You have successfully added this image to favorites", butonTitle: "Ok")
+        presentCustomAllertOnMainThred(allertTitle: R.string.localizable.success(),
+                                       message: R.string.localizable.successMessage(),
+                                       butonTitle: R.string.localizable.ok())
 
         reloadDelegate?.reloadTableData()
     }
 
     func setFavouriteState(isFavourite: Bool) {
         if isFavourite {
-            addFavoritesButton.set(backgroundColor: .systemRed, title: "Delete From  Favorites")
+            addFavoritesButton.set(backgroundColor: .systemRed, title: R.string.localizable.deleteFavorites())
         } else {
-            addFavoritesButton.set(backgroundColor: .systemGreen, title: "Add to favorites")
+            addFavoritesButton.set(backgroundColor: .systemGreen, title: R.string.localizable.addToFav())
         }
     }
 
     func showError(_ error: ErrorMessages) {
-        self.presentCustomAllertOnMainThred(allertTitle: "Bad Stuff Happend", message: error.rawValue, butonTitle: "Ok")
+        self.presentCustomAllertOnMainThred(allertTitle: R.string.localizable.smthWrong(),
+                                            message: error.rawValue,
+                                            butonTitle: R.string.localizable.ok())
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import rswift
 
 final class CollectionImagesViewController: DataLoadingViewController {
 
@@ -53,7 +54,7 @@ extension CollectionImagesViewController {
 extension CollectionImagesViewController {
 
     private func congifureViewController() {
-        title = "Collection"
+        title = R.string.localizable.collection()
         view.backgroundColor = .systemBackground
     }
 
@@ -71,7 +72,7 @@ extension CollectionImagesViewController {
         let searchController = UISearchController()
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
-        searchController.searchBar.placeholder = "Search..."
+        searchController.searchBar.placeholder = R.string.localizable.search()
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.searchTextField.clearButtonMode = .never
         navigationItem.searchController = searchController
@@ -149,8 +150,9 @@ extension CollectionImagesViewController: CollectionImagesInput {
     func reloadData() {
         collectionView.reloadData()
     }
-
     func showError(_ error: ErrorMessages) {
-        self.presentCustomAllertOnMainThred(allertTitle: "Bad Stuff Happend", message: error.rawValue, butonTitle: "Ok")
+        self.presentCustomAllertOnMainThred(allertTitle: R.string.localizable.something(),
+                                            message: error.rawValue,
+                                            butonTitle: R.string.localizable.ok())
     }
 }
