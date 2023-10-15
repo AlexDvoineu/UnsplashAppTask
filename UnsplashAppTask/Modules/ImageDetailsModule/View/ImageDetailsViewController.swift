@@ -16,8 +16,13 @@ class ImageDetailsViewController: UIViewController, UIScrollViewDelegate {
     var reloadDelegate: ReloadTableProtocol?
     var presenter: ImageDetailsPresenterOutput
     
-    let scrollView  = UIScrollView()
-    let contentView = UIView()
+    let scrollView = UIScrollView()
+    lazy var contentStackView = UIStackView(arrangedSubviews: [
+        imageView,
+        userNameLabel,
+        locationAndDowloadsLabel,
+        addFavoritesButton
+    ])
     
     let imageView = ImageView(frame: .zero)
     let userNameLabel = TitleLabel(textAlignment: .left, fontSize: 34)
@@ -40,7 +45,6 @@ class ImageDetailsViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         configureVC()
         configureButtons()
-        configureScrollView()
         layoutUI()
         
         presenter.viewDidLoad()
@@ -59,18 +63,6 @@ class ImageDetailsViewController: UIViewController, UIScrollViewDelegate {
         addFavoritesButton.addTarget(self, action: #selector(addFavoritesButtonTapped), for: .touchUpInside)
     }
     
-    func configureScrollView() {
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        scrollView.pinToEdges(of: view)
-        
-        contentView.pinToEdges(of: scrollView)
-        
-        NSLayoutConstraint.activate([
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-        ])
-    }
-    
     //MARK: - Configure actions for buttons
     @objc func dismissVC() {
         reloadDelegate?.reloadTableFunc()
@@ -85,42 +77,33 @@ class ImageDetailsViewController: UIViewController, UIScrollViewDelegate {
     
     //MARK: - Configure Views Layouts
     private func layoutUI() {
-        
-        contentView.addSubviews(
-            imageView,
-            addFavoritesButton,
-            userNameLabel,
-            locationAndDowloadsLabel
-        )
-        
+        view.addSubview(scrollView)
+        scrollView.pinToEdges(of: view)
+
         let padding: CGFloat = 20
         
+        scrollView.addSubview(contentStackView)
+        contentStackView.axis = .vertical
+        contentStackView.distribution = .fill
+        contentStackView.alignment = .fill
+        contentStackView.spacing = 2*padding
+        contentStackView.setCustomSpacing(padding, after: imageView)
+
+        contentStackView.translatesAutoresizingMaskIntoConstraints = false
         addFavoritesButton.translatesAutoresizingMaskIntoConstraints = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
         userNameLabel.translatesAutoresizingMaskIntoConstraints = false
         locationAndDowloadsLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
+            contentStackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: padding),
+            contentStackView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -padding*2),
+            contentStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            contentStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -padding*3),
             
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
             imageView.heightAnchor.constraint(equalToConstant: 300),
             imageView.widthAnchor.constraint(equalToConstant: 300),
-            
-            userNameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: padding),
-            userNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            userNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
-            
-            locationAndDowloadsLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 2*padding),
-            locationAndDowloadsLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            locationAndDowloadsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
             locationAndDowloadsLabel.heightAnchor.constraint(equalToConstant: 60),
-            
-            addFavoritesButton.topAnchor.constraint(equalTo: locationAndDowloadsLabel.bottomAnchor, constant: 2*padding),
-            addFavoritesButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            addFavoritesButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
-            addFavoritesButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding*3),
             addFavoritesButton.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
