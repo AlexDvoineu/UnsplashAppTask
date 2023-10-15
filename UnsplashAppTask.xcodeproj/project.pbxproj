@@ -40,6 +40,8 @@
 		40F3E66F2AD9487900E7C9B8 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3E66E2AD9487900E7C9B8 /* UIHelper.swift */; };
 		40F3E6722AD95B8500E7C9B8 /* ImageInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3E6712AD95B8500E7C9B8 /* ImageInfoVC.swift */; };
 		40F3E6742AD95EF700E7C9B8 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3E6732AD95EF700E7C9B8 /* FavoritesVC.swift */; };
+		40F3E6792ADC36AE00E7C9B8 /* FavouritesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3E6782ADC36AE00E7C9B8 /* FavouritesStorage.swift */; };
+		40F3E67B2ADC36D500E7C9B8 /* ImageDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3E67A2ADC36D500E7C9B8 /* ImageDetails.swift */; };
 		CE857F082AD804290012B07C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CE857F072AD804290012B07C /* Realm */; };
 		CE857F0A2AD804290012B07C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE857F092AD804290012B07C /* RealmSwift */; };
 		CE857F0F2AD811210012B07C /* MainTabBarAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F0E2AD811210012B07C /* MainTabBarAssembly.swift */; };
@@ -114,6 +116,8 @@
 		40F3E66E2AD9487900E7C9B8 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		40F3E6712AD95B8500E7C9B8 /* ImageInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInfoVC.swift; sourceTree = "<group>"; };
 		40F3E6732AD95EF700E7C9B8 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
+		40F3E6782ADC36AE00E7C9B8 /* FavouritesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesStorage.swift; sourceTree = "<group>"; };
+		40F3E67A2ADC36D500E7C9B8 /* ImageDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetails.swift; sourceTree = "<group>"; };
 		CE857F0E2AD811210012B07C /* MainTabBarAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarAssembly.swift; sourceTree = "<group>"; };
 		CE857F102AD811400012B07C /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		CE857F142AD813670012B07C /* FavouriteImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteImagesViewController.swift; sourceTree = "<group>"; };
@@ -290,6 +294,15 @@
 			path = HelperClasses;
 			sourceTree = "<group>";
 		};
+		40F3E6772ADC369100E7C9B8 /* Contracts */ = {
+			isa = PBXGroup;
+			children = (
+				40F3E6782ADC36AE00E7C9B8 /* FavouritesStorage.swift */,
+				40F3E67A2ADC36D500E7C9B8 /* ImageDetails.swift */,
+			);
+			path = Contracts;
+			sourceTree = "<group>";
+		};
 		CE857F0B2AD8108E0012B07C /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -408,6 +421,7 @@
 		CE8BBAF72AD7FEF0006FA944 /* UnsplashAppTask */ = {
 			isa = PBXGroup;
 			children = (
+				40F3E6772ADC369100E7C9B8 /* Contracts */,
 				40F3E64F2AD9404500E7C9B8 /* CustomViews */,
 				CE857F0B2AD8108E0012B07C /* Application */,
 				CE857F2B2AD82FD70012B07C /* Services */,
@@ -565,6 +579,7 @@
 				40F3E6392AD8D17D00E7C9B8 /* ImageDetailsPresenterProtocol.swift in Sources */,
 				CE857F2F2AD8406E0012B07C /* PersistanceManager.swift in Sources */,
 				40F3E63F2AD8D5F800E7C9B8 /* ImageDetailsViewController.swift in Sources */,
+				40F3E6792ADC36AE00E7C9B8 /* FavouritesStorage.swift in Sources */,
 				40F3E6672AD9473400E7C9B8 /* UIView+Extension.swift in Sources */,
 				40F3E64C2AD93D3300E7C9B8 /* RandomRequestModel.swift in Sources */,
 				40F3E6552AD9441D00E7C9B8 /* EmptyStateView.swift in Sources */,
@@ -580,6 +595,7 @@
 				CE857F252AD822C70012B07C /* Image.swift in Sources */,
 				40F3E6372AD8D0B600E7C9B8 /* ImageDetailsAssembly.swift in Sources */,
 				CE857F272AD822D40012B07C /* ImageData.swift in Sources */,
+				40F3E67B2ADC36D500E7C9B8 /* ImageDetails.swift in Sources */,
 				40F3E66D2AD9482A00E7C9B8 /* AlertContainerView.swift in Sources */,
 				40F3E6572AD9445500E7C9B8 /* TitleLabel.swift in Sources */,
 				40F3E64E2AD93D8F00E7C9B8 /* ImageRequestModel.swift in Sources */,
