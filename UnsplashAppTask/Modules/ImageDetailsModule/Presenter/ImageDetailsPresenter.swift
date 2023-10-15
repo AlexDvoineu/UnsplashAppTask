@@ -13,13 +13,13 @@ final class ImageDetailsPresenter {
     
     private var image: ImageDetails
     private let storage: FavouritesStorage
-    private var isFavourits: Bool {
+    private var isFavourit: Bool {
         storage.imageExist(id: image.id)
     }
     
     init(image: ImageDetails, storage: FavouritesStorage) {
-        self.image = image
         self.storage = storage
+        self.image = image
     }
 
 }
@@ -28,13 +28,13 @@ extension ImageDetailsPresenter: ImageDetailsPresenterOutput {
     
     func viewDidLoad() {
         downloadAndSetupImage()
-        view?.setFavouriteState(isFavourite: isFavourits)
+        view?.setFavouriteState(isFavourite: isFavourit)
         view?.configure(image: image)
     }
     
     func favoriteButtonTapped() {
         let imageId = image.id
-        guard !storage.imageExist(id: imageId) else {
+        guard !isFavourit else {
             view?.showDeleteConfirmationAlert(completion: { [weak self] confirm in
                 guard let self, confirm else { return }
                 self.storage.removeImage(id: imageId)
@@ -44,8 +44,8 @@ extension ImageDetailsPresenter: ImageDetailsPresenterOutput {
         }
         
         view?.setFavouriteState(isFavourite: true)
-        storage.addImage(image)
         view?.showSuccesSavedAlert()
+        storage.addImage(image)
     }
     
 }

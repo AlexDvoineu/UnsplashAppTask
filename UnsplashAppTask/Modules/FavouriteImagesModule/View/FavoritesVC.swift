@@ -13,7 +13,7 @@ class FavoritesVC: DataLoadingVC {
     
     #warning("move injection to assembler")
     private var storage: FavouritesStorage = PersistenceManager.sharedRealm
-    lazy var favoritesArray = storage.items
+    lazy var favoritesArray: [ImageDetails] = storage.items
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +29,7 @@ class FavoritesVC: DataLoadingVC {
     }
     
     private func checkImagesCount() {
-        if favoritesArray.count == 0{
-            
+        if favoritesArray.isEmpty {
             DispatchQueue.main.async {
                 self.showEmptyStateView(with: "No favorites", in: self.view)
             }
@@ -38,7 +37,7 @@ class FavoritesVC: DataLoadingVC {
     }
     
     func reloadTableView() {
-        favoritesArray = PersistenceManager.sharedRealm.items
+        favoritesArray = storage.items
         DispatchQueue.main.async {
             self.tableView.reloadData()
             self.view.bringSubviewToFront(self.tableView)
@@ -74,27 +73,18 @@ extension FavoritesVC: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteCell.reuseID) as! FavoriteCell
-        
         let favorite = favoritesArray[indexPath.row]
         cell.set(imageUrl: favorite.imageUrl, userName: favorite.authorsName)
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let favorite = favoritesArray[indexPath.row]
-        let destinationVC = ImageDetailsAssembly.assembleImageDetailsModule(image: favorite, delegate: self)
+        let image = TempImageDetails(image: favorite)
+        let destinationVC = ImageDetailsAssembly.assembleImageDetailsModule(image: image, delegate: self)
         
         let navController = UINavigationController(rootViewController: destinationVC)
         present(navController, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard editingStyle == .delete else{return}
-        let favorite = favoritesArray[indexPath.row]
-        storage.removeImage(id: favorite.id)
-        reloadTableView()
-        checkImagesCount()
     }
 }
 

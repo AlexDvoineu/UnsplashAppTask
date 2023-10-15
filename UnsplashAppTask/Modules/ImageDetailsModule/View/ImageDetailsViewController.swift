@@ -11,14 +11,6 @@ protocol ReloadTableProtocol {
     func reloadTableFunc()
 }
 
-struct TempImageDetails: ImageDetails {
-    var id: String
-    var title: String
-    var description: String
-    var imageUrl: URL
-    var authorsName: String
-}
-
 class ImageDetailsViewController: UIViewController, UIScrollViewDelegate {
     
     var reloadDelegate: ReloadTableProtocol?
@@ -28,15 +20,9 @@ class ImageDetailsViewController: UIViewController, UIScrollViewDelegate {
     let contentView = UIView()
     
     let imageView = ImageView(frame: .zero)
-    let addFavoritesButton = Button(frame: .zero)
     let userNameLabel = TitleLabel(textAlignment: .left, fontSize: 34)
-    
-        // .эти два пункта под вопросом
-    let updatedAtLabel = SecondaryTitleLabel(fontSize: 18)
     let locationAndDowloadsLabel = SecondaryTitleLabel(fontSize: 18)
-    
-    let imageTitleLabel = SecondaryTitleLabel(fontSize: 18)
-    let imageDescriptionLabel = SecondaryTitleLabel(fontSize: 18)
+    let addFavoritesButton = Button(frame: .zero)
     
     
     var updatedAt: Date = Date()
@@ -121,19 +107,15 @@ class ImageDetailsViewController: UIViewController, UIScrollViewDelegate {
             imageView,
             addFavoritesButton,
             userNameLabel,
-            locationAndDowloadsLabel,
-            imageTitleLabel,
-            imageDescriptionLabel)
+            locationAndDowloadsLabel
+        )
         
         let padding: CGFloat = 20
         
         addFavoritesButton.translatesAutoresizingMaskIntoConstraints = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        updatedAtLabel.translatesAutoresizingMaskIntoConstraints = false
         userNameLabel.translatesAutoresizingMaskIntoConstraints = false
         locationAndDowloadsLabel.translatesAutoresizingMaskIntoConstraints = false
-        imageTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        imageDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
@@ -155,18 +137,8 @@ class ImageDetailsViewController: UIViewController, UIScrollViewDelegate {
             addFavoritesButton.topAnchor.constraint(equalTo: locationAndDowloadsLabel.bottomAnchor, constant: 2*padding),
             addFavoritesButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
             addFavoritesButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
-            addFavoritesButton.heightAnchor.constraint(equalToConstant: 60),
-            
-            imageTitleLabel.topAnchor.constraint(equalTo: addFavoritesButton.bottomAnchor, constant: padding),
-            imageTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            imageTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
-            imageTitleLabel.heightAnchor.constraint(equalToConstant: 60),
-            
-            imageDescriptionLabel.topAnchor.constraint(equalTo: imageTitleLabel.bottomAnchor, constant: padding),
-            imageDescriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            imageDescriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
-            imageDescriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding),
-            imageDescriptionLabel.heightAnchor.constraint(equalToConstant: 60)
+            addFavoritesButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding*3),
+            addFavoritesButton.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
 }

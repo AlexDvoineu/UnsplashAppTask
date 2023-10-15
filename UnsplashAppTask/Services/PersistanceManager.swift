@@ -15,9 +15,9 @@ final class RealmImage: Object {
     @Persisted dynamic var authorsName = ""
     @Persisted dynamic var urlString = ""
     var imageUrl: URL { URL(string: urlString)! }
-    @Persisted dynamic var updatedAt: Date = Date()
+    @Persisted dynamic var updatedAt: Date
     override static func primaryKey() -> String? { return "id" }
-    @Persisted(primaryKey: true) var objectId: ObjectId
+    @Persisted(primaryKey: true) var objectId: ObjectId//for sorting
 }
 
 extension RealmImage: ImageDetails {
@@ -26,7 +26,7 @@ extension RealmImage: ImageDetails {
     }
 }
 
-final class PersistenceManager{
+final class PersistenceManager {
     static let sharedRealm = PersistenceManager()
     
     private let realm = try! Realm()
@@ -46,15 +46,14 @@ final class PersistenceManager{
         favoriteImage.urlString = imageUrl
         favoriteImage.updatedAt = updatedAt
         
-        try! realm.write{ realm.add(favoriteImage) }
+        try! realm.write { realm.add(favoriteImage) }
     }
     
     func deleteData(idForDelete: String) {
-        let realm = try! Realm()
         let data = realm.object(ofType: RealmImage.self, forPrimaryKey: idForDelete)
-        if data != nil{
-            try! realm.write {
-                realm.delete(data!)
+        if let data {
+            try? realm.write {
+                realm.delete(data)
             }
         }
     }

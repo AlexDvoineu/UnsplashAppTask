@@ -147,7 +147,7 @@ extension CollectionImagesViewController {
 }
 
 //MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
-extension CollectionImagesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension CollectionImagesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -185,7 +185,7 @@ extension CollectionImagesViewController: UICollectionViewDelegate, UICollection
         let contentHeight = scrollView.contentSize.height//total height of data
         let height = scrollView.frame.size.height//screen height
         
-        if offSetY > contentHeight - height{
+        if offSetY > contentHeight - height {
             guard moreImages, !isLoadingMoreImages, !isSearchingByRandom else {return}
             page += 1
             getImagesByRequest(request: searchRequest, page: page)
@@ -203,7 +203,7 @@ extension CollectionImagesViewController: UICollectionViewDelegate, UICollection
 }
 
 //MARK: - UISearchResultsUpdating, UISearchBarDelegate, UISearchControllerDelegate
-extension CollectionImagesViewController: UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate{
+extension CollectionImagesViewController: UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
         
         searchRequest = searchController.searchBar.text ?? ""
@@ -234,7 +234,7 @@ extension CollectionImagesViewController: UISearchResultsUpdating, UISearchContr
 
 extension CollectionImagesViewController: CollectionImagesViewInput {
     func reloadData() {
-        DispatchQueue.main.async{
+        DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
     }
