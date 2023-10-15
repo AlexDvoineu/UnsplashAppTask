@@ -71,26 +71,9 @@ class ImageDetailsViewController: UIViewController, UIScrollViewDelegate {
         ])
     }
     
-    //MARK: - Load Image Data From API
-    private func getImageData(id: String) {
-        NetworkManager.shared.getImagesByID(for: id) { [weak self] result in
-            guard let self else { return }
-            
-            switch result {
-            case .success(let data):
-                DispatchQueue.main.async {
-                    self.locationAndDowloadsLabel.text = "\(data.location.name ?? "No info about description") \nDownloads: \(String(describing: data.downloads ?? 0))"
-                }
-                
-            case .failure(let error):
-                self.presentCustomAllertOnMainThred(allertTitle: "Bad Stuff Happend", message: error.rawValue, butonTitle: "Ok")
-            }
-        }
-    }
-    
     //MARK: - Configure actions for buttons
     @objc func dismissVC() {
-        self.reloadDelegate?.reloadTableFunc()
+        reloadDelegate?.reloadTableFunc()
         dismiss(animated: true)
     }
     
@@ -144,9 +127,9 @@ class ImageDetailsViewController: UIViewController, UIScrollViewDelegate {
 }
 
 extension ImageDetailsViewController: ImageDetailsViewInput {
-    func configure(image: ImageDetails) {
+    func configure(image: ImageDetails, location: String?, downloads: Int) {
         userNameLabel.text = "Author: \(image.authorsName)"
-        getImageData(id: image.id)
+        locationAndDowloadsLabel.text = "\(location ?? "No info about description") \nDownloads: \(String(describing: downloads))"
     }
     
     func setImage(image: UIImage) {
@@ -158,7 +141,6 @@ extension ImageDetailsViewController: ImageDetailsViewInput {
         let alert = UIAlertController(title: "", message: "Already in Favorites", preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "Delete from Favorites", style: .destructive , handler:{ [weak self] (UIAlertAction) in
-            
             completion(true)
             self?.reloadDelegate?.reloadTableFunc()
         }))
@@ -182,5 +164,9 @@ extension ImageDetailsViewController: ImageDetailsViewInput {
         } else {
             addFavoritesButton.set(backgroundColor: .systemGreen, title: "Add to favorites")
         }
+    }
+    
+    func showError(_ error: ErrorMessages) {
+        self.presentCustomAllertOnMainThred(allertTitle: "Bad Stuff Happend", message: error.rawValue, butonTitle: "Ok")
     }
 }
