@@ -1,5 +1,5 @@
 //
-//  FavouriteImagesViewInput.swift
+//  FavouriteImagesInput.swift
 //  UnsplashAppTask
 //
 //  Created by Aliaksandr Dvoineu on 13.10.23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol FavouriteImagesViewInput: AnyObject {
+protocol FavouriteImagesInput: AnyObject {
     func reloadData()
-    func showAlert(isEmpty: Bool)
 }
+

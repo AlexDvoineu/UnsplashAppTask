@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ReloadTableProtocol {
-    func reloadTableFunc()
+    func reloadTableData()
 }
 
 class ImageDetailsViewController: UIViewController, UIScrollViewDelegate {
@@ -57,7 +57,7 @@ class ImageDetailsViewController: UIViewController, UIScrollViewDelegate {
         navigationItem.rightBarButtonItem = doneButton
     }
     
- //MARK: -  Configure Views
+    //MARK: -  Configure Views
     
     private func configureButtons() {
         addFavoritesButton.addTarget(self, action: #selector(addFavoritesButtonTapped), for: .touchUpInside)
@@ -65,15 +65,13 @@ class ImageDetailsViewController: UIViewController, UIScrollViewDelegate {
     
     //MARK: - Configure actions for buttons
     @objc func dismissVC() {
-        reloadDelegate?.reloadTableFunc()
+        reloadDelegate?.reloadTableData()
         dismiss(animated: true)
     }
     
     @objc func addFavoritesButtonTapped() {
         presenter.favoriteButtonTapped()
     }
-    
-
     
     //MARK: - Configure Views Layouts
     private func layoutUI() {
@@ -124,7 +122,7 @@ extension ImageDetailsViewController: ImageDetailsViewInput {
         
         alert.addAction(UIAlertAction(title: "Delete from Favorites", style: .destructive , handler:{ [weak self] (UIAlertAction) in
             completion(true)
-            self?.reloadDelegate?.reloadTableFunc()
+            self?.reloadDelegate?.reloadTableData()
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{  (UIAlertAction) in
@@ -137,7 +135,7 @@ extension ImageDetailsViewController: ImageDetailsViewInput {
     func showSuccesSavedAlert() {
         presentCustomAllertOnMainThred(allertTitle: "Success", message: "You have successfully added this image to favorites", butonTitle: "Ok")
         
-        reloadDelegate?.reloadTableFunc()
+        reloadDelegate?.reloadTableData()
     }
     
     func setFavouriteState(isFavourite: Bool) {

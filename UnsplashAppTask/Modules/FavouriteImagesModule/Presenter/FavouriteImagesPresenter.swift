@@ -7,35 +7,34 @@
 
 import Foundation
 
-final class FavouriteImagesPresenter: FavouriteImagesPresenterProtocol {
-    weak var view: FavouriteImagesViewInput?
+final class FavouriteImagesPresenter {
+    
+    weak var view: FavouriteImagesInput?
+    private var storage: FavouritesStorage
 
-    var imageData: [Image] = []
+//    lazy var imageData: [ImageDetails] = []
+    lazy var favoritesArray: [ImageDetails] = []
+    
+    
+    init(storage: FavouritesStorage) {
+        self.storage = storage
+    }
+}
 
+extension FavouriteImagesPresenter: FavouriteImagesOutput {
+    func viewDidAppear() {
+        updateData()
+    }
+    
     func viewWillAppear() {
-        imageData = ImagesStorage.shared.loadNotes()
-        checkFavouriteImages()
-        view?.reloadData()
+        updateData()
+//        imageData = ImagesStorage.shared.loadNotes()
+//        checkFavouriteImages()
     }
 
-    func passImageData(image: Image) {
-        self.imageData.removeAll(where: { $0.id == image.id })
-        imageData.append(image)
-        ImagesStorage.shared.saveNotes(imageData)
+    
+    func updateData() {
+        favoritesArray = storage.items
         view?.reloadData()
-    }
-
-    func deleteImageData(image: Image) {
-        self.imageData.removeAll(where: { $0.id == image.id })
-        ImagesStorage.shared.saveNotes(imageData)
-        view?.reloadData()
-    }
-
-    private func checkFavouriteImages() {
-        if imageData.isEmpty {
-            view?.showAlert(isEmpty: true)
-        } else {
-            view?.showAlert(isEmpty: false)
-        }
     }
 }

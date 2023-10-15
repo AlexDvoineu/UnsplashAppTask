@@ -9,7 +9,8 @@ import UIKit
 
 class FavouriteImagesAssembly {
     static func assembleFavouriteImagesModule() -> UIViewController {
-        let presenter = FavouriteImagesPresenter()
+        let storage = PersistenceManager.sharedRealm
+        let presenter = FavouriteImagesPresenter(storage: storage)
         let view = FavouriteImagesViewController(presenter: presenter)
         view.presenter = presenter
         presenter.view = view
