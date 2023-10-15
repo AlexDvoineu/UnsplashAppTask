@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol CollectionImagesOutput {
+protocol CollectionImagesOutput: AnyObject {
     func viewDidLoad()
-    
+
     var searchRequest: String { get set }
     func searchImages(searchText: String)
     func loadNextPageIfNeeded()
     func cancelSearching()
-    
-    func getItem(at indexPath: IndexPath) -> ImageDetails
-    func numberOfItemsInSection(_ section: Int) -> Int
+
+    func image(at index: Int) -> ImageDetails
+    var numberOfItems: Int { get }
 }

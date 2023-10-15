@@ -1,5 +1,5 @@
 //
-//  NetworService.swift
+//  NetworkService.swift
 //  UnsplashAppTask
 //
 //  Created by Aliaksandr Dvoineu on 12.10.23.
@@ -41,9 +41,9 @@ enum RequestType {
     case search(searchTerms: String)
 }
 
-final class NetworService {
+final class NetworkService {
     let jsonDecoder = JSONDecoder()
-    
+
     func fetchData(
         requestType: RequestType,
         onCompletion: @escaping ((Result<[Image], Error>) -> Void)
@@ -85,36 +85,38 @@ final class NetworService {
             }
         }
     }
+}
 
-    private func createURLcomponents(requestType: RequestType) -> URL? {
+private extension NetworkService {
+    func createURLcomponents(requestType: RequestType) -> URL? {
         var urlComponents = URLComponents()
 
         urlComponents.scheme = "https"
         urlComponents.host = "api.unsplash.com"
         switch requestType {
-        case .random:
-            urlComponents.path = "/photos/random/"
-            urlComponents.queryItems = [
-                URLQueryItem(name: "client_id", value: Constant.keyAPI),
-                URLQueryItem(name: "count", value: "30")
-            ]
+            case .random:
+                urlComponents.path = "/photos/random/"
+                urlComponents.queryItems = [
+                    URLQueryItem(name: "client_id", value: Constant.keyAPI),
+                    URLQueryItem(name: "count", value: "30")
+                ]
 
-        case .search(let searchTerms):
-            urlComponents.path = "/search/photos/"
-            urlComponents.queryItems = [
-                URLQueryItem(name: "client_id", value: Constant.keyAPI),
-                URLQueryItem(name: "query", value: searchTerms)
-            ]
+            case .search(let searchTerms):
+                urlComponents.path = "/search/photos/"
+                urlComponents.queryItems = [
+                    URLQueryItem(name: "client_id", value: Constant.keyAPI),
+                    URLQueryItem(name: "query", value: searchTerms)
+                ]
         }
         return urlComponents.url
     }
 
-    private func randomImageParseJSON(withData data: Data) throws -> [Image]? {
+    func randomImageParseJSON(withData data: Data) throws -> [Image]? {
         let imageData = try jsonDecoder.decode([ImageData].self, from: data)
         return imageData.compactMap { Image(imageData: $0) }
     }
 
-    private func searchImageParseJSON(withData data: Data) throws -> [Image]? {
+    func searchImageParseJSON(withData data: Data) throws -> [Image]? {
         let imageData = try jsonDecoder.decode(SearchData.self, from: data)
         return imageData.results.compactMap { Image(searchData: $0) }
     }
@@ -129,6 +131,7 @@ struct UnsplashSectionedImages: Codable, Hashable {
 struct UnsplashImage: Codable, Hashable {
     let id: String
     let urls: UnsplashImageURL
+
     static func == (lhs: UnsplashImage, rhs: UnsplashImage) -> Bool {
         lhs.id == rhs.id && lhs.urls == rhs.urls
     }

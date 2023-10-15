@@ -9,9 +9,10 @@ import UIKit
 
 final class CollectionImagesAssembly {
     static func assembleCollectionImagesModule() -> UIViewController {
-        let presenter = CollectionImagesPresenter()
+        let presenter = CollectionImagesPresenter(
+            apiManager: APIManager.shared
+        )
         let view = CollectionImagesViewController(presenter: presenter)
-        view.presenter = presenter
         presenter.view = view
         return view
     }

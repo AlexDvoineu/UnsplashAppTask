@@ -11,7 +11,7 @@ import SDWebImage
 class CollectionImagesViewCell: UICollectionViewCell {
     static let identifier = "collectionImagesViewCell"
 
-    private let picture = UIImageView()
+    private let imageView = UIImageView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,27 +19,27 @@ class CollectionImagesViewCell: UICollectionViewCell {
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    private func setupCell() {
-        picture.clipsToBounds = true
-        picture.contentMode = .scaleAspectFill
-        picture.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(picture)
-
-        NSLayoutConstraint.activate([
-            picture.rightAnchor.constraint(equalTo: rightAnchor),
-            picture.leftAnchor.constraint(equalTo: leftAnchor),
-            picture.topAnchor.constraint(equalTo: topAnchor),
-            picture.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
+        super.init(coder: coder)
+        setupCell()
     }
 
     func configure(image: Image) {
-        NetworService().downloadImage(url: image.smallPhoto) { [weak self] image in
-            guard let self = self else { return }
-            self.picture.image = image
-        }
+        imageView.sd_setImage(with: URL(string: image.smallPhoto))
+    }
+}
+
+private extension CollectionImagesViewCell {
+    func setupCell() {
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(imageView)
+
+        NSLayoutConstraint.activate([
+            imageView.rightAnchor.constraint(equalTo: rightAnchor),
+            imageView.leftAnchor.constraint(equalTo: leftAnchor),
+            imageView.topAnchor.constraint(equalTo: topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
     }
 }

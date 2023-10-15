@@ -7,36 +7,36 @@
 
 import UIKit
 
-final class CollectionImagesViewController: DataLoadingVC {
-    
+final class CollectionImagesViewController: DataLoadingViewController {
+
     private lazy var collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnFlowLayout(in: view))
     private var timer: Timer?
-    
-    var presenter: CollectionImagesOutput
-    
+
+    let presenter: CollectionImagesOutput
+
     init(presenter: CollectionImagesOutput) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+
         congifureViewController()
         configureCollectionView()
         configureSearchController()
         createDismissKeyboardTapGestureRecognizer()
         presenter.viewDidLoad()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
-        
+
         let textAttributes = [NSAttributedString.Key.foregroundColor: Colors.basicColor]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
     }
@@ -51,22 +51,22 @@ extension CollectionImagesViewController {
 }
 
 extension CollectionImagesViewController {
-    
+
     private func congifureViewController() {
         title = "Collection"
         view.backgroundColor = .systemBackground
     }
-    
-    //MARK: - Configure UI elements
+
+    // MARK: - Configure UI elements
     private func configureCollectionView() {
         view.addSubview(collectionView)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .systemBackground
-        collectionView.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.reuseID)
+        collectionView.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.identifier)
     }
-    
-    //MARK: - Configure Search Controller
+
+    // MARK: - Configure Search Controller
     func configureSearchController() {
         let searchController = UISearchController()
         searchController.searchBar.delegate = self
@@ -78,67 +78,65 @@ extension CollectionImagesViewController {
     }
 }
 
-//MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 extension CollectionImagesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
+
+    func numberOfSections(in collectionView: UICollectionView) -> Int { 1 }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter.numberOfItemsInSection(section)
+        presenter.numberOfItems
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCell.reuseID, for: indexPath) as! ImageCell
-        
-        let image: ImageDetails = presenter.getItem(at: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCell.identifier, for: indexPath) as! ImageCell
+
+        let image: ImageDetails = presenter.image(at: indexPath.row)
         cell.setForRequest(image: image)
-        
+
         return cell
     }
-    
+
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let alreadyScrolledDataOffsetY = scrollView.contentOffset.y
         let totalContentHeight = scrollView.contentSize.height
         let screenHeight = scrollView.frame.size.height
-        
+
         if alreadyScrolledDataOffsetY > totalContentHeight - screenHeight {
             presenter.loadNextPageIfNeeded()
         }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let image: ImageDetails = presenter.getItem(at: indexPath)
-        
+        let image: ImageDetails = presenter.image(at: indexPath.row)
+
         let destinationVC = ImageDetailsAssembly.assembleImageDetailsModule(image: image, delegate: nil)
         let navController = UINavigationController(rootViewController: destinationVC)
         present(navController, animated: true)
     }
 }
 
-//MARK: - UISearchResultsUpdating, UISearchBarDelegate, UISearchControllerDelegate
+// MARK: - UISearchResultsUpdating, UISearchBarDelegate, UISearchControllerDelegate
 extension CollectionImagesViewController: UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
         let searchRequest = searchController.searchBar.text ?? ""
         presenter.searchRequest = searchRequest
-        
+
         guard !searchRequest.isEmpty else {
             presenter.cancelSearching()
             return
         }
-        
+
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { [weak self] _ in
             guard let self else { return }
             self.presenter.searchImages(searchText: searchRequest)
         }
     }
-    
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
-    
+
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         presenter.cancelSearching()
     }
@@ -150,7 +148,7 @@ extension CollectionImagesViewController: CollectionImagesInput {
     func reloadData() {
         collectionView.reloadData()
     }
-    
+
     func showError(_ error: ErrorMessages) {
         self.presentCustomAllertOnMainThred(allertTitle: "Bad Stuff Happend", message: error.rawValue, butonTitle: "Ok")
     }

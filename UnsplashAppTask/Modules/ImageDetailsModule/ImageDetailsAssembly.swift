@@ -14,11 +14,15 @@ final class ImageDetailsAssembly {
         delegate: ReloadTableProtocol?
     ) -> ImageDetailsViewController {
         let storage = PersistenceManager.sharedRealm
-        
-        let presenter = ImageDetailsPresenter(image: image, storage: storage)
+
+        let presenter = ImageDetailsPresenter(
+            image: image,
+            storage: storage,
+            apiManager: APIManager.shared,
+            imageDownloader: ImageDownloader()
+        )
         let view = ImageDetailsViewController(presenter: presenter)
-        
-        view.presenter = presenter
+
         view.reloadDelegate = delegate
         presenter.view = view
 

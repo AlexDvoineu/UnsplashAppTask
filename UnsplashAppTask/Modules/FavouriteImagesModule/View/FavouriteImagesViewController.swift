@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavouriteImagesViewController: DataLoadingVC {
+class FavouriteImagesViewController: DataLoadingViewController {
     var presenter: FavouriteImagesPresenter
     let tableView = UITableView()
     

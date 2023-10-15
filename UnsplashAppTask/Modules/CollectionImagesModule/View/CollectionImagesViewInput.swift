@@ -10,8 +10,8 @@ import UIKit
 protocol CollectionImagesInput: AnyObject {
     func dismissLoadingView()
     func reloadData()
-    
+
     func showLoadingView()
-    
+
     func showError(_ error: ErrorMessages)
 }

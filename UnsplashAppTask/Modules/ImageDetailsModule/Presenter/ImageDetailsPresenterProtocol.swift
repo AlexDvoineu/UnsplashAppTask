@@ -9,5 +9,5 @@ import Foundation
 
 protocol ImageDetailsPresenterOutput {
     func viewDidLoad()
-    func favoriteButtonTapped()
+    func favouriteButtonTapped()
 }
