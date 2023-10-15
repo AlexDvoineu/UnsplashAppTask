@@ -13,12 +13,13 @@ struct RandomImagesResult: Codable, Hashable {
     let urls: URLS
     let user: UnsplashUsers
     
-    enum CodingKeys: String, CodingKey {
-        case id
-        case user
-        case likes
-        case urls
-    }
+}
+
+extension RandomImagesResult: ImageDetails {
+    var title: String { "" }
+    var description: String { "" }
+    var imageUrl: URL { URL(string: urls.small) ?? URL(string: urls.thumb)! }
+    var authorsName: String { user.name }
 }
 
 struct UnsplashUsers: Codable, Hashable {
@@ -29,7 +30,7 @@ struct APIResponse: Codable, Hashable {
     let results: [ImagesResult]
 }
 
-struct ImagesResult: Codable{
+struct ImagesResult: Codable {
     let uuid = UUID()
     let id: String
     let likes: Int
@@ -44,6 +45,13 @@ struct ImagesResult: Codable{
         case updatedAt
         case urls
     }
+}
+
+extension ImagesResult: ImageDetails {
+    var title: String { "" }
+    var description: String { "" }
+    var imageUrl: URL { URL(string: urls.small) ?? URL(string: urls.thumb)! }
+    var authorsName: String { user.name }
 }
 
 extension ImagesResult: Hashable{

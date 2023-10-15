@@ -7,9 +7,7 @@
 
 import Foundation
 
-protocol ImageDetailsPresenterProtocol {
+protocol ImageDetailsPresenterOutput {
     func viewDidLoad()
-    func setupDate(image: Image) -> String
-    func checkFavouriteButton(isFavourite: Bool)
-    func checkFavourites()
+    func favoriteButtonTapped()
 }

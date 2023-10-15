@@ -64,3 +64,13 @@ struct Image: Codable, Equatable {
         self.description = description
     }
 }
+
+extension Image: ImageDetails {
+    var imageUrl: URL {
+        URL(string: smallPhoto)!
+    }
+    
+    var authorsName: String {
+        authorName
+    }
+}

@@ -11,7 +11,9 @@ class FavoritesVC: DataLoadingVC {
     
     let tableView = UITableView()
     
-    var favoritesArray = PersistenceManager.sharedRealm.item
+    #warning("move injection to assembler")
+    private var storage: FavouritesStorage = PersistenceManager.sharedRealm
+    lazy var favoritesArray = storage.items
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +38,7 @@ class FavoritesVC: DataLoadingVC {
     }
     
     func reloadTableView() {
-        favoritesArray = PersistenceManager.sharedRealm.item
+        favoritesArray = PersistenceManager.sharedRealm.items
         DispatchQueue.main.async {
             self.tableView.reloadData()
             self.view.bringSubviewToFront(self.tableView)
@@ -81,15 +83,7 @@ extension FavoritesVC: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let favorite = favoritesArray[indexPath.row]
-        let destinationVC   = ImageInfoVC()
-        destinationVC.reloadDelegate = self
-        
-        destinationVC.authorsName       = favorite.authorsName
-        destinationVC.imageUrl          = favorite.imageUrl
-        destinationVC.updatedAt         = favorite.updatedAt
-        destinationVC.userHTML          = favorite.userHTML
-        destinationVC.likes             = favorite.likes
-        destinationVC.idOfImage         = favorite.idOfImage
+        let destinationVC = ImageDetailsAssembly.assembleImageDetailsModule(image: favorite, delegate: self)
         
         let navController = UINavigationController(rootViewController: destinationVC)
         present(navController, animated: true)
@@ -98,7 +92,7 @@ extension FavoritesVC: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else{return}
         let favorite = favoritesArray[indexPath.row]
-        PersistenceManager.sharedRealm.deleteFavorite(item: favorite)
+        storage.removeImage(id: favorite.id)
         reloadTableView()
         checkImagesCount()
     }

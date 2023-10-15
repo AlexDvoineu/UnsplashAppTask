@@ -44,7 +44,8 @@ extension FavouriteImagesViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        tableView.register(FavouriteImagesTableViewCell.self, forCellReuseIdentifier: FavouriteImagesTableViewCell.identifier)
+//        tableView.register(FavouriteImagesTableViewCell.self, forCellReuseIdentifier: FavouriteImagesTableViewCell.identifier)
+        tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.reuseID)
         self.view.addSubview(tableView)
 
         textIfEmpty.translatesAutoresizingMaskIntoConstraints = false
@@ -69,10 +70,11 @@ extension FavouriteImagesViewController: UITableViewDelegate, UITableViewDataSou
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(
-            withIdentifier: FavouriteImagesTableViewCell.identifier
-        ) as? FavouriteImagesTableViewCell,
+            withIdentifier: FavoriteCell.reuseID
+        ) as? FavoriteCell,
            let image = presenter.imageData[safe: indexPath.row] {
-            cell.configure(image: image)
+//            cell.configure(image: image)
+            cell.set(imageUrl: image.imageUrl, userName: image.authorsName)
             return cell
         }
         return UITableViewCell()
@@ -80,21 +82,19 @@ extension FavouriteImagesViewController: UITableViewDelegate, UITableViewDataSou
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let image = presenter.imageData[safe: indexPath.row] else { return }
-        let vc = ImageDetailsAssembly.assembleImageDetailsModule(image: image, fromFavouritePhoto: true, delegate: self)
+        let vc = ImageDetailsAssembly.assembleImageDetailsModule(image: image, delegate: self)
         navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 // MARK: Delegate
 
-extension FavouriteImagesViewController: ImageDetailsViewControllerDelegate {
-    func passImageData(image: Image) {
-        presenter.passImageData(image: image)
+extension FavouriteImagesViewController: ReloadTableProtocol {
+    func reloadTableFunc() {
+#warning("вуроятно это можно снести к херам")
     }
     
-    func deleteImageData(image: Image) {
-        presenter.deleteImageData(image: image)
-    }
+
 }
 
 // MARK: ViewInput
@@ -123,4 +123,3 @@ extension FavouriteImagesViewController: FavouriteImagesViewInput {
         }
     }
 }
-

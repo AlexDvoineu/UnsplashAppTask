@@ -59,8 +59,9 @@ extension CollectionImagesViewController {
         isSearchingByRandom = false
         showLoadingView()
         isLoadingMoreImages = true
+        
         NetworkManager.shared.getImagesByRequest(for: request, page: page)  { [weak self] result in
-            guard let self = self else { return }
+            guard let self else { return }
             dismissLoadingView()
             
             switch result {
@@ -76,6 +77,7 @@ extension CollectionImagesViewController {
             
             self.isLoadingMoreImages = false
         }
+        
     }
     
     func getRandomImages(page: Int) {
@@ -192,22 +194,9 @@ extension CollectionImagesViewController: UICollectionViewDelegate, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let destinationVC = ImageInfoVC()
+        let image: ImageDetails = isSearchingByRandom ? randomImagesResults[indexPath.item] : requestImagesResults[indexPath.item]
         
-        if isSearchingByRandom == false{
-            let resultRequest = requestImagesResults[indexPath.item]
-            destinationVC.authorsName = resultRequest.user.name
-            destinationVC.imageUrl = resultRequest.urls.small
-            destinationVC.likes = resultRequest.likes
-            destinationVC.idOfImage = resultRequest.id
-        }
-        else {
-            let resultRandom = randomImagesResults[indexPath.item]
-            destinationVC.authorsName = resultRandom.user.name
-            destinationVC.imageUrl = resultRandom.urls.small
-            destinationVC.likes = resultRandom.likes
-            destinationVC.idOfImage = resultRandom.id
-        }
+        let destinationVC = ImageDetailsAssembly.assembleImageDetailsModule(image: image, delegate: nil)
         let navController = UINavigationController(rootViewController: destinationVC)
         present(navController, animated: true)
     }

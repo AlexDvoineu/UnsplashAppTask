@@ -8,56 +8,52 @@
 import Foundation
 import SDWebImage
 
-final class ImageDetailsPresenter: ImageDetailsPresenterProtocol {
+final class ImageDetailsPresenter {
     weak var view: ImageDetailsViewInput?
-    var image: Image?
-    var fromFavouritePhoto = false
-    var isFavourite = false
+    
+    private var image: ImageDetails
+    private let storage: FavouritesStorage
+    private var isFavourits: Bool {
+        storage.imageExist(id: image.id)
+    }
+    
+    init(image: ImageDetails, storage: FavouritesStorage) {
+        self.image = image
+        self.storage = storage
+    }
+
+}
+
+extension ImageDetailsPresenter: ImageDetailsPresenterOutput {
     
     func viewDidLoad() {
-        guard let image = image else { return }
+        downloadAndSetupImage()
+        view?.setFavouriteState(isFavourite: isFavourits)
         view?.configure(image: image)
-        uploadImage()
-        checkFavourites()
     }
     
-    func setupDate(image: Image) -> String {
-        let dateFormatter = ISO8601DateFormatter()
-        let date = dateFormatter.date(from: image.createDate) ?? Date()
-        let convertDate = DateFormatter()
-        convertDate.dateFormat = "dd MMMM yyyy hh:mm"
-        convertDate.locale = Locale(identifier: "en_EN")
-        let finalDate = convertDate.string(from: date)
-        return finalDate
-    }
-    
-    func checkFavouriteButton(isFavourite: Bool) {
-        guard let image = image else { return }
-        if isFavourite {
-            let imageData = ImagesStorage.shared.loadNotes()
-            if !imageData.contains(where: { $0.id == image.id }) {
-                ImagesStorage.shared.appendPhoto([image])
-                view?.passImageData(image: image)
-            }
-        } else {
-            view?.deleteImageData(image: image)
+    func favoriteButtonTapped() {
+        let imageId = image.id
+        guard !storage.imageExist(id: imageId) else {
+            view?.showDeleteConfirmationAlert(completion: { [weak self] confirm in
+                guard let self, confirm else { return }
+                self.storage.removeImage(id: imageId)
+                self.view?.setFavouriteState(isFavourite: false)
+            })
+            return
         }
+        
+        view?.setFavouriteState(isFavourite: true)
+        storage.addImage(image)
+        view?.showSuccesSavedAlert()
     }
     
-    func checkFavourites() {
-        let imageData = ImagesStorage.shared.loadNotes()
-        imageData.contains(where: { $0.id == image?.id }) ? (isFavourite = true) : (isFavourite = false)
-        view?.setFavourite(isFavourite: isFavourite)
-    }
-    
-    func changeButton() {
-        isFavourite.toggle()
-        view?.setFavourite(isFavourite: isFavourite)
-    }
-    
-    private func uploadImage() {
-        NetworService().downloadImage(url: image?.smallPhoto ?? "") { [weak self] image in
-            guard let self = self else { return }
+}
+
+private extension ImageDetailsPresenter {
+    func downloadAndSetupImage() {
+        SDWebImageDownloader.shared.downloadImage(with: image.imageUrl) { [weak self] (image, data, error, finished) in
+            guard let self, let image else { return }
             self.view?.setImage(image: image)
         }
     }

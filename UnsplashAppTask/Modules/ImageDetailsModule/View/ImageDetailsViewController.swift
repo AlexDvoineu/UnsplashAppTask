@@ -6,146 +6,209 @@
 //
 
 import UIKit
-import SDWebImage
 
-final class ImageDetailsViewController: UIViewController {
-    var presenter: ImageDetailsPresenter
+protocol ReloadTableProtocol {
+    func reloadTableFunc()
+}
+
+struct TempImageDetails: ImageDetails {
+    var id: String
+    var title: String
+    var description: String
+    var imageUrl: URL
+    var authorsName: String
+}
+
+class ImageDetailsViewController: UIViewController, UIScrollViewDelegate {
     
-    weak var delegate: ImageDetailsViewControllerDelegate?
+    var reloadDelegate: ReloadTableProtocol?
+    var presenter: ImageDetailsPresenterOutput
     
-    private let imageView = UIImageView()
-    private let titleLabel = UILabel()
-    private let descriptionLabel = UILabel()
-    private let createDateLabel = UILabel()
-    private let favouritesButton = UIButton()
+    let scrollView  = UIScrollView()
+    let contentView = UIView()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        setupUI()
-        presenter.viewDidLoad()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        presenter.checkFavourites()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        checkFavouritesButton()
-    }
-
+    let imageView = ImageView(frame: .zero)
+    let addFavoritesButton = Button(frame: .zero)
+    let userNameLabel = TitleLabel(textAlignment: .left, fontSize: 34)
+    
+        // .эти два пункта под вопросом
+    let updatedAtLabel = SecondaryTitleLabel(fontSize: 18)
+    let locationAndDowloadsLabel = SecondaryTitleLabel(fontSize: 18)
+    
+    let imageTitleLabel = SecondaryTitleLabel(fontSize: 18)
+    let imageDescriptionLabel = SecondaryTitleLabel(fontSize: 18)
+    
+    
+    var updatedAt: Date = Date()
+    var likes: Int = 0
+    
     init(presenter: ImageDetailsPresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
-
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    @objc private func favouritesButtonTapped() {
-        presenter.changeButton()
-        checkFavouritesButton()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureVC()
+        configureButtons()
+        configureScrollView()
+        layoutUI()
+        
+        presenter.viewDidLoad()
     }
-
-    private func checkFavouritesButton() {
-        if favouritesButton.imageView?.image == UIImage(systemName: Constant.favouriteImage) {
-            presenter.checkFavouriteButton(isFavourite: true)
-        } else if presenter.fromFavouritePhoto == true &&
-                    favouritesButton.imageView?.image == UIImage(systemName: Constant.unfavouriteImage) {
-            presenter.checkFavouriteButton(isFavourite: false)
-        }
+    
+    func configureVC() {
+        view.backgroundColor = .systemBackground
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
+        doneButton.tintColor = Colors.basicColor
+        navigationItem.rightBarButtonItem = doneButton
     }
-}
-
-// MARK: Setup UI
-
-extension ImageDetailsViewController {
-    private func setupUI() {
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFill
+    
+ //MARK: -  Configure Views
+    
+    private func configureButtons() {
+        addFavoritesButton.addTarget(self, action: #selector(addFavoritesButtonTapped), for: .touchUpInside)
+    }
+    
+    func configureScrollView() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        scrollView.pinToEdges(of: view)
         
-        favouritesButton.translatesAutoresizingMaskIntoConstraints = false
-        favouritesButton.addTarget(self, action: #selector(favouritesButtonTapped), for: .touchUpInside)
-        
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = .systemFont(ofSize: 18)
-        titleLabel.numberOfLines = 0
-        titleLabel.textAlignment = .center
-        
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.font = .systemFont(ofSize: 14)
-        descriptionLabel.numberOfLines = 0
-        descriptionLabel.textAlignment = .center
-
-        view.addSubview(imageView)
-        view.addSubview(favouritesButton)
-        view.addSubview(titleLabel)
-        view.addSubview(descriptionLabel)
+        contentView.pinToEdges(of: scrollView)
         
         NSLayoutConstraint.activate([
-            imageView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-            imageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-
-            favouritesButton.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -15),
-            favouritesButton.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
-            favouritesButton.heightAnchor.constraint(equalToConstant: 50),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+        ])
+    }
+    
+    //MARK: - Load Image Data From API
+    private func getImageData(id: String) {
+        NetworkManager.shared.getImagesByID(for: id) { [weak self] result in
+            guard let self else { return }
             
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
+            switch result {
+            case .success(let data):
+                DispatchQueue.main.async {
+                    self.locationAndDowloadsLabel.text = "\(data.location.name ?? "No info about description") \nDownloads: \(String(describing: data.downloads ?? 0))"
+                }
+                
+            case .failure(let error):
+                self.presentCustomAllertOnMainThred(allertTitle: "Bad Stuff Happend", message: error.rawValue, butonTitle: "Ok")
+            }
+        }
+    }
+    
+    //MARK: - Configure actions for buttons
+    @objc func dismissVC() {
+        self.reloadDelegate?.reloadTableFunc()
+        dismiss(animated: true)
+    }
+    
+    @objc func addFavoritesButtonTapped() {
+        presenter.favoriteButtonTapped()
+    }
+    
 
-            descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            descriptionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            descriptionLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+    
+    //MARK: - Configure Views Layouts
+    private func layoutUI() {
+        
+        contentView.addSubviews(
+            imageView,
+            addFavoritesButton,
+            userNameLabel,
+            locationAndDowloadsLabel,
+            imageTitleLabel,
+            imageDescriptionLabel)
+        
+        let padding: CGFloat = 20
+        
+        addFavoritesButton.translatesAutoresizingMaskIntoConstraints = false
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        updatedAtLabel.translatesAutoresizingMaskIntoConstraints = false
+        userNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        locationAndDowloadsLabel.translatesAutoresizingMaskIntoConstraints = false
+        imageTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        imageDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
+            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            imageView.heightAnchor.constraint(equalToConstant: 300),
+            imageView.widthAnchor.constraint(equalToConstant: 300),
+            
+            userNameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: padding),
+            userNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            userNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            
+            locationAndDowloadsLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 2*padding),
+            locationAndDowloadsLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            locationAndDowloadsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            locationAndDowloadsLabel.heightAnchor.constraint(equalToConstant: 60),
+            
+            addFavoritesButton.topAnchor.constraint(equalTo: locationAndDowloadsLabel.bottomAnchor, constant: 2*padding),
+            addFavoritesButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            addFavoritesButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            addFavoritesButton.heightAnchor.constraint(equalToConstant: 60),
+            
+            imageTitleLabel.topAnchor.constraint(equalTo: addFavoritesButton.bottomAnchor, constant: padding),
+            imageTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            imageTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            imageTitleLabel.heightAnchor.constraint(equalToConstant: 60),
+            
+            imageDescriptionLabel.topAnchor.constraint(equalTo: imageTitleLabel.bottomAnchor, constant: padding),
+            imageDescriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            imageDescriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            imageDescriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding),
+            imageDescriptionLabel.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
 }
 
-// MARK: ViewInput
-
 extension ImageDetailsViewController: ImageDetailsViewInput {
-    
-    func configure(image: Image) {
-        descriptionLabel.text = "\(image.description)"
-        titleLabel.text = "\(image.title)"
-    }
-    
-    func setFavourite(isFavourite: Bool) {
-        if isFavourite {
-            favouritesButton.setImage(UIImage(systemName: Constant.favouriteImage), for: .normal)
-        } else {
-            favouritesButton.setImage(UIImage(systemName: Constant.unfavouriteImage), for: .normal)
-        }
-    }
-    
-    func passImageData(image: Image) {
-        delegate?.passImageData(image: image)
-    }
-    
-    func deleteImageData(image: Image) {
-        delegate?.deleteImageData(image: image)
+    func configure(image: ImageDetails) {
+        userNameLabel.text = "Author: \(image.authorsName)"
+        getImageData(id: image.id)
     }
     
     func setImage(image: UIImage) {
         imageView.image = image
     }
-}
-
-// MARK: Delegate
-
-protocol ImageDetailsViewControllerDelegate: AnyObject {
-    func passImageData(image: Image)
-    func deleteImageData(image: Image)
-}
-
-protocol ImageDetailsViewControllerFavourite: AnyObject {
-    func passImageData(image: Image)
-    func deleteImageData(image: Image)
+    
+    
+    func showDeleteConfirmationAlert(completion: @escaping (Bool) -> Void) {
+        let alert = UIAlertController(title: "", message: "Already in Favorites", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Delete from Favorites", style: .destructive , handler:{ [weak self] (UIAlertAction) in
+            
+            completion(true)
+            self?.reloadDelegate?.reloadTableFunc()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{  (UIAlertAction) in
+            completion(false)
+        }))
+        
+        self.present(alert, animated: true)
+    }
+    
+    func showSuccesSavedAlert() {
+        presentCustomAllertOnMainThred(allertTitle: "Success", message: "You have successfully added this image to favorites", butonTitle: "Ok")
+        
+        reloadDelegate?.reloadTableFunc()
+    }
+    
+    func setFavouriteState(isFavourite: Bool) {
+        if isFavourite {
+            addFavoritesButton.set(backgroundColor: .systemRed, title: "Delete From  Favorites")
+        } else {
+            addFavoritesButton.set(backgroundColor: .systemGreen, title: "Add to favorites")
+        }
+    }
 }

@@ -8,17 +8,22 @@
 import Foundation
 import RealmSwift
 
-final class ImagesRealm: Object{
-    @Persisted dynamic var authorsName = ""
-    @Persisted dynamic var imageUrl = ""
-    @Persisted dynamic var updatedAt: Date = Date()
-    @Persisted dynamic var userHTML = ""
-    @Persisted dynamic var idOfImage = ""
-    @Persisted dynamic var likes = 0
-    @Persisted dynamic var imageTitle = ""
+final class RealmImage: Object {
+    @Persisted dynamic var id = ""
+    @Persisted dynamic var title = ""
     @Persisted dynamic var imageDescription = ""
-    override static func primaryKey() -> String? { return "idOfImage" }
-    @Persisted(primaryKey: true) var id: ObjectId//for sorting
+    @Persisted dynamic var authorsName = ""
+    @Persisted dynamic var urlString = ""
+    var imageUrl: URL { URL(string: urlString)! }
+    @Persisted dynamic var updatedAt: Date = Date()
+    override static func primaryKey() -> String? { return "id" }
+    @Persisted(primaryKey: true) var objectId: ObjectId
+}
+
+extension RealmImage: ImageDetails {
+    override var description: String {
+        imageDescription
+    }
 }
 
 final class PersistenceManager{
@@ -26,36 +31,54 @@ final class PersistenceManager{
     
     private let realm = try! Realm()
     
-    var item: Results<ImagesRealm> {return realm.objects(ImagesRealm.self).sorted(byKeyPath: "id", ascending: false)}//sorting
+    var realmImages: Results<RealmImage> { return realm.objects(RealmImage.self).sorted(byKeyPath: "objectId", ascending: false) }
     
     func objectExist (primaryKey: String) -> Bool {
-        return realm.object(ofType: ImagesRealm.self, forPrimaryKey: primaryKey) != nil
+        return realm.object(ofType: RealmImage.self, forPrimaryKey: primaryKey) != nil
     }
     
-    func addFavorite(authorsName: String, imageUrl: String, updatedAt: Date, userHTML: String, likes: Int, id: String) {
-        let favoriteImage = ImagesRealm()
-        favoriteImage.imageUrl = imageUrl
+    func addFavorite(id: String, title: String, imageDescription: String, authorsName: String, imageUrl: String, updatedAt: Date = Date()) {
+        let favoriteImage = RealmImage()
+        favoriteImage.id = id //primary key
+        favoriteImage.title = title
+        favoriteImage.imageDescription = imageDescription
         favoriteImage.authorsName = authorsName
+        favoriteImage.urlString = imageUrl
         favoriteImage.updatedAt = updatedAt
-        favoriteImage.userHTML = userHTML
-        favoriteImage.likes = likes
-        favoriteImage.idOfImage = id//primary key
         
         try! realm.write{ realm.add(favoriteImage) }
     }
     
-    func deleteFavorite(item: ImagesRealm) {
-        try! realm.write{
-            realm.delete(item) }
-    }
-    
     func deleteData(idForDelete: String) {
         let realm = try! Realm()
-        let data = realm.object(ofType: ImagesRealm.self, forPrimaryKey: idForDelete)
+        let data = realm.object(ofType: RealmImage.self, forPrimaryKey: idForDelete)
         if data != nil{
             try! realm.write {
                 realm.delete(data!)
             }
         }
     }
+}
+
+extension PersistenceManager: FavouritesStorage {
+    var items: [ImageDetails] {
+        Array(realmImages)
+    }
+    
+    func imageExist(id: String) -> Bool {
+        objectExist(primaryKey: id)
+    }
+    
+    func addImage(_ image: ImageDetails) {
+        addFavorite(id: image.id,
+                    title: image.title,
+                    imageDescription: image.description,
+                    authorsName: image.authorsName,
+                    imageUrl: image.imageUrl.absoluteString)
+    }
+    
+    func removeImage(id: String) {
+        deleteData(idForDelete: id)
+    }
+    
 }

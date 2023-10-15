@@ -22,8 +22,8 @@ final class FavoriteCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(imageUrl: String, userName: String) {
-        imageImageView.sd_setImage(with: URL(string: imageUrl))
+    func set(imageUrl: URL, userName: String) {
+        imageImageView.sd_setImage(with: imageUrl)
         userNameLabel.text = "Authors name: \n\(userName)"
     }
     

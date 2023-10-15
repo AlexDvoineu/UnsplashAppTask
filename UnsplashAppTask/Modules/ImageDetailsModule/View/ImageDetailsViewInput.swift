@@ -8,9 +8,12 @@
 import UIKit
 
 protocol ImageDetailsViewInput: AnyObject {
-    func configure(image: Image)
+    func configure(image: ImageDetails)
     func setImage(image: UIImage)
-    func setFavourite(isFavourite: Bool)
-    func passImageData(image: Image)
-    func deleteImageData(image: Image)
+    func setFavouriteState(isFavourite: Bool)
+//    func passImageData(image: Image)
+//    func deleteImageData(image: Image)
+    
+    func showSuccesSavedAlert()
+    func showDeleteConfirmationAlert(completion: @escaping (Bool) -> Void)
 }
