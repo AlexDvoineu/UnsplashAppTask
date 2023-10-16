@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import rswift
 
 final class CollectionImagesViewController: DataLoadingViewController {
 

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import rswift
 
 struct Constant {
     static let keyAPI = "b5ADtG3x25jDGuCTS0q4zB78OgjkW61GVgexvfS10WU"
@@ -17,5 +16,4 @@ struct Constant {
 
 enum Images {
     static let placeholder = UIImage(named: "placeholderimage")
-//    static let placeholder = R.image.placeholderimage
 }
