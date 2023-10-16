@@ -16,14 +16,12 @@ protocol APIManagerProtocol {
 enum RequestType {
     case random(page: String)
     case search(searchTerms: String)
+    case byId(id: String)
 }
 
 final class APIManager {
 
     static let shared = APIManager()
-    private let baseURL = "https://api.unsplash.com/"
-    private let clientId = Constant.keyAPI
-
     private let urlSession: URLSession
 
     init(urlSession: URLSession = .shared) {
@@ -53,8 +51,14 @@ extension APIManager: APIManagerProtocol {
                 URLQueryItem(name: "query", value: searchTerms),
                 URLQueryItem(name: "per_page", value: Constant.imagesPerPage)
             ]
+        case .byId(let id):
+            urlComponents.path = "/photos/\(id)/"
+            urlComponents.queryItems = [
+                URLQueryItem(name: "client_id", value: Constant.keyAPI)
+            ]
         }
         return urlComponents.url
+        // let endpoint = baseURL+"/photos/\(id)?client_id=\(clientId)"
     }
     
     // MARK: - Get Images By Request
@@ -136,9 +140,7 @@ extension APIManager: APIManagerProtocol {
     // MARK: - Get Images By Id
     func getImagesByID(for id: String, completed: @escaping (Result<ImageResult, ErrorMessages>) -> Void) {
 
-        let endpoint = baseURL+"/photos/\(id)?client_id=\(clientId)"
-
-        guard let url = URL(string: endpoint) else {
+        guard let url = createURLcomponents(requestType: .byId(id: id)) else {
             completed(.failure(.invalidRequest))
             return
         }
