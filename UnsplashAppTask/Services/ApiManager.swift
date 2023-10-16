@@ -13,6 +13,11 @@ protocol APIManagerProtocol {
     func getImagesByID(for id: String, completed: @escaping (Result<ImageResult, ErrorMessages>) -> Void)
 }
 
+enum RequestType {
+    case random(page: String)
+    case search(searchTerms: String)
+}
+
 final class APIManager {
 
     static let shared = APIManager()
@@ -27,11 +32,35 @@ final class APIManager {
 }
 
 extension APIManager: APIManagerProtocol {
+    
+    private func createURLcomponents(requestType: RequestType) -> URL? {
+        var urlComponents = URLComponents()
+
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.unsplash.com"
+        switch requestType {
+        case .random(let page):
+            urlComponents.path = "/photos/random/"
+            urlComponents.queryItems = [
+                URLQueryItem(name: "client_id", value: Constant.keyAPI),
+                URLQueryItem(name: "page", value: page),
+                URLQueryItem(name: "count", value: Constant.imagesPerPage)
+            ]
+        case .search(let searchTerms):
+            urlComponents.path = "/search/photos/"
+            urlComponents.queryItems = [
+                URLQueryItem(name: "client_id", value: Constant.keyAPI),
+                URLQueryItem(name: "query", value: searchTerms),
+                URLQueryItem(name: "per_page", value: Constant.imagesPerPage)
+            ]
+        }
+        return urlComponents.url
+    }
+    
     // MARK: - Get Images By Request
     func getImagesByRequest(for searchRequest: String, page: Int, completed: @escaping (Result<APIResponse, ErrorMessages>) -> Void) {
-        let endpoint = baseURL+"search/photos?query=\(searchRequest)&client_id=\(clientId)&page=\(page)&per_page=30"
-
-        guard let url = URL(string: endpoint) else {
+        
+        guard let url = createURLcomponents(requestType: .search(searchTerms: searchRequest)) else {
             completed(.failure(.invalidRequest))
             return
         }
@@ -68,9 +97,8 @@ extension APIManager: APIManagerProtocol {
 
     // MARK: - Get Random Images
     func getRandomImages(page: Int, completed: @escaping (Result<[RandomImagesResult], ErrorMessages>) -> Void) {
-        let endpoint = baseURL+"photos/random?client_id=\(clientId)&count=30"
 
-        guard let url = URL(string: endpoint) else {
+        guard let url = createURLcomponents(requestType: .random(page: String(page))) else {
             completed(.failure(.invalidRequest))
             return
         }

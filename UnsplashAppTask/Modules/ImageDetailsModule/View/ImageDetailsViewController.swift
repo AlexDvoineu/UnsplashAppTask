@@ -29,9 +29,6 @@ class ImageDetailsViewController: UIViewController, UIScrollViewDelegate {
     let locationAndDowloadsLabel = SecondaryTitleLabel(fontSize: 18)
     let addFavoritesButton = Button(frame: .zero)
 
-    var updatedAt: Date = Date()
-    var likes: Int = 0
-
     init(presenter: ImageDetailsPresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
@@ -109,7 +106,7 @@ extension ImageDetailsViewController: ImageDetailsViewInput {
     func configure(image: ImageDetails, location: String?, downloads: Int) {
         userNameLabel.text = R.string.localizable.author() + " " + image.authorsName
         locationAndDowloadsLabel.text = "\(location ?? R.string.localizable.noDescription())" +
-                                        "\n\(R.string.localizable.downloads()) \(String(describing: downloads))"
+                                        "\n\(R.string.localizable.downloads()) \(downloads))"
     }
 
     func setImage(image: UIImage) {

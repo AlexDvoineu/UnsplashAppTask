@@ -76,7 +76,6 @@
 		CE857F272AD822D40012B07C /* ImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F262AD822D40012B07C /* ImageData.swift */; };
 		CE857F2A2AD82FC40012B07C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CE857F292AD82FC40012B07C /* Alamofire */; };
 		CE857F2F2AD8406E0012B07C /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F2E2AD8406E0012B07C /* PersistanceManager.swift */; };
-		CE857F332AD8491F0012B07C /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE857F322AD8491F0012B07C /* Collection+Extension.swift */; };
 		CE8BBAF92AD7FEF0006FA944 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BBAF82AD7FEF0006FA944 /* AppDelegate.swift */; };
 		CE8BBAFB2AD7FEF0006FA944 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BBAFA2AD7FEF0006FA944 /* SceneDelegate.swift */; };
 		CE8BBAFD2AD7FEF0006FA944 /* CollectionImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BBAFC2AD7FEF0006FA944 /* CollectionImagesViewController.swift */; };
@@ -157,7 +156,6 @@
 		CE857F242AD822C70012B07C /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		CE857F262AD822D40012B07C /* ImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageData.swift; sourceTree = "<group>"; };
 		CE857F2E2AD8406E0012B07C /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
-		CE857F322AD8491F0012B07C /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
 		CE8BBAF52AD7FEF0006FA944 /* UnsplashAppTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnsplashAppTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE8BBAF82AD7FEF0006FA944 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE8BBAFA2AD7FEF0006FA944 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -288,7 +286,6 @@
 		40F3E6702AD948C500E7C9B8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				CE857F322AD8491F0012B07C /* Collection+Extension.swift */,
 				40F3E6432AD8FA4300E7C9B8 /* UIViewController+Extension.swift */,
 				40F3E6662AD9473400E7C9B8 /* UIView+Extension.swift */,
 			);
@@ -672,6 +669,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		40F3E6CC2ADC627800E7C9B8 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -751,7 +749,6 @@
 				CE857F1E2AD81C640012B07C /* CollectionImagesPresenterProtocol.swift in Sources */,
 				CE857F1A2AD81BB30012B07C /* CollectionImagesAssembly.swift in Sources */,
 				CE857F112AD811400012B07C /* MainTabBarController.swift in Sources */,
-				CE857F332AD8491F0012B07C /* Collection+Extension.swift in Sources */,
 				40F3E6482AD93B8700E7C9B8 /* ErrorMessages.swift in Sources */,
 				CE857F182AD81AB40012B07C /* Constants.swift in Sources */,
 				40F3E62C2AD8C6D700E7C9B8 /* FavouriteImagesPresenterProtocol.swift in Sources */,

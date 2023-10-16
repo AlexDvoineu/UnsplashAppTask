@@ -30,7 +30,6 @@ final class PersistenceManager {
     static let sharedRealm = PersistenceManager()
     // swiftlint:disable force_try
     private let realm = try! Realm()
-    
     var realmImages: Results<RealmImage> { return realm.objects(RealmImage.self).sorted(byKeyPath: "objectId", ascending: false) }
     
     func objectExist (primaryKey: String) -> Bool {
@@ -47,6 +46,7 @@ final class PersistenceManager {
         favoriteImage.updatedAt = updatedAt
         
         try! realm.write { realm.add(favoriteImage) }
+        // swiftlint:enable force_try
     }
     
     func deleteData(idForDelete: String) {

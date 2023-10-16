@@ -16,6 +16,7 @@ struct Constant {
     static let unfavouriteImage = "heart"
     static let favouriteImage = "heart.fill"
     static let collectionImage = "photo"
+    static let imagesPerPage = "30"
 }
 
 enum Images {

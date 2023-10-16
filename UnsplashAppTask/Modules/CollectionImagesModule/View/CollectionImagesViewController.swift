@@ -88,7 +88,8 @@ extension CollectionImagesViewController: UICollectionViewDelegate, UICollection
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionImagesViewCell.identifier, for: indexPath) as? CollectionImagesViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionImagesViewCell.identifier,
+                                                         for: indexPath) as? CollectionImagesViewCell {
             let image: ImageDetails = presenter.image(at: indexPath.row)
             cell.setForRequest(image: image)
 

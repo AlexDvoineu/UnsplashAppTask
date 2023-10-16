@@ -43,3 +43,12 @@
 "No Internet Connection" = "Keine Internetverbindung";
 
 "Unable to complete request" = "Ihre Anfrage kann nicht bearbeitet werden";
+
+// Error Messages
+"This request created an invalid request. Please try again." = "This request created an invalid request. Please try again.";
+
+"Unable to complete your request. Please check your internet connection" = "Unable to complete your request. Please check your internet connection";
+
+"Invalid response from the server. Please try again." = "Invalid response from the server. Please try again.";
+
+"The data received from the server was invalid. Please try again." = "The data received from the server was invalid. Please try again.";

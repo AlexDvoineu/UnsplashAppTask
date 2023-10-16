@@ -27,10 +27,7 @@ enum ConnectionState {
     }
     
     var color: UIColor {
-        if self == .noConnection {
-            return .orange
-        }
-        return .red
+        self == .noConnection ? .orange : .red
     }
 }
 
@@ -68,17 +65,19 @@ final class ConnectivityService {
             }
         }
     }
+}
+
+// MARK: - Private Methods
+fileprivate extension ConnectivityService {
     
-    // MARK: - Private Methods
-    
-    private func startMonitoringCellularRestriction() {
+    func startMonitoringCellularRestriction() {
         let cellularState = CTCellularData.init()
         cellularState.cellularDataRestrictionDidUpdateNotifier = { (dataRestrictedState) in
             self.cellularDataRestrictedState = dataRestrictedState
         }
     }
     
-    private func startMonitoringConnection() {
+    func startMonitoringConnection() {
         let monitor = NWPathMonitor()
         monitor.pathUpdateHandler = { path in
             if path.status == .satisfied {
@@ -93,7 +92,7 @@ final class ConnectivityService {
         monitor.start(queue: queue)
     }
     
-    private func showBanner(text: String, color: UIColor) {
+    func showBanner(text: String, color: UIColor) {
         noInternetMessageView.backgroundView.backgroundColor = color
         noInternetMessageView.bodyLabel?.textColor = .white
         noInternetMessageView.configureContent(body: text)

@@ -8,7 +8,6 @@
 import UIKit
 
 final class FavouriteImagesTableViewCell: UITableViewCell {
-    static let identifier = "favouriteImagesTableViewCell"
 
     private let image = ImageView(frame: .zero)
     private let authorNameLabel = SecondaryTitleLabel(fontSize: 18)
@@ -48,3 +47,5 @@ final class FavouriteImagesTableViewCell: UITableViewCell {
         ])
     }
 }
+
+extension FavouriteImagesTableViewCell: Reusable {}

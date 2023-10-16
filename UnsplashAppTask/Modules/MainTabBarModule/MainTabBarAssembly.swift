@@ -29,7 +29,7 @@ struct MainTabBarAssembly {
         return controller
     }
     
-    static func generateViewController(
+    private static func generateViewController(
         viewController: UIViewController,
         image: UIImage,
         title: String) -> UIViewController {

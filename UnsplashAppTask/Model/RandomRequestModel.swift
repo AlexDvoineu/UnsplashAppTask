@@ -12,7 +12,6 @@ struct RandomImagesResult: Codable, Hashable {
     let likes: Int
     let urls: URLS
     let user: UnsplashUsers
-    
 }
 
 extension RandomImagesResult: ImageDetails {
