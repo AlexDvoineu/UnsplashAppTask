@@ -10,8 +10,8 @@ import UIKit
 final class FavouriteImagesTableViewCell: UITableViewCell {
     static let identifier = "favouriteImagesTableViewCell"
 
-    private let image = UIImageView()
-    private let authorNameLabel = UILabel()
+    private let image = ImageView(frame: .zero)
+    private let authorNameLabel = SecondaryTitleLabel(fontSize: 18)
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -21,27 +21,30 @@ final class FavouriteImagesTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func set(imageUrl: URL, userName: String) {
+        image.sd_setImage(with: imageUrl)
+        authorNameLabel.text = R.string.localizable.authorsName() + "\n\(userName)"
+    }
 
     private func setupUI() {
-        selectionStyle = .none
-        image.clipsToBounds = true
-        image.contentMode = .scaleAspectFill
+        addSubviews(image, authorNameLabel)
         image.translatesAutoresizingMaskIntoConstraints = false
-        authorNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        authorNameLabel.font = .systemFont(ofSize: 24)
-
-        addSubview(image)
-        addSubview(authorNameLabel)
-
+        authorNameLabel.translatesAutoresizingMaskIntoConstraints  = false
+        
+        let padding: CGFloat = 20
+        
+        accessoryType = .disclosureIndicator
+         
         NSLayoutConstraint.activate([
-            image.topAnchor.constraint(equalTo: topAnchor),
-            image.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            image.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            image.heightAnchor.constraint(equalToConstant: 50),
-            image.widthAnchor.constraint(equalToConstant: 100),
-
-            authorNameLabel.centerYAnchor.constraint(equalTo: image.centerYAnchor),
-            authorNameLabel.leftAnchor.constraint(equalTo: image.rightAnchor, constant: 40)
+            image.centerYAnchor.constraint(equalTo: centerYAnchor),
+            image.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            image.heightAnchor.constraint(equalToConstant: 150),
+            image.widthAnchor.constraint(equalToConstant: 150),
+            
+            authorNameLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            authorNameLabel.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: padding),
+            authorNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding)
         ])
     }
 }

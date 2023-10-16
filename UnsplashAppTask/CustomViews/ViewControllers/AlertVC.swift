@@ -44,6 +44,7 @@ final class AllertVC: UIViewController {
     
     func configureContainerView() {
         view.addSubview(containerView)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -56,6 +57,7 @@ final class AllertVC: UIViewController {
     func configureTitleLabel() {
         containerView.addSubview(titleLabel)
         titleLabel.text = alertTitle ?? R.string.localizable.smthWrong()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: padding),
@@ -69,6 +71,7 @@ final class AllertVC: UIViewController {
         containerView.addSubview(actionButton)
         actionButton.setTitle(buttonTitle ?? R.string.localizable.ok(), for: .normal)
         actionButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             actionButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -padding),
@@ -82,6 +85,7 @@ final class AllertVC: UIViewController {
         containerView.addSubview(messageLabel)
         messageLabel.text = message ?? R.string.localizable.unableToCompleteRequest()
         messageLabel.numberOfLines = 4
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),

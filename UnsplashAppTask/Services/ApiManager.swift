@@ -17,11 +17,7 @@ final class APIManager {
 
     static let shared = APIManager()
     private let baseURL = "https://api.unsplash.com/"
-    // private let clientId = Constant.keyAPI
-    // Another key if rate limit exceeded
-    // CewI7tFKhXqMgfDQ_mWQc2KYRxQLsXyTv033_CvAIko
-    // mXn3boZyLcKIvK-0rIdaoIgiJ4fYoDanWHhheM5EQnc
-    private let clientId = "CewI7tFKhXqMgfDQ_mWQc2KYRxQLsXyTv033_CvAIko"
+    private let clientId = Constant.keyAPI
 
     private let urlSession: URLSession
 

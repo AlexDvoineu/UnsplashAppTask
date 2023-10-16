@@ -1,45 +1,49 @@
 //
-//  CollectionImagesViewCell.swift
+//  ImageCell.swift
 //  UnsplashAppTask
 //
-//  Created by Aliaksandr Dvoineu on 12.10.23.
+//  Created by Aliaksandr Dvoineu on 13.10.23.
 //
 
 import UIKit
-import SDWebImage
 
-class CollectionImagesViewCell: UICollectionViewCell {
-    static let identifier = "collectionImagesViewCell"
-
-    private let imageView = UIImageView()
+final class CollectionImagesViewCell: UICollectionViewCell {
+    private lazy var imageView = ImageView(frame: .zero)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupCell()
+        configure()
     }
 
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupCell()
+        fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(image: Image) {
-        imageView.sd_setImage(with: URL(string: image.smallPhoto))
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        setDefaultImage()
+        imageView.sd_cancelCurrentImageLoad()
+        imageView.image = nil
     }
-}
 
-private extension CollectionImagesViewCell {
-    func setupCell() {
-        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        imageView.frame = contentView.bounds
+    }
+
+    func setDefaultImage() {
+        imageView.image = nil
+        imageView.image = Images.placeholder
+    }
+
+    func setForRequest(image: ImageDetails) {
+        setDefaultImage()
+        imageView.sd_setImage(with: image.imageUrl)
+    }
+
+    private func configure() {
         addSubview(imageView)
-
-        NSLayoutConstraint.activate([
-            imageView.rightAnchor.constraint(equalTo: rightAnchor),
-            imageView.leftAnchor.constraint(equalTo: leftAnchor),
-            imageView.topAnchor.constraint(equalTo: topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
     }
 }
+
+extension CollectionImagesViewCell: Reusable {}

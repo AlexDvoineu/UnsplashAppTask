@@ -61,7 +61,7 @@ class FavouriteImagesViewController: DataLoadingViewController {
         tableView.separatorColor = Colors.basicColor
         tableView.backgroundColor = .clear
         
-        tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.reuseID)
+        tableView.register(FavouriteImagesTableViewCell.self, forCellReuseIdentifier: FavouriteImagesTableViewCell.identifier)
     }
 }
 
@@ -74,7 +74,7 @@ extension FavouriteImagesViewController: UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteCell.reuseID) as? FavoriteCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: FavouriteImagesTableViewCell.identifier) as? FavouriteImagesTableViewCell {
             let favorite = presenter.favoritesArray[indexPath.row]
             cell.set(imageUrl: favorite.imageUrl, userName: favorite.authorsName)
             return cell

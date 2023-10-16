@@ -63,7 +63,7 @@ extension CollectionImagesViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .systemBackground
-        collectionView.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.identifier)
+        collectionView.register(CollectionImagesViewCell.self, forCellWithReuseIdentifier: CollectionImagesViewCell.identifier)
     }
 
     // MARK: - Configure Search Controller
@@ -88,7 +88,7 @@ extension CollectionImagesViewController: UICollectionViewDelegate, UICollection
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCell.identifier, for: indexPath) as? ImageCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionImagesViewCell.identifier, for: indexPath) as? CollectionImagesViewCell {
             let image: ImageDetails = presenter.image(at: indexPath.row)
             cell.setForRequest(image: image)
 

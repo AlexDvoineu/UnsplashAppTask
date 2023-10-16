@@ -8,7 +8,11 @@
 import UIKit
 
 struct Constant {
-    static let keyAPI = "b5ADtG3x25jDGuCTS0q4zB78OgjkW61GVgexvfS10WU"
+    // Another key if rate limit exceeded
+    // CewI7tFKhXqMgfDQ_mWQc2KYRxQLsXyTv033_CvAIko
+    // mXn3boZyLcKIvK-0rIdaoIgiJ4fYoDanWHhheM5EQnc
+    // b5ADtG3x25jDGuCTS0q4zB78OgjkW61GVgexvfS10WU
+    static let keyAPI = "CewI7tFKhXqMgfDQ_mWQc2KYRxQLsXyTv033_CvAIko"
     static let unfavouriteImage = "heart"
     static let favouriteImage = "heart.fill"
     static let collectionImage = "photo"
