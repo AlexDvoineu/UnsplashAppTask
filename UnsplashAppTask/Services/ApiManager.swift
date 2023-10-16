@@ -58,7 +58,6 @@ extension APIManager: APIManagerProtocol {
             ]
         }
         return urlComponents.url
-        // let endpoint = baseURL+"/photos/\(id)?client_id=\(clientId)"
     }
     
     // MARK: - Get Images By Request
