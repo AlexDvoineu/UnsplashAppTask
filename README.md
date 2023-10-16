@@ -13,6 +13,17 @@ There is also a button on the screen that allows you to add a photo to your favo
 If desired, you can make this list editable.
 API link - https://unsplash.com/documentation
 
+Before running this app please install [Swiftlint](https://github.com/realm/SwiftLint)
+
+In the Terminal use this command to install Swiftlint:
+```
+brew install swiftlint
+```
+If [Homebrew](https://brew.sh/) is not installed please also install it by using this command in your terminal: 
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
 Technology:
 - MVP
 - UIKit
@@ -22,5 +33,6 @@ Technology:
 - SwiftLint
 - Localization (R.Swift)
 - Unit Tests
+  
 https://github.com/AlexDvoineu/UnsplashAppTask/assets/89863071/f4072bb3-df8c-4b00-a7e4-47eac0ecebb9
 
