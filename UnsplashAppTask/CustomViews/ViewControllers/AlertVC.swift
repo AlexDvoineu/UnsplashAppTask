@@ -13,7 +13,7 @@ final class AllertVC: UIViewController {
     
     let titleLabel = TitleLabel(textAlignment: .center, fontSize: 20)
     let messageLabel = BodyLabel(textAlignment: .center)
-    let actionButton = Button(backgroundcolor: .systemPink, title: "Ok")
+    let actionButton = Button(backgroundcolor: .systemPink, title: R.string.localizable.ok())
     
     var alertTitle: String?
     var message: String?
@@ -55,7 +55,7 @@ final class AllertVC: UIViewController {
     
     func configureTitleLabel() {
         containerView.addSubview(titleLabel)
-        titleLabel.text = alertTitle ?? "Something went wrong"
+        titleLabel.text = alertTitle ?? R.string.localizable.smthWrong()
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: padding),
@@ -67,7 +67,7 @@ final class AllertVC: UIViewController {
     
     func configureActionButton() {
         containerView.addSubview(actionButton)
-        actionButton.setTitle(buttonTitle ?? "Ok", for: .normal)
+        actionButton.setTitle(buttonTitle ?? R.string.localizable.ok(), for: .normal)
         actionButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
@@ -80,7 +80,7 @@ final class AllertVC: UIViewController {
     
     func configureMessageLabel() {
         containerView.addSubview(messageLabel)
-        messageLabel.text = message ?? "Unable to complete request"
+        messageLabel.text = message ?? R.string.localizable.unableToCompleteRequest()
         messageLabel.numberOfLines = 4
         
         NSLayoutConstraint.activate([

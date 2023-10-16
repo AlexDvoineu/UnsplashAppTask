@@ -24,7 +24,7 @@
 
 "delete.favorites" = "Delete from Favorites";
 
-"Smth.wrong" = "Something wrong happened";
+"Smth.wrong" = "Something went wrong";
 
 "Downloads:" = "Downloads:";
 
@@ -41,3 +41,5 @@
 "Enable Cellular Data for usage" = "Enable Cellular Data for usage";
 
 "No Internet Connection" = "No Internet Connection";
+
+"Unable to complete request" = "Unable to complete request";
